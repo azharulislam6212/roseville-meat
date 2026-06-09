@@ -1,0 +1,519 @@
+{{ 'hero-slider-section.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .section-{{ section.id }}-padding {
+           padding-top: {{ section.settings.padding_top_mobile }}px;
+           padding-bottom: {{ section.settings.padding_bottom_moblie }}px;
+     }
+
+    @media screen and (min-width: 769px) {
+      .section-{{ section.id }}-padding {
+           padding-top: {{ section.settings.padding_top_tab }}px;
+           padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+    }
+
+    @media screen and (min-width: 1025px) {
+      .section-{{ section.id }}-padding {
+          padding-top: {{ section.settings.padding_top }}px;
+          padding-bottom: {{ section.settings.padding_bottom }}px;
+       }
+    }
+{% endstyle %}
+
+{% liquid
+  assign desktop_column = 1
+  assign tab_column = 1
+  assign mobile_column = 1
+
+  assign enable_pagination = section.settings.enable_pagination
+  assign enable_navigation = section.settings.enable_navigation
+  assign enable_scroll = section.settings.enable_scroll
+  assign autoplay = section.settings.autoplay_enabled
+  assign loop = section.settings.loop_enabled
+  assign delay = section.settings.autoplay_timeout | times: 1000
+  assign freemode = false
+%}
+
+<div
+  class="hero-slider-wrap"
+  {% if section.settings.allow_transparent_header %}
+    allow-transparent-header
+  {% endif %}
+>
+  <div
+    id="{{ section.settings.them_section_id |  default:"hero_slider" }}"
+    class="hero-slider  color-{{ section.settings.color_scheme }} gradient"
+  >
+    <slideshow-swiper>
+      <div
+        class="slideshow__swiper swiper {%if enable_pagination %} enable-pagination {% endif %}"
+        data-centeredslides="false"
+        data-slidesDesktop="{{desktop_column}}"
+        data-slidesTab="{{tab_column}}"
+        data-slidesMobile="{{mobile_column}}"
+        data-autoPlay="{{ autoplay }}"
+        data-delay="{{ delay }}"
+        data-loop="{{ loop }}"
+        data-freemode="{{ freemode }}"
+        data-freemomentum="false"
+        data-mousewheel="false"
+        data-desktopspace="16"
+        data-tabspace="16"
+        data-mobilespace="10"
+      >
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'slide' -%}
+                <div class="swiper-slide slider__item" {{ block.shopify_attributes }}>
+                  <div class="slider__wrap slider--height-{{ section.settings.hero_slider_heright }} color-{{ section.settings.color_scheme }} gradient">
+
+                  <div class="hero__behind-image">
+                             {% if block.settings.behind_image != blank %}
+                                {% render 'responsive-img' with image: block.settings.behind_image , class:"mobile-hidden" %}
+                                {% if block.settings.behind_image_mobile != blank %}
+                                  {% render 'responsive-img-mob' with image: block.settings.behind_image_mobile class:"desktop-hidden" %}
+                                {% else %}
+                                  {% render 'responsive-img-mob' with image: block.settings.behind_image  class:"desktop-hidden" %}
+                                {% endif %}
+                         
+                              {% endif %}
+                  </div>
+                          
+                    <div class="hero-slider__content  section-{{ section.id }}-padding">
+                      <div class="container-fluid hero-slider__container">
+                        <div class="row align-items-stretch hero-slider__row">
+                          <div class="col-12 col-md-7 col-lg-7">
+                            <div class="hero-slider__wrap">
+                              <div class="hero-slider__text-block">
+                                {%- if block.settings.title != blank -%}
+                                  <h2
+                                    class="hero-slider__title inline-richtext {{ block.settings.heading_size }}"
+                                    {{ block.shopify_attributes }}
+                                  >
+                                    {{ block.settings.title }}
+                                  </h2>
+                                {%- endif -%}
+
+                                {%- if block.settings.text != blank -%}
+                                  <p class="hero-slider__text rte" {{ block.shopify_attributes }}>
+                                    {{ block.settings.text }}
+                                  </p>
+                                {%- endif -%}
+
+                                <div class="hero__rating-inner">
+                                  {%- if block.settings.button_text != blank -%}
+                                    <a
+                                      href="{{ block.settings.button_url }}"
+                                      class="button button--icon button--{{ block.settings.button_style }}"
+                                      {{ block.shopify_attributes }}
+                                    >
+                                      
+                                      <span class="button--text">{{- block.settings.button_text -}}</span>
+                                    </a>
+                                  {%- endif -%}
+
+                                  <div class="hero-rating">
+                                    <div class="rating__content">
+                                      <a href="{{ block.settings.rating_url }}"> 
+                                      <div class="rating__text_flex">
+                                        {% if block.settings.rating_text != blank %}
+                                          <span class="rating-text-span">{{ block.settings.rating_text }}</span>
+                                        {% endif %}
+                                        <div
+                                          class="rating__stars"
+                                          role="img"
+                                          aria-label="{{ 'general.rating.info' | t: rating_value: block.settings.rating, rating_max: 5 }}"
+                                        >
+                                          {%- for i in (1..5) -%}
+                                            {%- if i <= block.settings.rating -%}
+                                            
+
+                                              <span>
+                                                {%- render 'icon' with 'rating-star',
+                                                  class: 'rating__star rating__star--full'
+                                                -%}
+                                              </span>
+                                         
+
+                                            {%- else -%}
+                                              <span>
+                                                {%- render 'icon' with 'rating-star',
+                                                  class: 'rating__star rating__star--empty'
+                                                -%}
+                                              </span>
+                                            {%- endif -%}
+                                          {%- endfor -%}
+                                        </div>
+                                      </div>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-5 col-lg-5">
+
+                          
+                            <div class="hero-image">
+                              {% if block.settings.bg_image != blank %}
+                                {% render 'responsive-img' with image: block.settings.bg_image , class:"mobile-hidden" %}
+                                {% if block.settings.bg_image_mobile != blank %}
+                                  {% render 'responsive-img-mob' with image: block.settings.bg_image_mobile class:"desktop-hidden" %}
+                                {% else %}
+                                  {% render 'responsive-img-mob' with image: block.settings.bg_image  class:"desktop-hidden" %}
+                                {% endif %}
+                              {% else %}
+                                {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+        {% if enable_navigation %}
+          <div class="swiper-navigation-wrapper color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-button-prev">
+              <svg width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.76123 13.1011L12.7612 24.1011" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.7612 2.10107L1.76123 13.1011" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="swiper-button-next">
+              <svg width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.2388 12.8989L2.23877 1.89893" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2.23877 23.8989L13.2388 12.8989" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        {% endif %}
+        {% if enable_pagination %}
+          <div class="pagination-wrap-style-2 color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+
+        {% if enable_scroll %}
+          <div class="scrollbar-wrap color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-scrollbar"></div>
+          </div>
+        {% endif %}
+      </div>
+    </slideshow-swiper>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Hero slider",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+              {
+          "type": "image_picker",
+          "id": "behind_image",
+          "label": "Behind Image"
+        },
+      {
+          "type": "image_picker",
+          "id": "behind_image_mobile",
+          "label": "Behind Image mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image_mobile",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "slider Title"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.heading_size.options__4.label"
+            },
+            {
+              "value": "hxxl",
+              "label": "t:sections.all.heading_size.options__5.label"
+            }
+          ],
+          "default": "h0",
+          "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "text",
+          "default": "Share information about your brand with your customers. and  welcome customers to your store."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button",
+          "default": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "range",
+          "min": 0,
+          "max": 5,
+          "id": "rating",
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "inline_richtext",
+          "id": "rating_text",
+          "label": "Rating Text",
+          "default": "Over 1000+ Reviews"
+        },
+          {
+          "type": "url",
+          "id": "rating_url",
+          "label": "Rating to"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "hero_slider_heright",
+      "label": "slider Height",
+      "options": [
+        {
+          "value": "orignal",
+          "label": "Orginal"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "exlarge",
+          "label": "Exlarge"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll",
+      "label": "Enable Scroll",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_moblie",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slider",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

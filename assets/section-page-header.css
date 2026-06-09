@@ -1,0 +1,9 @@
+.page-header{
+    position: relative;
+    border-radius: 0 0 40px 40px;
+}
+
+.page_title  {
+    padding: 0;
+    margin: 0;
+}

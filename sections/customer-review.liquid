@@ -1,0 +1,426 @@
+{{ 'section-customer-review.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+<div
+  id="{{ section.settings.them_section_id |  default:"customer_reveiw" }}"
+  class="customer-reveiw section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header text-center col-12 m-auto">
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        </div>
+      </div>
+    {%- endunless -%}
+  </div>
+
+  {% liquid
+    assign enable_pagination = section.settings.enable_pagination
+    assign enable_pagination_mobile = section.settings.enable_pagination_mobile
+    assign enable_navigation_desktop = section.settings.enable_navigation_desktop
+    assign enable_navigation = section.settings.enable_navigation
+    assign autoplay = section.settings.autoplay_enabled
+    assign loop = section.settings.loop_enabled
+    assign delay = section.settings.autoplay_timeout | times: 1000
+    assign freemode = false
+  %}
+
+  <auto-swiper>
+    <div
+      class="slideshow__swiper swiper testimonial-slider  {%if enable_pagination_mobile %} pagination_mobile__only {% endif %} {%if enable_navigation_desktop %} navigation_desktop__only {% endif %}"
+      data-centeredslides="true"
+      data-autoPlay="{{ autoplay }}"
+      data-delay="{{ delay }}"
+      data-loop="{{ loop }}"
+      data-freemode="{{ freemode }}"
+      data-freemomentum="false"
+      data-mousewheel="false"
+      data-desktopspace="48"
+      data-tabspace="32"
+      data-mobilespace="24"
+    >
+      <div class="swiper-wrapper review-blocks">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'review_block' -%}
+
+              <div class="review-card__item swiper-slide" {{ block.shopify_attributes }}>
+  <div class="review-card">
+    <div class="review-image">
+      {% if block.settings.image != blank %}
+        {% render 'responsive-img' with image: block.settings.image, alt: block.settings.author | default: 'Reviewer photo' %}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg', alt: 'Reviewer placeholder image' }}
+      {% endif %}
+    </div>
+
+    <div class="review-card__content color-{{ section.settings.color_scheme_card }} gradient">
+      <div class="review-card__inner">
+        <div class="review-card-rating">
+          {%- if block.settings.show_rating -%}
+            <div class="rating">
+              <div
+                class="rating__stars"
+                role="img"
+                aria-label="{{ 'general.rating.info' | t: rating_value: block.settings.rating, rating_max: 5 }}"
+              >
+                {%- for i in (1..5) -%}
+                  {%- if i <= block.settings.rating -%}
+                    {%- render 'icon' with 'rating-star', class: 'rating__star rating__star--full', 'aria-hidden': 'true' -%}
+                  {%- else -%}
+                    {%- render 'icon' with 'rating-star', class: 'rating__star rating__star--empty', 'aria-hidden': 'true' -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {% if block.settings.text != blank %}
+          <div class="review-card__text rte">{{ block.settings.text }}</div>
+        {% endif %}
+      </div>
+
+      <div class="review-card__footer">
+        <div class="author-info">
+          <span class="svg-icon">
+           <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle cx="10.4154" cy="10.4168" r="4.58333" fill="#EBEEFF"/>
+                            <path d="M17.6453 8.03281C17.3508 7.725 17.0461 7.40781 16.9313 7.12891C16.825 6.87344 16.8187 6.45 16.8125 6.03984C16.8008 5.27734 16.7883 4.41328 16.1875 3.8125C15.5867 3.21172 14.7227 3.19922 13.9602 3.1875C13.55 3.18125 13.1266 3.175 12.8711 3.06875C12.593 2.95391 12.275 2.64922 11.9672 2.35469C11.4281 1.83672 10.8156 1.25 10 1.25C9.18437 1.25 8.57266 1.83672 8.03281 2.35469C7.725 2.64922 7.40781 2.95391 7.12891 3.06875C6.875 3.175 6.45 3.18125 6.03984 3.1875C5.27734 3.19922 4.41328 3.21172 3.8125 3.8125C3.21172 4.41328 3.20312 5.27734 3.1875 6.03984C3.18125 6.45 3.175 6.87344 3.06875 7.12891C2.95391 7.40703 2.64922 7.725 2.35469 8.03281C1.83672 8.57187 1.25 9.18437 1.25 10C1.25 10.8156 1.83672 11.4273 2.35469 11.9672C2.64922 12.275 2.95391 12.5922 3.06875 12.8711C3.175 13.1266 3.18125 13.55 3.1875 13.9602C3.19922 14.7227 3.21172 15.5867 3.8125 16.1875C4.41328 16.7883 5.27734 16.8008 6.03984 16.8125C6.45 16.8187 6.87344 16.825 7.12891 16.9313C7.40703 17.0461 7.725 17.3508 8.03281 17.6453C8.57187 18.1633 9.18437 18.75 10 18.75C10.8156 18.75 11.4273 18.1633 11.9672 17.6453C12.275 17.3508 12.5922 17.0461 12.8711 16.9313C13.1266 16.825 13.55 16.8187 13.9602 16.8125C14.7227 16.8008 15.5867 16.7883 16.1875 16.1875C16.7883 15.5867 16.8008 14.7227 16.8125 13.9602C16.8187 13.55 16.825 13.1266 16.9313 12.8711C17.0461 12.593 17.3508 12.275 17.6453 11.9672C18.1633 11.4281 18.75 10.8156 18.75 10C18.75 9.18437 18.1633 8.57266 17.6453 8.03281ZM13.5672 8.56719L9.19219 12.9422C9.13414 13.0003 9.06521 13.0464 8.98934 13.0779C8.91346 13.1093 8.83213 13.1255 8.75 13.1255C8.66787 13.1255 8.58654 13.1093 8.51066 13.0779C8.43479 13.0464 8.36586 13.0003 8.30781 12.9422L6.43281 11.0672C6.31554 10.9499 6.24965 10.7909 6.24965 10.625C6.24965 10.4591 6.31554 10.3001 6.43281 10.1828C6.55009 10.0655 6.70915 9.99965 6.875 9.99965C7.04085 9.99965 7.19991 10.0655 7.31719 10.1828L8.75 11.6164L12.6828 7.68281C12.7409 7.62474 12.8098 7.57868 12.8857 7.54725C12.9616 7.51583 13.0429 7.49965 13.125 7.49965C13.2071 7.49965 13.2884 7.51583 13.3643 7.54725C13.4402 7.57868 13.5091 7.62474 13.5672 7.68281C13.6253 7.74088 13.6713 7.80982 13.7027 7.88569C13.7342 7.96156 13.7503 8.04288 13.7503 8.125C13.7503 8.20712 13.7342 8.28844 13.7027 8.36431C13.6713 8.44018 13.6253 8.50912 13.5672 8.56719Z" fill="#22BB33"/>
+                          </svg>
+          </span>
+          <h3 class="review-card__name">{{ block.settings.author }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      {% if enable_navigation or enable_navigation_desktop %}
+        <div class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}">
+          <div class="swiper-button-prev">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.3367 15.6633L5.93665 7.26562L5.93665 13.125C5.93665 13.3736 5.83788 13.6121 5.66207 13.7879C5.48625 13.9637 5.24779 14.0625 4.99915 14.0625C4.75051 14.0625 4.51206 13.9637 4.33624 13.7879C4.16043 13.6121 4.06165 13.3736 4.06165 13.125L4.06166 5C4.06166 4.75136 4.16043 4.5129 4.33624 4.33709C4.51206 4.16127 4.75051 4.0625 4.99916 4.0625L13.1242 4.0625C13.3728 4.0625 13.6113 4.16127 13.7871 4.33709C13.9629 4.5129 14.0617 4.75136 14.0617 5C14.0617 5.24864 13.9629 5.4871 13.7871 5.66291C13.6113 5.83873 13.3728 5.9375 13.1242 5.9375L7.26478 5.9375L15.6624 14.3367C15.7496 14.4239 15.8188 14.5275 15.866 14.6414C15.9132 14.7553 15.9375 14.8775 15.9375 15.0008C15.9375 15.1241 15.9132 15.2462 15.866 15.3602C15.8188 15.4741 15.7496 15.5776 15.6624 15.6648C15.5752 15.752 15.4717 15.8212 15.3578 15.8684C15.2438 15.9156 15.1217 15.9399 14.9984 15.9399C14.875 15.9399 14.7529 15.9156 14.639 15.8684C14.525 15.8212 14.4215 15.752 14.3343 15.6648L14.3367 15.6633Z" fill="currentcolor"/>
+          </svg>
+          </div>
+          <div class="swiper-button-next">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.33672 14.3376L12.7344 5.93763L6.875 5.93763C6.62636 5.93763 6.3879 5.83886 6.21209 5.66304C6.03627 5.48723 5.9375 5.24877 5.9375 5.00013C5.9375 4.75149 6.03627 4.51303 6.21209 4.33722C6.3879 4.1614 6.62636 4.06263 6.875 4.06263L15 4.06263C15.2486 4.06263 15.4871 4.1614 15.6629 4.33722C15.8387 4.51303 15.9375 4.75149 15.9375 5.00013L15.9375 13.1251C15.9375 13.3738 15.8387 13.6122 15.6629 13.788C15.4871 13.9639 15.2486 14.0626 15 14.0626C14.7514 14.0626 14.5129 13.9639 14.3371 13.788C14.1613 13.6122 14.0625 13.3738 14.0625 13.1251L14.0625 7.26576L5.66328 15.6634C5.57608 15.7506 5.47255 15.8198 5.35861 15.867C5.24467 15.9142 5.12255 15.9385 4.99922 15.9385C4.87589 15.9385 4.75377 15.9142 4.63983 15.867C4.52589 15.8198 4.42236 15.7506 4.33516 15.6634C4.24795 15.5762 4.17877 15.4727 4.13158 15.3587C4.08438 15.2448 4.06009 15.1227 4.06009 14.9993C4.06009 14.876 4.08438 14.7539 4.13158 14.64C4.17877 14.526 4.24795 14.4225 4.33516 14.3353L4.33672 14.3376Z" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+      {% endif %}
+      {% if enable_pagination or enable_pagination_mobile %}
+        <div class="pagination-wrap  color-{{ section.settings.color_scheme_swiper }}">
+          <div class="swiper-pagination"></div>
+        </div>
+      {% endif %}
+    </div>
+  </auto-swiper>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Review",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination_mobile",
+      "label": "Enable Pagination Mobile Only",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation_desktop",
+      "label": "Enable Naviagtion Desktop Only",
+      "default": true
+    },
+        {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_block",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_overtext",
+          "label": "Over Text Enable",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "Show rating",
+          "default": true
+        },
+        {
+          "type": "range",
+          "min": 0,
+          "max": 5,
+          "id": "rating",
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Author name"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Review",
+      "blocks": [
+        {
+          "type": "review_block"
+        },
+        {
+          "type": "review_block"
+        },
+        {
+          "type": "review_block"
+        },
+        {
+          "type": "review_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,15 @@
+.video-media{
+    border-radius: 20px;
+    overflow: hidden;
+}
+.media-item .media {
+    background-color: transparent;
+}
+
+.js-product-media-deferred-video.playing
+{
+        border: 2px solid transparent;
+    border-image-slice: 1;
+    --color-border-g:  linear-gradient(160deg,rgba(71, 112, 219, 1) 0%, rgba(14, 27, 77, 1) 50%, rgba(71, 112, 219, 1) 100%);
+    background: linear-gradient(95deg, #fff, #fff) padding-box, var(--color-border-g) border-box;
+}

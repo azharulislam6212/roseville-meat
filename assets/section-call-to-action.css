@@ -1,0 +1,26 @@
+
+.call-to-action-section{
+    position: relative;
+}
+
+.call-to-action__inner {
+    padding: 48px 120px ;
+    border-radius: 40px;
+}
+
+.call-to-action__heading {
+    margin: 0 0 20px;
+}
+.call-to-action__text {
+    max-width: 846px;
+    margin: 0 auto 20px;
+}
+
+
+@media screen and (max-width: 750px) {
+
+.call-to-action__inner {
+    padding: 20px ;
+}
+
+}

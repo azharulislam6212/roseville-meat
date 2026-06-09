@@ -1,0 +1,635 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title_E7BRtY": {
+          "type": "title",
+          "settings": {}
+        },
+        "icon_with_text_tBkE94": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "heart",
+            "heading_1": "Deeply hydrates and nourishes",
+            "icon_2": "return",
+            "heading_2": "Strengthens and repairs the skin barrier",
+            "icon_3": "truck",
+            "heading_3": "Supports firmness and elasticity"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_BBtyYN": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Key Benefits",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_EXF3yi": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Key Ingredients",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_yWqkWi": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Safety & Usage Tips",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_Acwn3Q": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Pair ’Em Like Pro",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "share_WLhxk3": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title_E7BRtY",
+        "icon_with_text_tBkE94",
+        "description",
+        "collapsible_tab_BBtyYN",
+        "collapsible_tab_EXF3yi",
+        "collapsible_tab_yWqkWi",
+        "collapsible_tab_Acwn3Q",
+        "share_WLhxk3"
+      ],
+      "settings": {
+        "width": "container",
+        "layout": "image_first",
+        "gallery_type": "grid",
+        "gallery_size": "6",
+        "gallery_image_size": "portrait",
+        "enable_zoom": true,
+        "disable_zoom_icon": true,
+        "slides_per_view": "1",
+        "partial_slide": false,
+        "enable_navigation": true,
+        "enable_mobile_thumbs": false,
+        "enable_sticky_info": true,
+        "enable_sticky_gallery": true,
+        "color_scheme": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "benefit_card_P7ykRG": {
+      "type": "benefit-card",
+      "blocks": {
+        "card_block_left_Hpq9WQ": {
+          "type": "card_block_left",
+          "settings": {
+            "title": "Dual-Action Hydration & Shine Control:",
+            "text": "Replenish dry areas with essential moisture while keeping oily zones balanced and mattified.",
+            "color_scheme_card": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da"
+          }
+        },
+        "card_block_left_FjJLYV": {
+          "type": "card_block_left",
+          "settings": {
+            "title": "Fragrance-Free & Non-Comedogenic Formula:",
+            "text": "Designed to be gentle on skin, preventing clogged pores and irritation for a clear, healthy complexion.",
+            "color_scheme_card": "scheme-4"
+          }
+        },
+        "card_block_left_KrkXN9": {
+          "type": "card_block_left",
+          "settings": {
+            "title": "Broad-Spectrum SPF Protection:",
+            "text": "Defend your skin daily from both UVA and UVB rays with confidence and clarity.",
+            "color_scheme_card": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da"
+          }
+        },
+        "image_block_CBqW9w": {
+          "type": "image_block",
+          "settings": {}
+        },
+        "card_block_right_n3wxmz": {
+          "type": "card_block_right",
+          "settings": {
+            "title": "Ideal for Oily to Dry Skin: ",
+            "text": "Tailored to meet the needs of combination skin, offering all day comfort, protection, and a natural glow.",
+            "color_scheme_card": "scheme-4"
+          }
+        },
+        "card_block_right_Dk7CXn": {
+          "type": "card_block_right",
+          "settings": {
+            "title": "Normal to Dry",
+            "text": "Enjoy a weightless, no white-cast formula that blends seamlessly under makeup or worn alone.",
+            "color_scheme_card": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da"
+          }
+        }
+      },
+      "block_order": [
+        "card_block_left_Hpq9WQ",
+        "card_block_left_FjJLYV",
+        "card_block_left_KrkXN9",
+        "image_block_CBqW9w",
+        "card_block_right_n3wxmz",
+        "card_block_right_Dk7CXn"
+      ],
+      "name": "Benefit card",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "Benefit of Clear Guard SPF",
+        "heading_size": "h0",
+        "text": "<p>With HydroShield, let your skin face the day balanced, protected, and glowing—because true skincare begins with smart, everyday defense.</p>",
+        "buy_now": true,
+        "button_label": "Shop Now",
+        "button_link": "https://ndeptskn.com/products/hydrosheild-spf-oily-to-dry-skin#shopify-section-template--18531159638060__main",
+        "button_style": "primary",
+        "color_scheme": "scheme-1",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "inside_blocks_kd3p3k": {
+      "type": "inside-blocks",
+      "blocks": {
+        "button_block_QWybRK": {
+          "type": "button_block",
+          "settings": {
+            "title": "Contains Collagen",
+            "color_scheme_card": "scheme-3"
+          }
+        },
+        "button_block_BEBpLz": {
+          "type": "button_block",
+          "settings": {
+            "title": "Paben Free",
+            "color_scheme_card": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da"
+          }
+        },
+        "button_block_pinyfC": {
+          "type": "button_block",
+          "settings": {
+            "title": "100% Vegan",
+            "color_scheme_card": "scheme-3"
+          }
+        },
+        "button_block_JMth4z": {
+          "type": "button_block",
+          "settings": {
+            "title": "Dermatologically Tested",
+            "color_scheme_card": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da"
+          }
+        },
+        "button_block_YHMHwA": {
+          "type": "button_block",
+          "settings": {
+            "title": "Cruelty Free",
+            "color_scheme_card": "scheme-3"
+          }
+        }
+      },
+      "block_order": [
+        "button_block_QWybRK",
+        "button_block_BEBpLz",
+        "button_block_pinyfC",
+        "button_block_JMth4z",
+        "button_block_YHMHwA"
+      ],
+      "name": "Inside Blocks",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "WHAT’S INSIDE?",
+        "heading_size": "h0",
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "video_q4b4qV": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": false,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "instafeed_tJ9V7a": {
+      "type": "instafeed",
+      "blocks": {
+        "media_item_wBRLay": {
+          "type": "media_item",
+          "settings": {
+            "enable_video": true,
+            "video_source": "video_hosted",
+            "emabaded_video": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": ""
+          }
+        },
+        "media_item_KAQgHx": {
+          "type": "media_item",
+          "settings": {
+            "enable_video": true,
+            "video_source": "video_hosted",
+            "emabaded_video": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": ""
+          }
+        },
+        "media_item_N6xG8h": {
+          "type": "media_item",
+          "settings": {
+            "enable_video": true,
+            "video_source": "video_hosted",
+            "emabaded_video": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": ""
+          }
+        },
+        "media_item_9mcQRY": {
+          "type": "media_item",
+          "settings": {
+            "enable_video": true,
+            "video_source": "video_hosted",
+            "emabaded_video": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": ""
+          }
+        },
+        "media_item_WXN8qd": {
+          "type": "media_item",
+          "settings": {
+            "enable_video": true,
+            "video_source": "video_hosted",
+            "emabaded_video": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": ""
+          }
+        },
+        "media_item_CQWCCy": {
+          "type": "media_item",
+          "settings": {
+            "enable_video": true,
+            "video_source": "video_hosted",
+            "emabaded_video": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": ""
+          }
+        },
+        "media_item_VHUyLy": {
+          "type": "media_item",
+          "settings": {
+            "enable_video": true,
+            "video_source": "video_hosted",
+            "emabaded_video": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "media_item_wBRLay",
+        "media_item_KAQgHx",
+        "media_item_N6xG8h",
+        "media_item_9mcQRY",
+        "media_item_WXN8qd",
+        "media_item_CQWCCy",
+        "media_item_VHUyLy"
+      ],
+      "name": "Instagram Feed",
+      "settings": {
+        "page_width": "container-fluid",
+        "column": "4",
+        "column_medium": "4",
+        "column_mobile": "2",
+        "heading": "Trusted By Many <em>People</em>",
+        "heading_size": "h0",
+        "image_ratio": "portrait",
+        "color_scheme": "",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_scroll": false,
+        "enable_pagination": true,
+        "enable_navigation": false,
+        "color_scheme_swiper": "scheme-3",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "image_card_block_LaYfGB": {
+      "type": "image-card-block",
+      "blocks": {
+        "card_block_dFb4Qe": {
+          "type": "card_block",
+          "settings": {
+            "title": "When to apply",
+            "text": "Only during the daytime",
+            "color_scheme_card": "scheme-1"
+          }
+        },
+        "card_block_PatTTk": {
+          "type": "card_block",
+          "settings": {
+            "title": "How to apply",
+            "text": "Apply a quarter- sized amount to clean,  dry skin.",
+            "color_scheme_card": "scheme-4"
+          }
+        },
+        "card_block_F9aBHM": {
+          "type": "card_block",
+          "settings": {
+            "title": "Good to know",
+            "text": "Protects your skin from harmful UVA and UVB rays.",
+            "color_scheme_card": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da"
+          }
+        },
+        "card_block_edPQDF": {
+          "type": "card_block",
+          "settings": {
+            "title": "Dose",
+            "text": "Reapply every two hours.",
+            "color_scheme_card": "scheme-4"
+          }
+        },
+        "card_block_AGHRGx": {
+          "type": "card_block",
+          "settings": {
+            "title": "Precautions",
+            "text": "External use only.",
+            "color_scheme_card": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da"
+          }
+        }
+      },
+      "block_order": [
+        "card_block_dFb4Qe",
+        "card_block_PatTTk",
+        "card_block_F9aBHM",
+        "card_block_edPQDF",
+        "card_block_AGHRGx"
+      ],
+      "name": "Image card block",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "text": "",
+        "button_label": "Button label",
+        "button_link": "",
+        "button_style": "primary",
+        "color_scheme": "",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "image_with_card_g3Vahy": {
+      "type": "image-with-card",
+      "blocks": {
+        "heading_cbJcf7": {
+          "type": "heading",
+          "settings": {
+            "heading": "CLINICAL NOTE",
+            "heading_size": "h0"
+          }
+        },
+        "text_dffXFb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Plant-based phytosteroid reduces redness as max-strength salicylic acid clears and heals—no derm visit required</p>",
+            "text_style": "body",
+            "text_size": "large"
+          }
+        },
+        "button_zFRrBP": {
+          "type": "button",
+          "settings": {
+            "buy_now": true,
+            "button_label": "Shop Now",
+            "button_link": "https://ndeptskn.com/products/hydrosheild-spf-oily-to-dry-skin#shopify-section-template--18531159638060__main",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cbJcf7",
+        "text_dffXFb",
+        "button_zFRrBP"
+      ],
+      "name": "Image with card",
+      "settings": {
+        "page_width": "container-fluid",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-d790852a-c810-4fec-98cf-a6ab6b5e2587",
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "faq_section_M4cfFH": {
+      "type": "faq-section",
+      "blocks": {
+        "collapsible_row_TmpUCf": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "When will I see results?",
+            "icon": "none",
+            "row_content": "<p>Immediately. Your skin is protected from the first application, and with daily use, you’ll notice a healthier, more even tone over time.</p>"
+          }
+        },
+        "collapsible_row_cPxwQF": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "What kind of benefits can I expect from Ndept Sunscreen?",
+            "icon": "none",
+            "row_content": "<p>Broad-spectrum SPF protection, mineral-based defense against UVA/UVB rays, and nourishing ingredients that leave your skin smooth, hydrated, and glowing.</p>"
+          }
+        },
+        "collapsible_row_9gq8C8": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Does the sunscreen work under makeup?",
+            "icon": "none",
+            "row_content": "<p>Yes. It’s lightweight, non-greasy, and designed to sit seamlessly under makeup without pilling or shine.</p>"
+          }
+        },
+        "collapsible_row_CQKnTD": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "What makes Ndept Sunscreen different from other sunscreens?",
+            "icon": "none",
+            "row_content": "<p>We combine clean, mineral protection with skin-loving ingredients, no harsh chemicals, no hidden toxins, just effective, safe sun care that feels luxurious.</p>"
+          }
+        },
+        "collapsible_row_KHM6zH": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Do I actually need sunscreen?",
+            "icon": "none",
+            "row_content": "<p>Absolutely, 90% of visible skin aging comes from sun damage. Daily sunscreen is your best anti-aging step.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_TmpUCf",
+        "collapsible_row_cPxwQF",
+        "collapsible_row_9gq8C8",
+        "collapsible_row_CQKnTD",
+        "collapsible_row_KHM6zH"
+      ],
+      "name": "Faq Section",
+      "settings": {
+        "enable_border": false,
+        "page_width": "container-fluid",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h0",
+        "sub_heading": "Have a question?",
+        "text": "<p>We’re always here to assist you! If you have any  questions regarding our products, services, or anything else, don’t  hesitate to reach out. </p>",
+        "text_style": "body",
+        "text_size": "medium",
+        "button_label": "Contact Us",
+        "button_link": "shopify://pages/contact",
+        "button_style": "primary",
+        "disclosure_toggle": "plus",
+        "color_scheme": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
+        "card_color_scheme": "scheme-3",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "them_section_id": ""
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "1754717456e979fd41": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "sticky_product_bar": {
+      "type": "sticky-product-bar",
+      "blocks": {
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        }
+      },
+      "block_order": [
+        "buy_buttons"
+      ],
+      "settings": {
+        "enable_stikcy_product": true,
+        "color_scheme": "scheme-9ab283a1-7cb4-429e-b553-ebe8284dbb7f"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "benefit_card_P7ykRG",
+    "inside_blocks_kd3p3k",
+    "video_q4b4qV",
+    "instafeed_tJ9V7a",
+    "image_card_block_LaYfGB",
+    "image_with_card_g3Vahy",
+    "faq_section_M4cfFH",
+    "related-products",
+    "1754717456e979fd41",
+    "sticky_product_bar"
+  ]
+}

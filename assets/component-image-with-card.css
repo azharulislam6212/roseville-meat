@@ -1,0 +1,130 @@
+.image-with-card{
+    position: relative;
+}
+
+.image-with-card .image-with-text__media {
+   border: 2px solid rgba(var(--color-accent));
+}
+
+.image-with-card .image-with-text__content,
+.image-with-card .image-with-text__media {
+    border-radius: 40px !important;
+}
+
+
+.image-with-card .image-with-text__content {
+    padding: 1.6rem;
+}
+
+.image-with-text__content {
+    position: relative;
+}
+
+.card-image__shape{
+     max-width: 260px;
+     margin: 0 0 0 auto;
+     position: absolute;
+     right: 0;
+     bottom: 0;
+     line-height: 0;
+}
+
+/* checkmark.svg */
+
+.image-with-card .image-with-text__content ul{
+    margin: 70px 0 40px;
+    padding: 0;
+    list-style: none;
+}
+
+.image-with-card .image-with-text__content li{
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.image-with-card .image-with-text__content li::before{
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url(checkmark.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    left: 0;
+       top: 6px;
+}
+
+  .image-with-card.image-with-text--overlap .image-with-text__content {
+    height: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+     .image-with-card.image-with-text--overlap .image-with-text__content {
+        margin-top: 0;
+        margin-left: -26px;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
+    .image-with-card.image-with-text--overlap .image-with-text__grid--reverse  .image-with-text__content {
+        margin-top: 0;
+        margin-left: 0 !important;
+        margin-right: -26px;
+        border-radius: 40px !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
+
+}
+@media screen and (min-width: 1080px) {
+.image-with-card.image-with-text--overlap .image-with-text__content .button{
+    position: absolute;
+    bottom: 40px;
+}
+
+.image-with-card .image-with-text__content {
+    padding: 4rem 4rem 4rem;
+}
+}
+
+
+
+@media screen and (min-width: 750px) {
+
+.image-with-card .image-with-text__content {
+    padding: 2rem;
+}
+
+.image-with-card  .image-with-text__content .image-with-text__text+.button {
+    margin-top: 5rem;
+}
+
+}
+
+@media screen and (min-width: 749px) and (max-width: 1024px) {
+.image-with-card.image-with-text--overlap .image-with-text__media{
+        padding-bottom: 123.277778% !important;
+}
+}
+
+@media screen and (max-width: 749px) {
+.image-with-card .image-with-text__content, .image-with-card .image-with-text__media {
+    border-radius: 20px!important;
+}
+.image-with-card .image-with-text__content .image-with-text__text+.button {
+    height: 76px;
+}
+.image-with-card.image-with-text--overlap .image-with-text__content {
+    margin: -2rem auto 0;
+}
+
+.image-with-text__media-item{
+    position: relative;
+    z-index: 999;
+}
+
+
+}

@@ -1,0 +1,160 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "usp_icons_xzyTnj": {
+      "type": "usp-icons",
+      "blocks": {
+        "usp_block_HmmHrr": {
+          "type": "usp_block",
+          "settings": {
+            "svg_icon": "",
+            "title": "Free Shipping",
+            "text": "We ship globally, ensuring fast and secure delivery to any location through our extensive network."
+          }
+        },
+        "usp_block_CXn7Te": {
+          "type": "usp_block",
+          "settings": {
+            "svg_icon": "",
+            "title": "30-Days Free Returns",
+            "text": "Your satisfaction is paramount; enjoy risk-free purchases with our 30-day free return policy."
+          }
+        },
+        "usp_block_FRWtCD": {
+          "type": "usp_block",
+          "settings": {
+            "svg_icon": "",
+            "title": "Secure Online Payment",
+            "text": "Our robust, encrypted system guarantees the security of your financial information during online payments."
+          }
+        },
+        "usp_block_LkUeCb": {
+          "type": "usp_block",
+          "settings": {
+            "svg_icon": "",
+            "title": "24/7 Friendly Support",
+            "text": "We ship globally, ensuring fast and secure delivery to any location through our extensive network."
+          }
+        }
+      },
+      "block_order": [
+        "usp_block_HmmHrr",
+        "usp_block_CXn7Te",
+        "usp_block_FRWtCD",
+        "usp_block_LkUeCb"
+      ],
+      "name": "Usp icons",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 120,
+        "padding_top_tab": 48,
+        "padding_bottom_tab": 120,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 120,
+        "margin_bottom": 72,
+        "margin_bottom_mobile": 72
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text_gqrxaW": {
+          "type": "text",
+          "settings": {
+            "image_width": 115,
+            "heading": "",
+            "subtext": "<p>Each product is made with care , precision , and premium ingredients because your skin deserves luxury in every step.</p>",
+            "show_icon": false,
+            "phone": "",
+            "mail": "",
+            "address": "",
+            "show_social": true
+          }
+        },
+        "link_list_aMLWNk": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": ""
+          }
+        },
+        "link_list_DX8TFr": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Support",
+            "menu": "footer"
+          }
+        },
+        "product_list_RdaGM9": {
+          "type": "product_list",
+          "settings": {
+            "heading": "Our Products",
+            "product_list": [
+              "clearguard-spf-normal-to-dry-skin",
+              "hydrosheild-spf-oily-to-dry-skin"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "text_gqrxaW",
+        "link_list_aMLWNk",
+        "link_list_DX8TFr",
+        "product_list_RdaGM9"
+      ],
+      "settings": {
+        "page_width": "container-fluid",
+        "layout": "box",
+        "column": "4",
+        "column_tab": "3",
+        "column_mobile": "2",
+        "color_scheme": "scheme-6",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_text": "Sign up for emails to receive 10% off your first order. Plus, a first look at new products, exclusive promotions and more!",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "payment_enable_custom": false,
+        "show_policy": false,
+        "menu_policy": "footer",
+        "copy_right_content": "&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url -}}. Powered by Shopify",
+        "speed": "50",
+        "moving_direction": "animation-direction",
+        "pause_when_hover": false,
+        "margin_top": 0,
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "padding_top_mobile": 48,
+        "padding_bottom_moblie": 24
+      }
+    }
+  },
+  "order": [
+    "usp_icons_xzyTnj",
+    "footer"
+  ]
+}

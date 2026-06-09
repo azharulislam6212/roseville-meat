@@ -1,0 +1,73 @@
+.usp-icons-seciton {
+    position: relative;
+    border-radius: 48px 48px 0 0;
+    border-top: 2px solid rgba(var(--color-accent));
+}
+
+.usp-block__item{
+position: relative;
+border-right: 2px solid rgba(71, 112, 219, 0.48);
+}
+
+.usp-block__item:last-child{
+    border: 0;
+}
+
+.icon-row{
+        --bs-gutter-x: 2.4rem;
+}
+
+.usp-block__icon{
+box-sizing: border-box;
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+width: 48px;
+height: 48px;
+/* Light */
+background: #EBEEFF;
+border: 1px solid rgba(71, 112, 219, 0.2);
+border-radius: 8px;
+
+}
+
+.usp-block__icon svg , .usp-block__iconimg{
+    width: 32px;
+    height: 32px;
+}
+
+.usp-block__content{
+    margin-top: 16px;
+}
+
+.usp-block__title{
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 150%;
+margin: 0 0 4px;
+
+}
+
+.usp-block__text{
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+   .usp-block__icon{
+     padding-right: 10px;
+   }
+
+   .usp-icons-seciton {
+    border-radius: 24px 0 0 0;
+}
+
+}

@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "hied_page_title": false,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "section-page-header": {
+      "type": "section-page-header",
+      "settings": {
+        "allow_transparent_header": true,
+        "page_width": "container-fluid",
+        "heading": "About Us",
+        "heading_size": "h0",
+        "color_scheme": "scheme-2",
+        "padding_top": 168,
+        "padding_bottom": 110,
+        "padding_top_tab": 112,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 112,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "about_image_with_text_kz4fLw": {
+      "type": "about-image-with-text",
+      "blocks": {
+        "image_cynGEf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/IMG_2273_2.jpg"
+          }
+        },
+        "heading_U9cCAa": {
+          "type": "heading",
+          "settings": {
+            "heading": "Learn About Us<em> Who We Are<\/em>",
+            "heading_size": "hxl"
+          }
+        },
+        "text_WkppgW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>I never thought much about sunscreen until I lost a friend to skin cancer and later got sunburned myself on a trip to Florida. As someone with dark skin, I’d been told it couldn’t happen to me. After struggling with greasy, pasty formulas that didn’t suit my tone, I teamed up with women at my fiancée’s salon to create something better. After 19 months of research and testing, we developed a sunscreen that absorbs beautifully and actually works. Now, I’m proud to share it with others who’ve felt left out of sun care ,because protection should work for everyone.<\/p><h4>Our Story & Mission<\/h4><p>NDeptSkn was born from a simple truth: skin cancer doesn’t discriminate, yet many people are unaware of the risks. We set out to change that narrative. Our mission is to redefine sun care with clean, effective formulas made for every skin type and tone. No white cast. No harsh ingredients. Just real protection that feels good and works.<br\/><br\/><\/p>",
+            "text_style": "body",
+            "text_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "image_cynGEf",
+        "heading_U9cCAa",
+        "text_WkppgW"
+      ],
+      "name": "About image with text",
+      "settings": {
+        "page_width": "container-fluid",
+        "color_scheme": "",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "team_carousel_iW94Xb": {
+      "type": "team-carousel",
+      "blocks": {
+        "team_block_YiJcKV": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_17.png",
+            "name": "Mya Turner",
+            "designation": "Licensed Esthetician",
+            "text": "As a licensed esthetician, my passion lies in helping people feel confident in their skin through intentional care, education, and results-driven treatments.",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_mp9jPk": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_16.png",
+            "name": "Elena",
+            "designation": "Marketing Lead",
+            "text": "Elena is the creative engine behind N-DEPT brand presence, driving innovative marketing strategies and authentic storytelling that connect with our community.",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_9nDqJH": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_15.png",
+            "name": "Cori",
+            "designation": "Licensed Master Cosmetologist",
+            "text": "At N-DEPT, my role is rooted in helping clients feel seen, supported, and confident through products and practices that actually work. I’m passionate about ingredient education, texture-inclusive care, and creating safe spaces for people to ask questions, learn, and grow in their skin and beauty journeys.",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_g7WR8m": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_14.png",
+            "name": "Charles",
+            "designation": "Brand Storyteller & Community Lead",
+            "text": "Charles is the voice and heart of N-DEPT. With a passion for authentic storytelling and a deep understanding of customer needs.",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_edjMfC": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_404.png",
+            "name": "Emily",
+            "designation": "Digital Marketing and PR Specialist",
+            "text": "Behind the scenes, Emily is the creative mind connecting N-DEPT with its community. She runs our social media with a strategic and creative touch, ensuring that every post reflects our brand’s personality and mission. In addition, she curates meaningful influencer collaborations that expand our reach and foster genuine connections with new audiences. Emily also designs thoughtful PR experiences that bring our products to life beyond the screen, engaging people in ways that feel personal and memorable. Her work ensures that N-DEPT’s story resonates both online and in real life, creating lasting impressions with our customers and partners.",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "team_block_YiJcKV",
+        "team_block_mp9jPk",
+        "team_block_9nDqJH",
+        "team_block_g7WR8m",
+        "team_block_edjMfC"
+      ],
+      "name": "Team Carousel",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "Meet With <em>Team Members<\/em>",
+        "heading_size": "h0",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_pagination": false,
+        "enable_pagination_mobile": false,
+        "enable_navigation": true,
+        "enable_navigation_desktop": true,
+        "color_scheme_swiper": "scheme-4",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-1",
+        "padding_top": 76,
+        "padding_bottom": 76,
+        "padding_top_tab": 68,
+        "padding_bottom_tab": 68,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section-page-header",
+    "about_image_with_text_kz4fLw",
+    "team_carousel_iW94Xb"
+  ]
+}

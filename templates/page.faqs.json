@@ -1,0 +1,212 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section-page-header": {
+      "type": "section-page-header",
+      "settings": {
+        "allow_transparent_header": true,
+        "page_width": "container-fluid",
+        "heading": "FAQS",
+        "heading_size": "h0",
+        "color_scheme": "scheme-2",
+        "padding_top": 168,
+        "padding_bottom": 110,
+        "padding_top_tab": 112,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 112,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "faq_page_section_RaaQVD": {
+      "type": "faq-page-section",
+      "blocks": {
+        "collapsible_row_3f7GWj": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Is this sunscreen safe for sensitive skin?",
+            "icon": "none",
+            "row_content": "<p>Yes! Our sunscreen is dermatologist-tested and formulated without harsh chemicals, making it gentle and safe for sensitive skin.<\/p>"
+          }
+        },
+        "collapsible_row_nypEJ3": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Will this leave a white cast on my skin?",
+            "icon": "none",
+            "row_content": "<p>No! Our lightweight, invisible finish ensures a transparent look on all skin tones, so you won’t have that white cast issue.<\/p>"
+          }
+        },
+        "collapsible_row_Fdgbyn": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Can I use this sunscreen under makeup?",
+            "icon": "none",
+            "row_content": "<p>Absolutely! Its non-greasy, fast-absorbing formula makes it perfect as a base layer under makeup for a smooth, flawless finish.<\/p>"
+          }
+        },
+        "collapsible_row_TdA73m": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Is this sunscreen waterproof or sweat-resistant?",
+            "icon": "none",
+            "row_content": "<p>Yes! Our formula is water-resistant and stays effective during outdoor activities and sweating, providing reliable protection.<\/p>"
+          }
+        },
+        "collapsible_row_QmV8XN": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Is this product free from harmful chemicals like oxybenzone and parabens?",
+            "icon": "none",
+            "row_content": "<p>Definitely! Our sunscreen is made with clean, natural ingredients, free from oxybenzone, parabens, sulfates, and synthetic fragrances.<\/p>"
+          }
+        },
+        "collapsible_row_eibDBf": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "How often should I reapply the sunscreen?",
+            "icon": "none",
+            "row_content": "<p>For optimal protection, reapply every two hours when outdoors, and after swimming, sweating, or towel drying.<\/p>"
+          }
+        },
+        "collapsible_row_kXFKi6": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Can this sunscreen be used on children or pregnant women?",
+            "icon": "none",
+            "row_content": "<p>Yes, our formula is safe for children and pregnant women, but we recommend consulting with a healthcare provider if you have specific skin concerns.<\/p>"
+          }
+        },
+        "collapsible_row_j3ky94": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Will this sunscreen clog pores or cause breakouts?",
+            "icon": "none",
+            "row_content": "<p>No! Our non-comedogenic formula is designed to prevent pore clogging, making it suitable for acne-prone skin.<\/p>"
+          }
+        },
+        "collapsible_row_whTrxU": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Is the packaging environmentally friendly?",
+            "icon": "none",
+            "row_content": "<p>Yes! Our sunscreen comes in recyclable packaging, reflecting our commitment to sustainability and eco-conscious practices.<\/p>"
+          }
+        },
+        "collapsible_row_K9UMaN": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Does using this sunscreen help improve my skin health over time?",
+            "icon": "none",
+            "row_content": "<p>Yes! Besides protecting from UV damage, our formula includes ingredients that support and maintain healthy, glowing skin.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_3f7GWj",
+        "collapsible_row_nypEJ3",
+        "collapsible_row_Fdgbyn",
+        "collapsible_row_TdA73m",
+        "collapsible_row_QmV8XN",
+        "collapsible_row_eibDBf",
+        "collapsible_row_kXFKi6",
+        "collapsible_row_j3ky94",
+        "collapsible_row_whTrxU",
+        "collapsible_row_K9UMaN"
+      ],
+      "name": "Faq Section",
+      "settings": {
+        "enable_border": true,
+        "page_width": "container-fluid",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h0",
+        "disclosure_toggle": "plus",
+        "color_scheme": "",
+        "card_color_scheme": "scheme-3",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "them_section_id": ""
+      }
+    },
+    "call_to_actions_Rn3FBL": {
+      "type": "call-to-actions",
+      "blocks": {
+        "heading_GR4mUc": {
+          "type": "heading",
+          "settings": {
+            "heading": "Have a question?",
+            "heading_size": "h0"
+          }
+        },
+        "text_VNdefG": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We’re always here to assist you! If you have any questions regarding our products, services, or anything else, don’t hesitate to reach out. We’re committed to providing you with the best  shopping experience.<\/p>",
+            "text_style": "body",
+            "text_size": "large"
+          }
+        },
+        "button_Axih4U": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact Us",
+            "button_link": "shopify:\/\/pages\/contact",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_GR4mUc",
+        "text_VNdefG",
+        "button_Axih4U"
+      ],
+      "name": "Call to actions",
+      "settings": {
+        "page_width": "container-fluid",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 120,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 48
+      }
+    }
+  },
+  "order": [
+    "section-page-header",
+    "main",
+    "faq_page_section_RaaQVD",
+    "call_to_actions_Rn3FBL"
+  ]
+}

@@ -1,0 +1,97 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section-page-header": {
+      "type": "section-page-header",
+      "settings": {
+        "allow_transparent_header": true,
+        "page_width": "container-fluid",
+        "heading": "{{ page.title }}",
+        "heading_size": "h0",
+        "color_scheme": "scheme-2",
+        "padding_top": 168,
+        "padding_bottom": 110,
+        "padding_top_tab": 112,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 112,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "blocks": {
+        "form_9KrDBq": {
+          "type": "form",
+          "settings": {
+            "heading": "",
+            "heading_size": "h0",
+            "button_style": "primary"
+          }
+        },
+        "text_WhQiTr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Have questions or need assistance? Whether it’s about your order, our products, or anything else, our team is ready to assist you. Reach out to us, and we’ll get back to you as soon as possible.<\/p>",
+            "text_style": "body",
+            "text_size": "large"
+          }
+        },
+        "icon_block_WA8tDG": {
+          "type": "icon_block",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_10.svg",
+            "title": "Email:",
+            "text": "Info@ndeptskn.com"
+          }
+        },
+        "icon_block_8MCyNX": {
+          "type": "icon_block",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_11.svg",
+            "title": "Location:",
+            "text": "1600 Kennesaw Due West Rd Kennesaw Ga 30152 Suite 406"
+          }
+        }
+      },
+      "block_order": [
+        "form_9KrDBq",
+        "text_WhQiTr",
+        "icon_block_WA8tDG",
+        "icon_block_8MCyNX"
+      ],
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "CUSTOMER SERVICE",
+        "heading_size": "h0",
+        "color_scheme": "",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "section-page-header",
+    "main",
+    "form"
+  ]
+}

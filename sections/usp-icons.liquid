@@ -1,0 +1,389 @@
+{{ 'section-usp-blocks.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      margin-bottom: -{{ section.settings.margin_bottom | append: 'px'}};
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+        margin-bottom: -{{ section.settings.margin_bottom_mobile | append: 'px'}};
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div
+  class="usp-icons-seciton section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  isolate {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header text-center col-12 m-auto">
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        </div>
+      </div>
+    {%- endunless -%}
+
+    {% liquid
+
+  assign enable_pagination = section.settings.enable_pagination
+  assign enable_navigation = section.settings.enable_navigation
+  assign enable_scroll = section.settings.enable_scroll
+  assign autoplay = section.settings.autoplay_enabled
+  assign loop = section.settings.loop_enabled
+  assign delay = section.settings.autoplay_timeout | times: 1000
+  assign freemode = false
+%}
+
+    <slideshow-swiper>
+      <div
+        class="slideshow__swiper swiper"
+        data-centeredslides="false"
+        data-slidesDesktop="4"
+        data-slidesTab="3"
+        data-slidesMobile="1"
+        data-autoPlay="{{ autoplay }}"
+        data-delay="{{ delay }}"
+        data-loop="{{ loop }}"
+        data-freemode="{{ freemode }}"
+        data-paginationType="bullets"
+        data-freemomentum="false"
+        data-mousewheel="false"
+        data-desktopspace="24"
+        data-tabspace="24"
+        data-mobilespace="24"
+      >
+    <div class="swiper-wrapper row row-cols-lg-4 row-cols-md-2 row-cols-sm-2  row-cols-1 icon-row">
+      {%- for block in section.blocks -%}
+        <div class="usp-block__item swiper-slide col">
+          <div class="usp-block  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"  {{ block.shopify_attributes }}
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}>
+
+              <div class="usp-block__icon"> 
+            {% if block.settings.image != blank %}
+        
+             {% render 'icon-img' with image: block.settings.image %}
+
+              {% elsif block.settings.svg_icon != blank %}
+                {{ block.settings.svg_icon }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+               </div>
+       
+            <div class="usp-block__content">
+              {% if block.settings.title != blank %}
+                <h3 class="usp-block__title">{{ block.settings.title }}</h3>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <p class="usp-block__text">
+                  {{ block.settings.text }}
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+
+    
+        {% if enable_navigation %}
+          <div class="swiper-navigation-wrapper color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-button-prev">
+                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.3367 15.6633L5.93665 7.26562L5.93665 13.125C5.93665 13.3736 5.83788 13.6121 5.66207 13.7879C5.48625 13.9637 5.24779 14.0625 4.99915 14.0625C4.75051 14.0625 4.51206 13.9637 4.33624 13.7879C4.16043 13.6121 4.06165 13.3736 4.06165 13.125L4.06166 5C4.06166 4.75136 4.16043 4.5129 4.33624 4.33709C4.51206 4.16127 4.75051 4.0625 4.99916 4.0625L13.1242 4.0625C13.3728 4.0625 13.6113 4.16127 13.7871 4.33709C13.9629 4.5129 14.0617 4.75136 14.0617 5C14.0617 5.24864 13.9629 5.4871 13.7871 5.66291C13.6113 5.83873 13.3728 5.9375 13.1242 5.9375L7.26478 5.9375L15.6624 14.3367C15.7496 14.4239 15.8188 14.5275 15.866 14.6414C15.9132 14.7553 15.9375 14.8775 15.9375 15.0008C15.9375 15.1241 15.9132 15.2462 15.866 15.3602C15.8188 15.4741 15.7496 15.5776 15.6624 15.6648C15.5752 15.752 15.4717 15.8212 15.3578 15.8684C15.2438 15.9156 15.1217 15.9399 14.9984 15.9399C14.875 15.9399 14.7529 15.9156 14.639 15.8684C14.525 15.8212 14.4215 15.752 14.3343 15.6648L14.3367 15.6633Z" fill="currentcolor"/>
+          </svg>
+            </div>
+            <div class="swiper-button-next">
+                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.33672 14.3376L12.7344 5.93763L6.875 5.93763C6.62636 5.93763 6.3879 5.83886 6.21209 5.66304C6.03627 5.48723 5.9375 5.24877 5.9375 5.00013C5.9375 4.75149 6.03627 4.51303 6.21209 4.33722C6.3879 4.1614 6.62636 4.06263 6.875 4.06263L15 4.06263C15.2486 4.06263 15.4871 4.1614 15.6629 4.33722C15.8387 4.51303 15.9375 4.75149 15.9375 5.00013L15.9375 13.1251C15.9375 13.3738 15.8387 13.6122 15.6629 13.788C15.4871 13.9639 15.2486 14.0626 15 14.0626C14.7514 14.0626 14.5129 13.9639 14.3371 13.788C14.1613 13.6122 14.0625 13.3738 14.0625 13.1251L14.0625 7.26576L5.66328 15.6634C5.57608 15.7506 5.47255 15.8198 5.35861 15.867C5.24467 15.9142 5.12255 15.9385 4.99922 15.9385C4.87589 15.9385 4.75377 15.9142 4.63983 15.867C4.52589 15.8198 4.42236 15.7506 4.33516 15.6634C4.24795 15.5762 4.17877 15.4727 4.13158 15.3587C4.08438 15.2448 4.06009 15.1227 4.06009 14.9993C4.06009 14.876 4.08438 14.7539 4.13158 14.64C4.17877 14.526 4.24795 14.4225 4.33516 14.3353L4.33672 14.3376Z" fill="currentColor"/>
+            </svg>
+            </div>
+          </div>
+        {% endif %}
+        {% if enable_pagination %}
+          <div class="pagination-wrap color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+
+        {% if enable_scroll %}
+          <div class="scrollbar-wrap color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-scrollbar"></div>
+          </div>
+        {% endif %}
+      </div>
+    </slideshow-swiper>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Usp icons",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+          {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+        {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll",
+      "label": "Enable Scroll",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 48
+    },
+     {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom  (Negative)",
+      "default": 70
+    },
+     {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom Mobile (Negative)",
+      "default": 70
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp_block",
+      "name": "Usp Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": " Image"
+        },
+        {
+          "type": "liquid",
+          "id": "svg_icon",
+          "label": "Svg Icon"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "default": "t:sections.multicolumn.blocks.column.settings.title.default",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
+          "label": "t:sections.multicolumn.blocks.column.settings.text.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Usp icons",
+      "blocks": [
+        {
+          "type": "usp_block"
+        },
+        {
+          "type": "usp_block"
+        },
+        {
+          "type": "usp_block"
+        },
+        {
+          "type": "usp_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
