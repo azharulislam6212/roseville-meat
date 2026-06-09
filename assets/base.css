@@ -2865,10 +2865,6 @@ details[open] > .header__submenu {
     display: block;
   }
 
-  .header--top-center .header__inline-menu {
-    justify-self: center;
-  }
-
   .header--top-center .header__inline-menu > .list-menu--inline {
     justify-content: center;
   }

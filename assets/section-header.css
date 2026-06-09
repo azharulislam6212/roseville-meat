@@ -34,24 +34,17 @@
 }
 
 /* header container layout    */
-
-.header-container {
-    padding: 0 1.6rem;
-}
-
-@media screen and (min-width: 1200px) {
-    .header-container {
-        padding: 0 3rem;
+ 
+@media (min-width: 1080px) {
+    .header.header--top-left .header__inline-menu {
+         margin: 0 -6rem;
+         padding: 0 6rem;
+    }
+    .header.header--top-center  .header__inline-menu {
+         margin: 0 -6rem;
+         padding: 0 6rem;
     }
 }
-
-@media screen and (min-width: 1600px) {
-    .header-wrapper .header-container {
-        padding: 0 5rem;
-    }
-}
-
-
 
 /* sticky header */
 
