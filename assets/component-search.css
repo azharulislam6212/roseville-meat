@@ -1,7 +1,4 @@
-.search__input.field__input {
-  padding-right: 9.8rem;
-      background: #818cb596;
-}
+ 
 
 .search__button {
   right: var(--inputs-border-width);

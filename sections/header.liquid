@@ -327,10 +327,17 @@
   
   
     {%- liquid
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
+
+ 
+      
+
+       if section.settings.logo_position == 'top-left' or section.settings.menu == blank or section.settings.logo_position == 'top-center'
+        render 'inline-search', input_id: 'header-search'
       endif
+
     -%}
+
+    
 
     {%- if section.settings.logo_position != 'middle-center' -%}
            {{ logo }}
@@ -383,7 +390,10 @@
 
   
        {% if section.settings.show_icons %}
+
        {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+
       {%- if shop.customer_accounts_enabled != false and section.settings.enable_customer_avatar -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"

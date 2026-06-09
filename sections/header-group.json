@@ -67,7 +67,7 @@
         "menu": "new-main-menu",
         "menu_type_desktop": "menu",
         "sticky_header_type": "none",
-        "show_line_separator": true,
+        "show_line_separator": false,
         "show_icons": true,
         "transparent_on_home": false,
         "transparent": false,
