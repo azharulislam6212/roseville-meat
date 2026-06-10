@@ -14,7 +14,12 @@ img {
     fill: rgb(var(--color-foreground));
 }
 
-
+.custom-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
 
 /* button */
 

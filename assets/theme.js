@@ -1125,8 +1125,8 @@ function buildAnimation() {
             let span = item.querySelector(".button--text");
             let tl = gsap.timeline({ paused: true });
             if (span != null) {
-                tl.to(span, { duration: 0.2, xPercent: -150, ease: "power2.in" });
-                tl.set(span, { xPercent: 150 });
+                tl.to(span, { duration: 0.2, xPercent: 150, ease: "power2.in" });
+                tl.set(span, { xPercent: -150 });
                 tl.to(span, { duration: 0.2, xPercent: 0 });
                 item.addEventListener("mouseenter", () => tl.play(0));
                 item.addEventListener("mouseleave", () => tl.reverse());
