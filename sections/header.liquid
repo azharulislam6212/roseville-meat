@@ -362,6 +362,15 @@
 
     <div class="header__icons {% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
    
+
+    {%- if section.settings.call_to_action_text -%}
+      
+      <div class="call-to-action-text">
+        {{ section.settings.call_to_action_text }}
+      </div>
+    {%- endif -%}
+
+      
     {%- if section.settings.enable_country_selector or  section.settings.enable_language_selector -%}
     <div class="desktop-localization-wrapper">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
@@ -421,15 +430,17 @@
 
             </span>
           {%- endif -%}
-          <span class="visually-hidden">
-            {%- liquid
+        
+            <span>
+              {%- liquid
               if customer
                 echo 'customer.account_fallback' | t
               else
                 echo 'customer.log_in' | t
               endif
             -%}
-          </span>
+            </span>
+         
         </a>
       {%- endif -%}
 
@@ -456,7 +467,7 @@
             
             </span>
           {% endif %}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        <span  >{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
           <div class="cart-count-bubble">
             {%- if cart.item_count < 100 -%}
@@ -823,6 +834,16 @@
     },
       {
       "type": "header",
+      "content": "Cal to action"
+    },
+        {
+      "type": "richtext",
+      "id": "call_to_action_text",
+      
+      "label": "Text"
+    },
+      {
+      "type": "header",
       "content": "Transparent"
     },
         {
@@ -844,7 +865,7 @@
       "type": "header",
       "content": "Login Button"
     },
-        {
+    {
       "type": "url",
       "id": "login_link",
       "label": "Login link"

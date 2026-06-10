@@ -281,9 +281,6 @@ header-drawer {
     font-size: 16px;
     text-transform: none;
 }
-
- 
-
 .header__icon--cart {
     box-sizing: border-box;
 }
@@ -294,6 +291,33 @@ header-drawer {
 
 .header__heading-logo-wrapper img {
     max-width: var(--logo-width-mobile);
+}
+
+.call-to-action-text a{
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 150%;
+/* identical to box height, or 24px */
+letter-spacing: 0.01em;
+color:  rgb(var(--color-heading));
+text-decoration: none;
+}
+.call-to-action-text p{
+    margin: 0;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 150%;
+/* identical to box height, or 18px */
+letter-spacing: 0.01em;
+
+/* Text/text-5 */
+color:  rgb(var(--color-foreground));
+
+
+ 
+
 }
 
 @media screen and (min-width: 990px) {

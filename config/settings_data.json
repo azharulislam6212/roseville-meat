@@ -1,15 +1,6 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "current": {
-    "logo": "shopify://shop_images/logo_ndept_1200__white.png",
+    "logo": "shopify:\/\/shop_images\/logo_ndept_1200__white.png",
     "logo_width": 160,
     "enable_custom_font": true,
     "type_header_font": "poppins_n6",
@@ -109,7 +100,7 @@
     "sold_out_badge_color_scheme": "scheme-3",
     "custom_badge_color_scheme": "scheme-f80c93ed-444f-4ae5-a24a-23dabb24d4c5",
     "brand_headline": "",
-    "brand_description": "<p></p>",
+    "brand_description": "<p><\/p>",
     "brand_image_width": 100,
     "social_facebook_link": "",
     "social_instagram_link": "#",
@@ -500,7 +491,7 @@
       "sale_badge_color_scheme": "scheme-4",
       "sold_out_badge_color_scheme": "scheme-3",
       "brand_headline": "",
-      "brand_description": "<p></p>",
+      "brand_description": "<p><\/p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",

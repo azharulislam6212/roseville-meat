@@ -98,7 +98,6 @@
             "label": "Primary Button Label:Hover",
             "default": "#ffffff"
           },
-       
           {
             "type": "header",
             "content": "Secondary Buttons Color"
@@ -127,7 +126,6 @@
             "label": "Secondary Button Label:Hover",
             "default": "#ffffff"
           },
-              
           {
             "type": "header",
             "content": "Others Color"

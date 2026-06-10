@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -168,10 +159,10 @@
         "page_width": "container-fluid",
         "heading": "Benefit of Clear Guard SPF",
         "heading_size": "h0",
-        "text": "<p>With HydroShield, let your skin face the day balanced, protected, and glowing—because true skincare begins with smart, everyday defense.</p>",
+        "text": "<p>With HydroShield, let your skin face the day balanced, protected, and glowing—because true skincare begins with smart, everyday defense.<\/p>",
         "buy_now": true,
         "button_label": "Shop Now",
-        "button_link": "https://ndeptskn.com/products/hydrosheild-spf-oily-to-dry-skin#shopify-section-template--18531159638060__main",
+        "button_link": "https:\/\/ndeptskn.com\/products\/hydrosheild-spf-oily-to-dry-skin#shopify-section-template--18531159638060__main",
         "button_style": "primary",
         "color_scheme": "scheme-1",
         "padding_top": 120,
@@ -250,7 +241,7 @@
         "heading": "",
         "heading_size": "h1",
         "enable_video_looping": false,
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
         "description": "",
         "color_scheme": "",
         "padding_top": 0,
@@ -270,7 +261,7 @@
             "enable_video": true,
             "video_source": "video_hosted",
             "emabaded_video": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
             "link": ""
           }
         },
@@ -280,7 +271,7 @@
             "enable_video": true,
             "video_source": "video_hosted",
             "emabaded_video": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
             "link": ""
           }
         },
@@ -290,7 +281,7 @@
             "enable_video": true,
             "video_source": "video_hosted",
             "emabaded_video": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
             "link": ""
           }
         },
@@ -300,7 +291,7 @@
             "enable_video": true,
             "video_source": "video_hosted",
             "emabaded_video": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
             "link": ""
           }
         },
@@ -310,7 +301,7 @@
             "enable_video": true,
             "video_source": "video_hosted",
             "emabaded_video": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
             "link": ""
           }
         },
@@ -320,7 +311,7 @@
             "enable_video": true,
             "video_source": "video_hosted",
             "emabaded_video": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
             "link": ""
           }
         },
@@ -330,7 +321,7 @@
             "enable_video": true,
             "video_source": "video_hosted",
             "emabaded_video": false,
-            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
             "link": ""
           }
         }
@@ -350,7 +341,7 @@
         "column": "4",
         "column_medium": "4",
         "column_mobile": "2",
-        "heading": "Trusted By Many <em>People</em>",
+        "heading": "Trusted By Many <em>People<\/em>",
         "heading_size": "h0",
         "image_ratio": "portrait",
         "color_scheme": "",
@@ -451,7 +442,7 @@
         "text_dffXFb": {
           "type": "text",
           "settings": {
-            "text": "<p>Plant-based phytosteroid reduces redness as max-strength salicylic acid clears and heals—no derm visit required</p>",
+            "text": "<p>Plant-based phytosteroid reduces redness as max-strength salicylic acid clears and heals—no derm visit required<\/p>",
             "text_style": "body",
             "text_size": "large"
           }
@@ -461,7 +452,7 @@
           "settings": {
             "buy_now": true,
             "button_label": "Shop Now",
-            "button_link": "https://ndeptskn.com/products/hydrosheild-spf-oily-to-dry-skin#shopify-section-template--18531159638060__main",
+            "button_link": "https:\/\/ndeptskn.com\/products\/hydrosheild-spf-oily-to-dry-skin#shopify-section-template--18531159638060__main",
             "button_style": "primary"
           }
         }
@@ -501,7 +492,7 @@
             "deafult_open": false,
             "heading": "When will I see results?",
             "icon": "none",
-            "row_content": "<p>Immediately. Your skin is protected from the first application, and with daily use, you’ll notice a healthier, more even tone over time.</p>"
+            "row_content": "<p>Immediately. Your skin is protected from the first application, and with daily use, you’ll notice a healthier, more even tone over time.<\/p>"
           }
         },
         "collapsible_row_cPxwQF": {
@@ -510,7 +501,7 @@
             "deafult_open": false,
             "heading": "What kind of benefits can I expect from Ndept Sunscreen?",
             "icon": "none",
-            "row_content": "<p>Broad-spectrum SPF protection, mineral-based defense against UVA/UVB rays, and nourishing ingredients that leave your skin smooth, hydrated, and glowing.</p>"
+            "row_content": "<p>Broad-spectrum SPF protection, mineral-based defense against UVA\/UVB rays, and nourishing ingredients that leave your skin smooth, hydrated, and glowing.<\/p>"
           }
         },
         "collapsible_row_9gq8C8": {
@@ -519,7 +510,7 @@
             "deafult_open": false,
             "heading": "Does the sunscreen work under makeup?",
             "icon": "none",
-            "row_content": "<p>Yes. It’s lightweight, non-greasy, and designed to sit seamlessly under makeup without pilling or shine.</p>"
+            "row_content": "<p>Yes. It’s lightweight, non-greasy, and designed to sit seamlessly under makeup without pilling or shine.<\/p>"
           }
         },
         "collapsible_row_CQKnTD": {
@@ -528,7 +519,7 @@
             "deafult_open": false,
             "heading": "What makes Ndept Sunscreen different from other sunscreens?",
             "icon": "none",
-            "row_content": "<p>We combine clean, mineral protection with skin-loving ingredients, no harsh chemicals, no hidden toxins, just effective, safe sun care that feels luxurious.</p>"
+            "row_content": "<p>We combine clean, mineral protection with skin-loving ingredients, no harsh chemicals, no hidden toxins, just effective, safe sun care that feels luxurious.<\/p>"
           }
         },
         "collapsible_row_KHM6zH": {
@@ -537,7 +528,7 @@
             "deafult_open": false,
             "heading": "Do I actually need sunscreen?",
             "icon": "none",
-            "row_content": "<p>Absolutely, 90% of visible skin aging comes from sun damage. Daily sunscreen is your best anti-aging step.</p>"
+            "row_content": "<p>Absolutely, 90% of visible skin aging comes from sun damage. Daily sunscreen is your best anti-aging step.<\/p>"
           }
         }
       },
@@ -555,11 +546,11 @@
         "heading": "Frequently Asked Questions",
         "heading_size": "h0",
         "sub_heading": "Have a question?",
-        "text": "<p>We’re always here to assist you! If you have any  questions regarding our products, services, or anything else, don’t  hesitate to reach out. </p>",
+        "text": "<p>We’re always here to assist you! If you have any  questions regarding our products, services, or anything else, don’t  hesitate to reach out. <\/p>",
         "text_style": "body",
         "text_size": "medium",
         "button_label": "Contact Us",
-        "button_link": "shopify://pages/contact",
+        "button_link": "shopify:\/\/pages\/contact",
         "button_style": "primary",
         "disclosure_toggle": "plus",
         "color_scheme": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
