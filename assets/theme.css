@@ -632,3 +632,52 @@ button.shopify-payment-button__button--unbranded {
     font-size: 16px;
     line-height: 150%;
 }
+
+
+/* start: Aligment CSS */
+.vertical-top {
+  align-items: start;
+}
+.vertical-center {
+  align-items: center;
+}
+.vertical-bottom {
+  align-items: end;
+}
+.horizontal-left {
+  justify-content: start;
+  text-align: left;
+}
+.horizontal-center {
+  justify-content: center;
+  text-align: center;
+}
+.horizontal-right {
+  justify-content: end;
+  text-align: right;
+}
+
+/* End: Aligment CSS */
+@media (max-width: 768px) {
+  .mob-vertical-top {
+    align-items: start;
+  }
+  .mob-vertical-center {
+    align-items: center;
+  }
+  .mob-vertical-bottom {
+    align-items: end;
+  }
+  .mob-horizontal-left {
+    justify-content: start;
+    text-align: left;
+  }
+  .mob-horizontal-center {
+    justify-content: center;
+    text-align: center;
+  }
+  .mob-horizontal-right {
+    justify-content: end;
+    text-align: right;
+  }
+}
