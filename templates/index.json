@@ -27,7 +27,7 @@
           "type": "button",
           "settings": {
             "button_label": "Button label",
-            "button_link": "shopify:\/\/collections",
+            "button_link": "shopify:\/\/products\/bacon-extra-thick-cut-10-12-slices-lb",
             "button_style": "secondary"
           }
         }

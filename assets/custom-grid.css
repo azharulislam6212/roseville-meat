@@ -5,7 +5,7 @@
  */
  
  .container{
-  --bs-gutter-x:  2rem;
+  --bs-gutter-x:  1.6rem;
   --bs-gutter-y: 0;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x));
@@ -15,7 +15,7 @@
 }
 
 .container-fluid{
-  --bs-gutter-x:  2rem;
+  --bs-gutter-x:  1.6rem;
   --bs-gutter-y: 0;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x));

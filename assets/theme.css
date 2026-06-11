@@ -250,6 +250,22 @@ button.shopify-payment-button__button--unbranded {
 }
 
 
+.link-animation {
+    background: linear-gradient(90deg, currentColor, currentColor 100%) !important;
+    background-size: 0% 0.1rem !important;
+    background-repeat: no-repeat !important;
+    background-position: right bottom !important;
+    transition: background-size 0.5s var(--link-transition-ease) !important;
+}
+
+.link-animation:hover {
+    background-size: 100% 0.1rem !important;
+    background-position: left bottom !important;
+}
+
+
+/* rating */
+
 .position-relative {
     position: relative;
 }
@@ -342,6 +358,7 @@ button.shopify-payment-button__button--unbranded {
     height: 100%;
     width: 100%;
 }
+
 
 /* swiper navigation */
 
@@ -614,7 +631,4 @@ button.shopify-payment-button__button--unbranded {
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-    /* identical to box height, or 24px */
-
-
 }

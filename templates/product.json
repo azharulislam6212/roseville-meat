@@ -60,6 +60,13 @@
             "page": ""
           }
         },
+        "buy_buttons_cmNQyQ": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
         "share_WLhxk3": {
           "type": "share",
           "settings": {
@@ -75,6 +82,7 @@
         "collapsible_tab_EXF3yi",
         "collapsible_tab_yWqkWi",
         "collapsible_tab_Acwn3Q",
+        "buy_buttons_cmNQyQ",
         "share_WLhxk3"
       ],
       "settings": {
