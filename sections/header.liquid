@@ -214,35 +214,34 @@
     data-drawer="hamburger"
     aria-label="main-menu"
     id="header-menu">
-    <div class="drawer__content gradient motion-reduce color-{{ section.settings.menu_color_scheme }}">
+    <div class="drawer__content gradient motion-reduce color-{{ section.settings.mega_color_scheme }}">
       <div class="drawer__top">
         <div class="drawer__top__left">
-                 Menu
+
+         
+             <a href="{{ routes.root_url }}" class="heading-logo">
+            {%- if section.settings.logo != blank -%}
+              <div  >
+
+          {% render 'responsive-img' with image: section.settings.logo  %}
+
+              </div>
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+  
+            
         </div>
         <div class="drawer__top__right">
 
-        <a href="{{ section.settings.login_link }}" class="menu-account-icon">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M6.5 8C8.433 8 10 6.433 10 4.5C10 2.567 8.433 1 6.5 1C4.567 1 3 2.567 3 4.5C3 6.433 4.567 8 6.5 8Z" fill="#2E2E25" stroke="#2E2E25" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 13C12 11.6739 11.4205 10.4021 10.3891 9.46447C9.35764 8.52678 7.95869 8 6.5 8C5.04131 8 3.64236 8.52678 2.61091 9.46447C1.57946 10.4021 1 11.6739 1 13" fill="#2E2E25"/>
-<path d="M12 13C12 11.6739 11.4205 10.4021 10.3891 9.46447C9.35764 8.52678 7.95869 8 6.5 8C5.04131 8 3.64236 8.52678 2.61091 9.46447C1.57946 10.4021 1 11.6739 1 13" stroke="black" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M6.5 8C5.04131 8 3.64236 8.52678 2.61091 9.46447C1.57946 10.4021 1 11.6739 1 13H12C12 11.6739 11.4205 10.4021 10.3891 9.46447C9.35764 8.52678 7.95869 8 6.5 8Z" fill="#2E2E25" stroke="#2E2E25" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-        </a>
-
-      <a href="{{ routes.cart_url }}"  class="menu-cart-icon">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10.4 10.4C9.6785 10.4 9.1 10.9785 9.1 11.7C9.1 12.0448 9.23696 12.3754 9.48076 12.6192C9.72456 12.863 10.0552 13 10.4 13C10.7448 13 11.0754 12.863 11.3192 12.6192C11.563 12.3754 11.7 12.0448 11.7 11.7C11.7 11.3552 11.563 11.0246 11.3192 10.7808C11.0754 10.537 10.7448 10.4 10.4 10.4ZM0 0V1.3H1.3L3.64 6.2335L2.756 7.826C2.6585 8.008 2.6 8.2225 2.6 8.45C2.6 8.79478 2.73696 9.12544 2.98076 9.36924C3.22456 9.61304 3.55522 9.75 3.9 9.75H11.7V8.45H4.173C4.1299 8.45 4.08857 8.43288 4.05809 8.4024C4.02762 8.37193 4.0105 8.3306 4.0105 8.2875C4.0105 8.255 4.017 8.229 4.03 8.2095L4.615 7.15H9.4575C9.945 7.15 10.374 6.877 10.595 6.4805L12.922 2.275C12.9675 2.171 13 2.0605 13 1.95C13 1.77761 12.9315 1.61228 12.8096 1.49038C12.6877 1.36848 12.5224 1.3 12.35 1.3H2.7365L2.1255 0M3.9 10.4C3.1785 10.4 2.6 10.9785 2.6 11.7C2.6 12.0448 2.73696 12.3754 2.98076 12.6192C3.22456 12.863 3.55522 13 3.9 13C4.24478 13 4.57544 12.863 4.81924 12.6192C5.06304 12.3754 5.2 12.0448 5.2 11.7C5.2 11.3552 5.06304 11.0246 4.81924 10.7808C4.57544 10.537 4.24478 10.4 3.9 10.4Z" fill="#2E2E25"/>
-          </svg>
-        </a>  
-
+      
         <button class="drawer__button drawer__close_button"
           data-first-focus
           data-drawer-toggle="hamburger"
           aria-label="drawer-close">
-          <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8.15625 0.84375L0.84375 8.15625M0.84375 0.84375L8.15625 8.15625" stroke="#2E2E25" stroke-width="1.6875" stroke-linecap="round" stroke-linejoin="round"/>
+           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.854 12.1463C12.9005 12.1927 12.9373 12.2479 12.9625 12.3086C12.9876 12.3693 13.0006 12.4343 13.0006 12.5C13.0006 12.5657 12.9876 12.6308 12.9625 12.6915C12.9373 12.7521 12.9005 12.8073 12.854 12.8538C12.8076 12.9002 12.7524 12.9371 12.6917 12.9622C12.631 12.9873 12.566 13.0003 12.5003 13.0003C12.4346 13.0003 12.3695 12.9873 12.3088 12.9622C12.2481 12.9371 12.193 12.9002 12.1465 12.8538L8.00028 8.70688L3.85403 12.8538C3.76021 12.9476 3.63296 13.0003 3.50028 13.0003C3.3676 13.0003 3.24035 12.9476 3.14653 12.8538C3.05271 12.7599 3 12.6327 3 12.5C3 12.3673 3.05271 12.2401 3.14653 12.1463L7.2934 8L3.14653 3.85375C3.05271 3.75993 3 3.63269 3 3.5C3 3.36732 3.05271 3.24007 3.14653 3.14625C3.24035 3.05243 3.3676 2.99973 3.50028 2.99973C3.63296 2.99973 3.76021 3.05243 3.85403 3.14625L8.00028 7.29313L12.1465 3.14625C12.2403 3.05243 12.3676 2.99973 12.5003 2.99973C12.633 2.99973 12.7602 3.05243 12.854 3.14625C12.9478 3.24007 13.0006 3.36732 13.0006 3.5C13.0006 3.63269 12.9478 3.75993 12.854 3.85375L8.70715 8L12.854 12.1463Z" fill="currentColor"/>
 </svg>
 
 
@@ -256,42 +255,7 @@
 
          {% render 'mobile-drawer-menu', mobile_menu_linklist:  mobile_menu_linklist %}
 
-    
-              <div class="drawer__inner__footer">
-
-
-                 {%- for block in section.blocks -%}
-            {%- case block.type -%}
-              {%- when 'contact_info' -%}
-
-                {% if  block.settings.title  != blank %}
-                      <p class="menu-lebel">
-                {{ block.settings.title }}
-              </p>
-                {% endif %}
-          
-              <div class="drawer-contact-info">
-                <div class="contact-item">
-
-                  <a href="tel:{{ block.settings.call_number }}" data-rel="external"  class="contact-item__button button button--primary"> {{ block.settings.call_lebel }} </a>
-                  <span class="conact-text">  {{ block.settings.call_text }}</span>
-
-                </div>
-                  <div class="contact-item">
-                  <a href="mailto:{{ block.settings.email_address }}"  data-rel="external" class="contact-item__button button button--secondary"> {{ block.settings.email_lebel }}</a>
-                  <span class="conact-text">{{ block.settings.email_text }}</span>
-
-                </div>
-
-              </div>
-
-                  {%- endcase -%}
-      {%- endfor -%}
-              
-
-
-              </div>
-
+     
 
       </div>
     </div>
@@ -885,7 +849,7 @@
     {
       "type": "color_scheme",
       "id": "mega_color_scheme",
-      "label": "t:sections.header.settings.menu_color_scheme.label",
+      "label": "Mega menu and drawer",
       "default": "scheme-1"
     },
     {
@@ -900,6 +864,21 @@
       "label": "Sticky text color",
       "default": "#0A0A0A"
     },
+    {
+      "type": "header",
+      "content": "Flash sale"
+    },
+       {
+          "type": "text",
+          "id": "falsh_link_text",
+           "default": "Today Sale",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "falsh_link",
+          "label": "Link url"
+        },
     {
       "type": "header",
       "content": "t:sections.header.settings.header__utilities.content"
@@ -1085,7 +1064,12 @@
       "id": "promotion_color_scheme",
       "label": "t:sections.header.settings.menu_color_scheme.label",
       "default": "scheme-5"
-    }
+    },
+      {
+          "type": "color_background",
+          "id": "overlay_color",
+          "label": "Overlay color"
+        }
       ]
     },
          {

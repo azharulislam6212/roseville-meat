@@ -47,6 +47,10 @@
                             {%- if block.settings.title != blank -%}
                               <h3 class="promotion-image__title">{{ block.settings.title }}</h3>
                             {%- endif -%}
+
+                            {%- if block.settings.link_text  != blank -%}
+                              
+                            
                             <div class="promotion-image__btn--label link-animation">
                               {{ block.settings.link_text }}
                               <svg
@@ -59,6 +63,8 @@
                                 <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747275C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
                               </svg>
                             </div>
+                            
+                            {%- endif -%}
                           </div>
                         </div>
                       </div>
@@ -84,6 +90,11 @@
                             {%- if block.settings.title_2 != blank -%}
                               <h3 class="promotion-image__title">{{ block.settings.title_2 }}</h3>
                             {%- endif -%}
+
+                            
+                            {%- if block.settings.link_text_2  != blank -%}
+                              
+                           
                             <div class="promotion-image__btn--label link-animation">
                               {{ block.settings.link_text_2 }}
                               <svg
@@ -96,6 +107,7 @@
                                 <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747275C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
                               </svg>
                             </div>
+                             {%- endif -%}
                           </div>
                         </div>
                       </div>
@@ -115,6 +127,8 @@
                 <div class="col">
                   <h3 class="mega-menu-title">{{ block.settings.quick_menu_title | escape }}</h3>
 
+                 
+
                   {%- if block.settings.block_menu != blank -%}
                     <ul class="megamenu-list">
                       {% for link in linklists[block.settings.block_menu].links %}
@@ -131,18 +145,20 @@
                     {%- endif -%}
 
                     <div class="mega-image__card color-{{ block.settings.promotion_color_scheme }} gradient">
-                      <div class="mega-image__img">
+                      <div class="mega-image__img" style="--overlay: {{ block.settings.overlay_color }}">
                         {%- if block.settings.image != blank -%}
                           {% render 'responsive-img' with image: block.settings.image %}
                         {%- else -%}
                           {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                         {%- endif -%}
                       </div>
-                      <div class="mega-image__text  d-flex {{ block.settings.text_align }} link-animation">
-                        <div class="mega-image__content">
+                      <div class="mega-image__text  d-flex {{ block.settings.text_align }} ">
+                        <div class="mega-image__content link-animation">
                           {%- if block.settings.title != blank -%}
                             <h3 class="mega-image__title">{{ block.settings.title }}</h3>
                           {%- endif -%}
+
+                          {%- if block.settings.link_text != blank -%} 
 
                           <div class="mega-image__btn--label">
                             {{ block.settings.link_text }}
@@ -156,6 +172,8 @@
                               <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747275C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
                             </svg>
                           </div>
+
+                           {%- endif -%}
                         </div>
                       </div>
                     </div>
@@ -163,7 +181,8 @@
                       </a>
                     {%- endif -%}
                   {%- endif -%}
-                </div>
+                     </div>
+          
               {%- endif -%}
           {%- endcase -%}
         {% endfor %}
