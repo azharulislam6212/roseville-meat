@@ -56,9 +56,12 @@
             "quick_menu_title": "BY CUT",
             "block_menu": "by-cut",
             "enable_promotion": false,
+            "title": "Curated Gift Boxes",
             "link_text": "SHOP NOW",
             "link_url": "",
-            "promotion_color_scheme": ""
+            "text_align": "vertical-center horizontal-left",
+            "promotion_color_scheme": "",
+            "overlay_color": ""
           }
         },
         "menu_block_ykkezD": {
@@ -69,15 +72,121 @@
             "block_menu": "by-grade",
             "enable_promotion": true,
             "image": "shopify:\/\/shop_images\/image_4.png",
+            "title": "",
             "link_text": "SHOP NOW",
             "link_url": "shopify:\/\/collections",
-            "promotion_color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
+            "text_align": "vertical-center horizontal-center",
+            "promotion_color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(0deg,#0003,#0003)"
+          }
+        },
+        "menu_block_NnDTJW": {
+          "type": "menu_block",
+          "settings": {
+            "link_title": "Boxes & Bundle",
+            "quick_menu_title": "BY CATEGORY",
+            "block_menu": "by-category",
+            "enable_promotion": false,
+            "title": "Curated Gift Boxes",
+            "link_text": "SHOP NOW",
+            "link_url": "",
+            "text_align": "vertical-center horizontal-left",
+            "promotion_color_scheme": "scheme-5",
+            "overlay_color": ""
+          }
+        },
+        "image_blocks_Uccn3w": {
+          "type": "image_blocks",
+          "settings": {
+            "link_title": "Boxes & Bundle",
+            "image_title": "FEATURED COLECTONS",
+            "enable_promotion": true,
+            "image": "shopify:\/\/shop_images\/image_4_1.png",
+            "title": "Curated Gift Boxes",
+            "link_text": "Shop Now",
+            "link_url": "shopify:\/\/collections\/beef",
+            "promotion_color_scheme": "scheme-1",
+            "enable_promotion_2": true,
+            "image_2": "shopify:\/\/shop_images\/image_4_2.png",
+            "title_2": "Curated Gift Boxes",
+            "link_text_2": "Shop Now",
+            "link_url_2": "shopify:\/\/collections\/lamb",
+            "promotion_color_scheme_2": "scheme-1"
+          }
+        },
+        "menu_block_ieUAqh": {
+          "type": "menu_block",
+          "settings": {
+            "link_title": "Gifts",
+            "quick_menu_title": "BY OCCASION",
+            "block_menu": "by-occasion",
+            "enable_promotion": false,
+            "title": "Curated Gift Boxes",
+            "link_text": "SHOP NOW",
+            "link_url": "",
+            "text_align": "vertical-center horizontal-left",
+            "promotion_color_scheme": "",
+            "overlay_color": ""
+          }
+        },
+        "menu_block_tfnLJm": {
+          "type": "menu_block",
+          "settings": {
+            "link_title": "Gifts",
+            "quick_menu_title": "BY RECIPIENT",
+            "block_menu": "by-recipient",
+            "enable_promotion": true,
+            "image": "shopify:\/\/shop_images\/Hero_Image_1.png",
+            "title": "Curated Gift Boxes",
+            "link_text": "",
+            "link_url": "shopify:\/\/collections",
+            "text_align": "vertical-bottom horizontal-left",
+            "promotion_color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6) 100%)"
+          }
+        },
+        "menu_block_A8Cc34": {
+          "type": "menu_block",
+          "settings": {
+            "link_title": "Gifts",
+            "quick_menu_title": "BY PRICE",
+            "block_menu": "by-price",
+            "enable_promotion": true,
+            "image": "shopify:\/\/shop_images\/Hero_Image_3.png",
+            "title": "Custom Meat Bundles",
+            "link_text": "",
+            "link_url": "shopify:\/\/collections",
+            "text_align": "vertical-bottom horizontal-left",
+            "promotion_color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6) 100%)"
+          }
+        },
+        "menu_block_kHL3Mg": {
+          "type": "menu_block",
+          "settings": {
+            "link_title": "Gifts",
+            "quick_menu_title": "GIFT CARDS",
+            "block_menu": "gift-cards",
+            "enable_promotion": true,
+            "image": "shopify:\/\/shop_images\/Hero_Image_4.png",
+            "title": "Roseville Gift Cards",
+            "link_text": "",
+            "link_url": "shopify:\/\/collections",
+            "text_align": "vertical-bottom horizontal-left",
+            "promotion_color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6) 100%)"
           }
         }
       },
       "block_order": [
         "menu_block_wJyRBq",
-        "menu_block_ykkezD"
+        "menu_block_ykkezD",
+        "menu_block_NnDTJW",
+        "image_blocks_Uccn3w",
+        "menu_block_ieUAqh",
+        "menu_block_tfnLJm",
+        "menu_block_A8Cc34",
+        "menu_block_kHL3Mg"
       ],
       "settings": {
         "page_width": "container-fluid",

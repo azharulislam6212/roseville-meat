@@ -2,109 +2,52 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
-    "usp_icons_xzyTnj": {
-      "type": "usp-icons",
-      "blocks": {
-        "usp_block_HmmHrr": {
-          "type": "usp_block",
-          "settings": {
-            "svg_icon": "",
-            "title": "Free Shipping",
-            "text": "We ship globally, ensuring fast and secure delivery to any location through our extensive network."
-          }
-        },
-        "usp_block_CXn7Te": {
-          "type": "usp_block",
-          "settings": {
-            "svg_icon": "",
-            "title": "30-Days Free Returns",
-            "text": "Your satisfaction is paramount; enjoy risk-free purchases with our 30-day free return policy."
-          }
-        },
-        "usp_block_FRWtCD": {
-          "type": "usp_block",
-          "settings": {
-            "svg_icon": "",
-            "title": "Secure Online Payment",
-            "text": "Our robust, encrypted system guarantees the security of your financial information during online payments."
-          }
-        },
-        "usp_block_LkUeCb": {
-          "type": "usp_block",
-          "settings": {
-            "svg_icon": "",
-            "title": "24\/7 Friendly Support",
-            "text": "We ship globally, ensuring fast and secure delivery to any location through our extensive network."
-          }
-        }
-      },
-      "block_order": [
-        "usp_block_HmmHrr",
-        "usp_block_CXn7Te",
-        "usp_block_FRWtCD",
-        "usp_block_LkUeCb"
-      ],
-      "name": "Usp icons",
-      "settings": {
-        "page_width": "container-fluid",
-        "heading": "",
-        "heading_size": "h1",
-        "autoplay_enabled": false,
-        "autoplay_timeout": 5,
-        "loop_enabled": true,
-        "enable_scroll": false,
-        "enable_pagination": false,
-        "enable_navigation": true,
-        "color_scheme_swiper": "",
-        "color_scheme": "scheme-3",
-        "padding_top": 48,
-        "padding_bottom": 120,
-        "padding_top_tab": 48,
-        "padding_bottom_tab": 120,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 120,
-        "margin_bottom": 72,
-        "margin_bottom_mobile": 72
-      }
-    },
     "footer": {
       "type": "footer",
       "blocks": {
         "text_gqrxaW": {
           "type": "text",
           "settings": {
-            "image_width": 115,
+            "image": "shopify:\/\/shop_images\/tt-logo.png",
+            "image_width": 320,
             "heading": "",
-            "subtext": "<p>Each product is made with care , precision , and premium ingredients because your skin deserves luxury in every step.<\/p>",
-            "show_icon": false,
-            "phone": "",
-            "mail": "",
-            "address": "",
+            "subtext": "<p>Roseville Meat Company A Modern Day, Old Fashioned Meat Market<\/p>",
+            "show_icon": true,
+            "phone": "xzcAS",
+            "mail": "asAS",
+            "address": "<p>asAS<\/p>",
             "show_social": true
           }
         },
         "link_list_aMLWNk": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick Links",
-            "menu": ""
+            "heading": "Shop",
+            "menu": "shop"
           }
         },
         "link_list_DX8TFr": {
           "type": "link_list",
           "settings": {
-            "heading": "Support",
-            "menu": "footer"
+            "heading": "Help",
+            "menu": "help"
           }
         },
-        "product_list_RdaGM9": {
-          "type": "product_list",
+        "link_list_aaG83d": {
+          "type": "link_list",
           "settings": {
-            "heading": "Our Products",
-            "product_list": [
-              "clearguard-spf-normal-to-dry-skin",
-              "hydrosheild-spf-oily-to-dry-skin"
-            ]
+            "heading": "Company",
+            "menu": "company"
+          }
+        },
+        "store_info_94Y3gA": {
+          "type": "store_info",
+          "settings": {
+            "show_icon": true,
+            "address": "<p>700 Atlantic St., Roseville, CA 95678<\/p>",
+            "phone": "+123 000 0000",
+            "mail": "",
+            "clock_text": "<p>Mon–Sat: 8 AM – 6 PM<br\/>Sun: 10 AM – 5 PM<br\/><a href=\"#\" title=\"#\"><span style=\"text-decoration:underline\"> <\/span>Click Here<\/a> For Holiday Hours<\/p>"
           }
         }
       },
@@ -112,40 +55,40 @@
         "text_gqrxaW",
         "link_list_aMLWNk",
         "link_list_DX8TFr",
-        "product_list_RdaGM9"
+        "link_list_aaG83d",
+        "store_info_94Y3gA"
       ],
       "settings": {
         "page_width": "container-fluid",
-        "layout": "box",
+        "layout": "Fixed",
         "column": "4",
         "column_tab": "3",
         "column_mobile": "2",
-        "color_scheme": "scheme-6",
+        "color_scheme": "scheme-2",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
         "newsletter_text": "Sign up for emails to receive 10% off your first order. Plus, a first look at new products, exclusive promotions and more!",
-        "enable_follow_on_shop": true,
+        "enable_follow_on_shop": false,
         "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
         "payment_enable": true,
         "payment_enable_custom": false,
         "show_policy": false,
-        "menu_policy": "footer",
+        "menu_policy": "",
         "copy_right_content": "&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url -}}. Powered by Shopify",
         "speed": "50",
         "moving_direction": "animation-direction",
         "pause_when_hover": false,
         "margin_top": 0,
-        "padding_top": 80,
-        "padding_bottom": 60,
+        "padding_top": 64,
+        "padding_bottom": 40,
         "padding_top_mobile": 48,
         "padding_bottom_moblie": 24
       }
     }
   },
   "order": [
-    "usp_icons_xzyTnj",
     "footer"
   ]
 }
