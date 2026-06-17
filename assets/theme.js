@@ -20,6 +20,7 @@ var Thm = {
       this.beforeAfter();
       this.videLoad();
       this.collapsibleContent();
+      this.collapsibleContentMobile();
       this.stickyProduct();
     },
     sticky_header: function () {
@@ -1071,6 +1072,130 @@ customElements.define("deferred-media-custom", DeferredMediaCustom);
       }
     
     },
+
+     collapsibleContentMobile: function () {
+
+
+            if (!customElements.get("collapsible-mobilecontent")) {
+                class CollapsibleMobileContent extends HTMLElement {
+                    constructor() {
+                        super();
+                        this.detailsList = Array.from(this.querySelectorAll('details'));
+                        this.isMobile = window.innerWidth < 768;
+
+                        this.boundHandleResize = this.handleResize.bind(this);
+                        this.boundToggleHandlers = new Map();
+
+                        this.init();
+                        window.addEventListener('resize', this.boundHandleResize);
+                    }
+
+                    init() {
+                        if (this.isMobile) {
+                            this.enableAccordion();
+                        } else {
+                            this.disableAccordion();
+                        }
+                    }
+
+                    handleResize() {
+                        const nowMobile = window.innerWidth < 768;
+                        if (nowMobile !== this.isMobile) {
+                            this.isMobile = nowMobile;
+                            if (this.isMobile) {
+                                this.enableAccordion();
+                            } else {
+                                this.disableAccordion();
+                            }
+                        }
+                    }
+
+                    enableAccordion() {
+                        this.detailsList.forEach(details => {
+                            const toggle = details.querySelector('summary');
+                            const panel = toggle.nextElementSibling;
+
+                            // Reset for mobile mode
+                            panel.style.height = '0';
+                            details.open = false;
+                            details.classList.remove('is-closing');
+
+                            // Create click handler for this details
+                            const handler = (evt) => {
+                                evt.preventDefault();
+                                if (!details.open) {
+                                    // Opening animation
+                                    panel.style.height = '0';
+                                    details.open = true;
+                                    requestAnimationFrame(() => {
+                                        panel.style.height = `${panel.scrollHeight}px`;
+                                    });
+                                } else {
+                                    // Closing animation
+                                    panel.style.height = `${panel.scrollHeight}px`;
+                                    details.classList.add('is-closing');
+                                    setTimeout(() => {
+                                        panel.style.height = '0';
+                                    }, 10);
+                                }
+                            };
+
+                            if (!this.boundToggleHandlers.has(details)) {
+                                toggle.addEventListener('click', handler);
+                                this.boundToggleHandlers.set(details, handler);
+
+                                // Transition end cleanup
+                                panel.addEventListener('transitionend', (evt) => {
+                                    if (evt.target !== panel) return;
+                                    if (details.classList.contains('is-closing')) {
+                                        details.classList.remove('is-closing');
+                                        details.open = false;
+                                        panel.style.height = '';
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    disableAccordion() {
+                        this.detailsList.forEach(details => {
+                            const toggle = details.querySelector('summary');
+                            const panel = toggle.nextElementSibling;
+
+                            // Remove click handlers if present
+                            const handler = this.boundToggleHandlers.get(details);
+                            if (handler) {
+                                toggle.removeEventListener('click', handler);
+                                this.boundToggleHandlers.delete(details);
+                            }
+
+                            // Reset styles for desktop view
+                            panel.style.height = '';
+                            details.classList.remove('is-closing');
+                            details.open = true;
+                        });
+                    }
+
+                    disconnectedCallback() {
+                        window.removeEventListener('resize', this.boundHandleResize);
+                        this.detailsList.forEach(details => {
+                            const toggle = details.querySelector('summary');
+                            const handler = this.boundToggleHandlers.get(details);
+                            if (handler) {
+                                toggle.removeEventListener('click', handler);
+                            }
+                        });
+                        this.boundToggleHandlers.clear();
+                    }
+                }
+
+                customElements.define('collapsible-mobilecontent', CollapsibleMobileContent);
+            }
+
+
+
+
+        },
 
     stickyProduct:function(){
       function TopOffset(el) {

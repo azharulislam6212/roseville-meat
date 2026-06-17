@@ -1,65 +1,162 @@
 {
   "sections": {
-    "featured_products_grid_BjUPwA": {
-      "type": "featured-products-grid",
-      "name": "Featured Products Grid",
-      "settings": {}
-    },
-    "image_with_text_CMfWnD": {
-      "type": "image-with-text",
+    "hero_slider_E44mFM": {
+      "type": "hero-slider",
       "blocks": {
-        "heading_jUXgid": {
-          "type": "heading",
+        "slide_rQhAnX": {
+          "type": "slide",
           "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
+            "image": "shopify:\/\/shop_images\/slide-1.png",
+            "title": "Premium Meat <em>Delivered Fresh<\/em>",
+            "heading_size": "h0",
+            "text": "Save up to 15% on our curated Variety Boxes and Family Packs",
+            "button_text": "SHOP NOW",
+            "button_url": "shopify:\/\/collections",
+            "button_style": "primary",
+            "button_text_2": "BUNDLE & SAVE",
+            "button_url_2": "",
+            "button_style_2": "secondary-outline",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
           }
         },
-        "text_BgiAcE": {
-          "type": "text",
+        "slide_F3cwEQ": {
+          "type": "slide",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "text_style": "body",
-            "text_size": "medium"
+            "image": "shopify:\/\/shop_images\/slide-1.png",
+            "pre_text": "GET 50% OFF",
+            "title": "Premium Meat <em>Delivered Fresh<\/em>",
+            "heading_size": "h0",
+            "text": "Save up to 15% on our curated Variety Boxes and Family Packs",
+            "button_text": "SHOP NOW",
+            "button_url": "shopify:\/\/collections",
+            "button_style": "primary",
+            "button_text_2": "BUNDLE & SAVE",
+            "button_url_2": "",
+            "button_style_2": "secondary-outline",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
           }
         },
-        "button_6W9A48": {
-          "type": "button",
+        "slide_gKpXKq": {
+          "type": "slide",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "shopify:\/\/products\/bacon-extra-thick-cut-10-12-slices-lb",
-            "button_style": "secondary"
+            "image": "shopify:\/\/shop_images\/slide-1.png",
+            "pre_text": "GET 50% OFF",
+            "title": "Premium Meat <em>Delivered Fresh<\/em>",
+            "heading_size": "h0",
+            "text": "Save up to 15% on our curated Variety Boxes and Family Packs",
+            "button_text": "SHOP NOW",
+            "button_url": "shopify:\/\/collections",
+            "button_style": "primary",
+            "button_text_2": "BUNDLE & SAVE",
+            "button_url_2": "",
+            "button_style_2": "secondary-outline",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
+          }
+        },
+        "slide_PnBfgm": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/slide-1.png",
+            "pre_text": "GET 50% OFF",
+            "title": "Premium Meat <em>Delivered Fresh<\/em>",
+            "heading_size": "h0",
+            "text": "Save up to 15% on our curated Variety Boxes and Family Packs",
+            "button_text": "SHOP NOW",
+            "button_url": "shopify:\/\/collections",
+            "button_style": "primary",
+            "button_text_2": "BUNDLE & SAVE",
+            "button_url_2": "",
+            "button_style_2": "secondary-outline",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
           }
         }
       },
       "block_order": [
-        "heading_jUXgid",
-        "text_BgiAcE",
-        "button_6W9A48"
+        "slide_rQhAnX",
+        "slide_F3cwEQ",
+        "slide_gKpXKq",
+        "slide_PnBfgm"
       ],
-      "name": "t:sections.image-with-text.presets.name",
+      "name": "Hero slider",
       "settings": {
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-1",
-        "color_scheme": "",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "padding_top_tab": 60,
-        "padding_bottom_tab": 60,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48
+        "allow_transparent_header": false,
+        "hero_slider_heright": "medium",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_moblie": 0,
+        "them_section_id": ""
       }
-    }
+    },
+    "icon_with_text_scroll_dgHgxg": {
+      "type": "icon-with-text-scroll",
+      "blocks": {
+        "item_4yzQxC": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Icon.png",
+            "title": "Hand-Cut Daily",
+            "subtitle": "Master butcher quality."
+          }
+        },
+        "item_z9HBtC": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Icon_1.png",
+            "title": "Vacuum Sealed",
+            "subtitle": "Locked-in freshness."
+          }
+        },
+        "item_kh9rUK": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Icon_3.png",
+            "title": "Premium Source",
+            "subtitle": "Selected for superior marbling."
+          }
+        },
+        "item_nUAFQD": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Icon_2.png",
+            "title": "Since 1946",
+            "subtitle": "Over 80 years of local trust."
+          }
+        }
+      },
+      "block_order": [
+        "item_4yzQxC",
+        "item_z9HBtC",
+        "item_kh9rUK",
+        "item_nUAFQD"
+      ],
+      "name": "Icon With Text Scroller",
+      "settings": {
+        "speed": "50",
+        "moving_direction": "animation-direction",
+        "pause_when_hover": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_tab": 32,
+        "padding_bottom_tab": 32,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
   },
   "order": [
-    "featured_products_grid_BjUPwA",
-    "image_with_text_CMfWnD"
+    "hero_slider_E44mFM",
+    "icon_with_text_scroll_dgHgxg",
   ]
 }

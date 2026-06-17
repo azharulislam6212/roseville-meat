@@ -26,7 +26,7 @@ img {
 .button,
 .shopify-challenge__button,
 button.shopify-payment-button__button--unbranded {
-    min-width: calc(18.8rem + var(--buttons-border-width) * 2);
+    min-width: calc(11.4rem + var(--buttons-border-width) * 2);
     min-height: calc(4.3rem + var(--buttons-border-width) * 2);
 }
 
@@ -196,10 +196,12 @@ button.shopify-payment-button__button--unbranded {
 
 .button--primary-outline {
     background: transparent;
+        color: rgb(var(--color-primary-button-text));
     border: 1px solid rgb(var(--color-primary-button));
 }
 
 .button--primary-outline:hover {
+        color: rgb(var(--color-primary-button-hover-text));
     border: 1px solid rgb(var(--color-primary-button-hover));
 }
 
@@ -221,10 +223,12 @@ button.shopify-payment-button__button--unbranded {
 .button--secondary-outline {
     background: transparent;
     border: 1px solid rgb(var(--color-secondary-button));
+    color: rgb(var(--color-secondary-button));
 }
 
 .button--secondary-outline:hover {
     border: 1px solid rgb(var(--color-secondary-button-hover));
+    color: rgb(var(--color-secondary-button-hover-text));
 }
 
 
@@ -371,11 +375,12 @@ button.shopify-payment-button__button--unbranded {
     display: none;
 }
 
+
 .swiper-button-next,
 .swiper-button-prev {
     background-color: transparent;
-    width: 45px;
-    height: 45px;
+    width: 36px;
+    height: 36px;
     -webkit-transition: all .3s cubic-bezier(.42, 0, .58, 1);
     -moz-transition: all .3s cubic-bezier(.42, 0, .58, 1);
     -o-transition: all .3s cubic-bezier(.42, 0, .58, 1);
@@ -384,13 +389,13 @@ button.shopify-payment-button__button--unbranded {
     transition: all .3s;
     position: absolute;
     background: transparent;
-    border-radius: 50%;
+    border-radius: 8px;
     border: 0;
     color: rgb(var(--color-background));
     background: rgb(var(--color-foreground));
-    border-radius: 80px;
     z-index: 1;
     cursor: pointer;
+
 }
 
 .swiper-button-next {
@@ -514,22 +519,37 @@ button.shopify-payment-button__button--unbranded {
 
 .swiper-navigation-flex .swiper-button-prev:hover,
 .swiper-navigation-flex .swiper-button-next:hover {
-    background-color: rgb(var(--color-background), 0.8);
+    background-color: rgb(var(--color-accent), 1);
+    color: rgb(var(--color-background));
 }
 
 .swiper-navigation-flex {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    background: transparent;
-    padding-top: 48px;
     justify-content: center;
+
+    box-sizing: border-box;
+    
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
+    gap: 8px;
+
+
+    
+    height: 44px;
+    
+    /* Border/border-4 */
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 12px;
+
+    
+
 }
 
 
 @media screen and (max-width:768px) {
     .swiper-navigation-flex {
-        padding-top: 32px;
         gap: 8px;
     }
 }
@@ -680,4 +700,86 @@ button.shopify-payment-button__button--unbranded {
     justify-content: end;
     text-align: right;
   }
+}
+
+
+
+/* checkbox */
+.checkbox {
+    position: relative;
+    padding-left: 3rem;
+}
+
+.checkbox__input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.checkbox input+label:after {
+    content: '';
+    width: 2rem;
+    height: 2rem;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: transparent;
+    border: 0.1rem solid rgb(var(--color-border));
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 250ms cubic-bezier(.4, .0, .23, 1);
+}
+
+
+.checkbox input:checked+label::before {
+    content: "";
+    position: absolute;
+     top: .8em;
+    left: .2em;
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    transform: rotate(45deg);
+    transform-origin: 0% 100%;
+    animation: checkbox-check 125ms 250ms cubic-bezier(.4, .0, .23, 1) forwards;
+    z-index: 3;
+}
+
+.checkbox input[type='checkbox']:checked+label::after {
+    border: 1rem solid rgba(var(--color-heading));
+    animation: shrink-bounce 200ms cubic-bezier(.4, .0, .23, 1);
+}
+
+@keyframes shrink-bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    33% {
+        transform: scale(.85);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes checkbox-check {
+    0% {
+        width: 0;
+        height: 0;
+        border-color: rgb(var(--color-background));
+        transform: translate3d(0, 0, 0) rotate(45deg);
+    }
+
+    33% {
+        width: 0.6rem;
+        height: 0;
+        transform: translate3d(0, 0, 0) rotate(45deg);
+    }
+
+    100% {
+        width: .7rem;
+        height: 1.4rem;
+        border-color: rgb(var(--color-background));
+        transform: translate3d(0, -1.3rem, 0) rotate(45deg);
+    }
 }

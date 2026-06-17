@@ -1,0 +1,232 @@
+{{ 'section-shop-by-category.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+ 
+
+
+<section
+  id="{{ section.settings.them_section_id | escape }}"
+  class="shop-by-category section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+>
+  <div class="shop-by-category__header">
+    <div class="shop-by-category__heading-group">
+      {% if section.settings.eyebrow != blank %}
+        <p class="shop-by-category__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="shop-by-category__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="shop-by-category__nav">
+      <button class="shop-by-category__nav-btn shop-by-category__nav-btn--prev" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 13L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="shop-by-category__nav-btn shop-by-category__nav-btn--next" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 5L11 9L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="shop-by-category__slider-wrapper">
+    <div class="shop-by-category__slider" id="sbc-slider-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'category_item' %}
+          
+            <a class="shop-by-category__card{% if forloop.index == section.settings.active_index %} is-active{% endif %}"
+            href="{{ block.settings.link | default: '#' }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="shop-by-category__card-image">
+              {% if block.settings.image != blank %}
+
+                       {% render 'icon-img' with image: block.settings.image %}
+
+
+           
+              {% else %}
+               {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+
+              {% if forloop.index == section.settings.active_index %}
+                <span class="shop-by-category__card-arrow" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 13L13 3M13 3H5M13 3V11" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              {% endif %}
+            </div>
+
+            <p class="shop-by-category__card-title">{{ block.settings.title }}</p>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+ 
+
+{% schema %}
+{
+  "name": "Shop By Category",
+  "tag": "section",
+  "class": "shop-by-category-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "SHOP BY CATEGORY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Categories"
+    },
+    {
+      "type": "range",
+      "id": "active_index",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "label": "Active / highlighted card (position)",
+      "default": 3
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_item",
+      "name": "Category Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category name",
+          "default": "Beef"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Category",
+      "blocks": [
+        { "type": "category_item", "settings": { "title": "Gifts under $100" } },
+        { "type": "category_item", "settings": { "title": "Beef" } },
+        { "type": "category_item", "settings": { "title": "Ribeye" } },
+        { "type": "category_item", "settings": { "title": "Wagyu" } },
+        { "type": "category_item", "settings": { "title": "Family Packs" } },
+        { "type": "category_item", "settings": { "title": "Holiday Favorites" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

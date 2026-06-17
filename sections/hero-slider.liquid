@@ -22,9 +22,9 @@
 {% endstyle %}
 
 {% liquid
-  assign desktop_column = 1
-  assign tab_column = 1
-  assign mobile_column = 1
+  assign desktop_column = 1.08
+  assign tab_column = 1.08
+  assign mobile_column = 1.08
 
   assign enable_pagination = section.settings.enable_pagination
   assign enable_navigation = section.settings.enable_navigation
@@ -48,7 +48,7 @@
     <slideshow-swiper>
       <div
         class="slideshow__swiper swiper {%if enable_pagination %} enable-pagination {% endif %}"
-        data-centeredslides="false"
+        data-centeredslides="true"
         data-slidesDesktop="{{desktop_column}}"
         data-slidesTab="{{tab_column}}"
         data-slidesMobile="{{mobile_column}}"
@@ -58,25 +58,29 @@
         data-freemode="{{ freemode }}"
         data-freemomentum="false"
         data-mousewheel="false"
-        data-desktopspace="16"
-        data-tabspace="16"
-        data-mobilespace="10"
+        data-desktopspace="8"
+        data-tabspace="8"
+        data-mobilespace="4"
       >
         <div class="swiper-wrapper">
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'slide' -%}
                 <div class="swiper-slide slider__item" {{ block.shopify_attributes }}>
-                  <div class="slider__wrap slider--height-{{ section.settings.hero_slider_heright }} color-{{ section.settings.color_scheme }} gradient">
+                  <div class="slider__wrap slider--height-{{ section.settings.hero_slider_heright }} color-{{ block.settings.color_scheme }} gradient">
 
                   <div class="hero__behind-image">
-                             {% if block.settings.behind_image != blank %}
-                                {% render 'responsive-img' with image: block.settings.behind_image , class:"mobile-hidden" %}
-                                {% if block.settings.behind_image_mobile != blank %}
-                                  {% render 'responsive-img-mob' with image: block.settings.behind_image_mobile class:"desktop-hidden" %}
+                             {% if block.settings.image != blank %}
+                                {% render 'responsive-img' with image: block.settings.image , class:"mobile-hidden" %}
+
+                                {% if block.settings.image_mobile != blank %}
+                                  {% render 'responsive-img-mob' with image: block.settings.image_mobile class:"desktop-hidden" %}
                                 {% else %}
-                                  {% render 'responsive-img-mob' with image: block.settings.behind_image  class:"desktop-hidden" %}
+                                  {% render 'responsive-img-mob' with image: block.settings.image  class:"desktop-hidden" %}
                                 {% endif %}
+
+                                {%- else -%}
+                                        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                          
                               {% endif %}
                   </div>
@@ -84,9 +88,22 @@
                     <div class="hero-slider__content  section-{{ section.id }}-padding">
                       <div class="container-fluid hero-slider__container">
                         <div class="row align-items-stretch hero-slider__row">
-                          <div class="col-12 col-md-7 col-lg-7">
+                          <div class="col-12">
                             <div class="hero-slider__wrap">
                               <div class="hero-slider__text-block">
+
+                                {%- if block.settings.pre_text != blank -%}
+                                  <p
+                                    class="hero-slider__pre_text"
+                                    {{ block.shopify_attributes }}
+                                  > <svg width="11" height="22" viewBox="0 0 11 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.2262" y="-2.72391" width="5" height="26.3451" transform="rotate(18.2252 6.2262 -2.72391)" fill="white"/>
+</svg>
+
+                                    {{ block.settings.pre_text }}
+                                  </p>
+                                {%- endif -%}
+
                                 {%- if block.settings.title != blank -%}
                                   <h2
                                     class="hero-slider__title inline-richtext {{ block.settings.heading_size }}"
@@ -113,63 +130,21 @@
                                       <span class="button--text">{{- block.settings.button_text -}}</span>
                                     </a>
                                   {%- endif -%}
-
-                                  <div class="hero-rating">
-                                    <div class="rating__content">
-                                      <a href="{{ block.settings.rating_url }}"> 
-                                      <div class="rating__text_flex">
-                                        {% if block.settings.rating_text != blank %}
-                                          <span class="rating-text-span">{{ block.settings.rating_text }}</span>
-                                        {% endif %}
-                                        <div
-                                          class="rating__stars"
-                                          role="img"
-                                          aria-label="{{ 'general.rating.info' | t: rating_value: block.settings.rating, rating_max: 5 }}"
-                                        >
-                                          {%- for i in (1..5) -%}
-                                            {%- if i <= block.settings.rating -%}
-                                            
-
-                                              <span>
-                                                {%- render 'icon' with 'rating-star',
-                                                  class: 'rating__star rating__star--full'
-                                                -%}
-                                              </span>
-                                         
-
-                                            {%- else -%}
-                                              <span>
-                                                {%- render 'icon' with 'rating-star',
-                                                  class: 'rating__star rating__star--empty'
-                                                -%}
-                                              </span>
-                                            {%- endif -%}
-                                          {%- endfor -%}
-                                        </div>
-                                      </div>
-                                      </a>
-                                    </div>
-                                  </div>
+                                  {%- if block.settings.button_text_2 != blank -%}
+                                    <a
+                                      href="{{ block.settings.button_url_2 }}"
+                                      class="button button--icon button--{{ block.settings.button_style_2 }}"
+                                      {{ block.shopify_attributes }}
+                                    >
+                                      <span class="button--text">{{- block.settings.button_text_2 -}}</span>
+                                    </a>
+                                  {%- endif -%}
+ 
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 col-md-5 col-lg-5">
-
-                          
-                            <div class="hero-image">
-                              {% if block.settings.bg_image != blank %}
-                                {% render 'responsive-img' with image: block.settings.bg_image , class:"mobile-hidden" %}
-                                {% if block.settings.bg_image_mobile != blank %}
-                                  {% render 'responsive-img-mob' with image: block.settings.bg_image_mobile class:"desktop-hidden" %}
-                                {% else %}
-                                  {% render 'responsive-img-mob' with image: block.settings.bg_image  class:"desktop-hidden" %}
-                                {% endif %}
-                              {% else %}
-                                {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                              {% endif %}
-                            </div>
-                          </div>
+                       
                         </div>
                       </div>
                     </div>
@@ -179,18 +154,18 @@
           {%- endfor -%}
         </div>
         {% if enable_navigation %}
-          <div class="swiper-navigation-wrapper color-{{ section.settings.color_scheme_swiper }}">
+          <div class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}">
             <div class="swiper-button-prev">
-              <svg width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.76123 13.1011L12.7612 24.1011" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.7612 2.10107L1.76123 13.1011" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+             <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"/>
+</svg>
+
             </div>
             <div class="swiper-button-next">
-              <svg width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13.2388 12.8989L2.23877 1.89893" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M2.23877 23.8989L13.2388 12.8989" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"/>
+</svg>
+
             </div>
           </div>
         {% endif %}
@@ -224,23 +199,19 @@
       "settings": [
               {
           "type": "image_picker",
-          "id": "behind_image",
+          "id": "image",
           "label": "Behind Image"
         },
       {
           "type": "image_picker",
-          "id": "behind_image_mobile",
+          "id": "image_mobile",
           "label": "Behind Image mobile"
         },
-        {
-          "type": "image_picker",
-          "id": "bg_image",
-          "label": "Desktop Image"
-        },
-        {
-          "type": "image_picker",
-          "id": "bg_image_mobile",
-          "label": "Mobile Image"
+         {
+          "type": "inline_richtext",
+          "id": "pre_text",
+          "label": "Pre text",
+          "default": "GET 50% OFF"
         },
         {
           "type": "inline_richtext",
@@ -298,35 +269,59 @@
           "id": "button_style",
           "label": "Button style",
           "options": [
-            {
+                    {
               "value": "primary",
               "label": "Primary"
             },
             {
+              "value": "primary-outline",
+              "label": "Primary outline"
+            },
+            {
               "value": "secondary",
               "label": "Secondary"
+            },
+            {
+              "value": "secondary-outline",
+              "label": "Secondary outline"
             }
           ],
           "default": "primary"
         },
-        {
-          "type": "range",
-          "min": 0,
-          "max": 5,
-          "id": "rating",
-          "label": "Rating",
-          "default": 5
+             {
+          "type": "text",
+          "id": "button_text_2",
+          "label": "Button",
+          "default": "Button Label"
         },
         {
-          "type": "inline_richtext",
-          "id": "rating_text",
-          "label": "Rating Text",
-          "default": "Over 1000+ Reviews"
-        },
-          {
           "type": "url",
-          "id": "rating_url",
-          "label": "Rating to"
+          "id": "button_url_2",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "button_style_2",
+          "label": "Button style",
+          "options": [
+                 {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "primary-outline",
+              "label": "Primary outline"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "secondary-outline",
+              "label": "Secondary outline"
+            }
+          ],
+          "default": "primary"
         },
         {
           "type": "color_scheme",

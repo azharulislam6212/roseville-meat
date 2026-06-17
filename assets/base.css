@@ -2398,10 +2398,7 @@ input[type="checkbox"] {
     display: block;
   }
 
-  .header--top-left .header__heading,
-  .header--top-center .header__heading {
-    padding: 4rem 0;
-  }
+ 
 }
 
 /* Header icons */
