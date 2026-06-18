@@ -22,8 +22,8 @@
 
    {% liquid
       assign desktop_column =  5.3
-      assign tab_column = 4.3
-      assign mobile_column = 3.3
+      assign tab_column = 3.5
+      assign mobile_column = 1.8
 
       assign enable_pagination = section.settings.enable_pagination
       assign enable_navigation = section.settings.enable_navigation
@@ -75,7 +75,8 @@
 
   
 
-  <div class="slideshow__swiper swiper shop-by-category__slider-wrapper" data-centeredslides="false"
+  <div class="slideshow__swiper swiper shop-by-category__slider-wrapper" 
+      data-centeredslides="true"
         data-slidesDesktop="{{desktop_column}}"
         data-slidesTab="{{tab_column}}"
         data-slidesMobile="{{mobile_column}}"
@@ -85,14 +86,14 @@
         data-freemode="{{ freemode }}"
         data-freemomentum="false"
         data-mousewheel="false"
-        data-desktopspace="60"
-        data-tabspace="40"
-        data-mobilespace="20">
-    <div class="swiper-wrapper"  >
+        data-desktopspace="16"
+        data-tabspace="16"
+        data-mobilespace="16">
+    <div class="swiper-wrapper row  row-cols-sm-1 row-cols-md-3 row-cols-lg-6"  >
       {% for block in section.blocks %}
         {% if block.type == 'category_item' %}
 
-          <div class="swiper-slide">
+          <div class="swiper-slide col">
  
             <a class="shop-by-category__card {% if forloop.index == section.settings.active_index %} is-active{% endif %}"
             href="{{ block.settings.link | default: '#' }}"
@@ -101,21 +102,20 @@
             <div class="shop-by-category__card-image">
               {% if block.settings.image != blank %}
 
-                       {% render 'icon-img' with image: block.settings.image %}
+                 {% render 'icon-img' with image: block.settings.image %}
 
 
-           
               {% else %}
                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {% endif %}
 
-              {% if forloop.index == section.settings.active_index %}
+            
                 <span class="shop-by-category__card-arrow" aria-hidden="true">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 13L13 3M13 3H5M13 3V11" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </span>
-              {% endif %}
+           
             </div>
 
             <p class="shop-by-category__card-title">{{ block.settings.title }}</p>

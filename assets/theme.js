@@ -1444,3 +1444,316 @@ if (!customElements.get('tabbed-content')) {
 
     customElements.define('tabbed-content', Tabs);
 }
+
+// Money format handler
+Shopify.money_format = "${{amount_no_decimals}}";
+Shopify.formatMoney = function (cents, format) {
+  if (typeof cents == 'string') cents = cents.replace('.', '');
+  var value = '';
+  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  var formatString = (format || this.money_format);
+
+  function defaultOption(opt, def) {
+    return (typeof opt === 'undefined' ? def : opt);
+  }
+
+  function formatWithDelimiters(number, precision, thousands, decimal) {
+    precision = defaultOption(precision, 2);
+    thousands = defaultOption(thousands, ',');
+    decimal = defaultOption(decimal, '.');
+
+    if (isNaN(number) || number == null) return 0;
+    number = (number / 100.0).toFixed(precision);
+    var parts = number.split('.'),
+      dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+      cents = parts[1] ? (decimal + parts[1]) : '';
+    return dollars + cents;
+  }
+
+  var match = formatString.match(placeholderRegex);
+  if (!match) return formatString;
+
+  switch (match[1]) {
+    case 'amount':
+      value = formatWithDelimiters(cents, 2);
+      break;
+    case 'amount_no_decimals':
+      value = formatWithDelimiters(cents, 0);
+      break;
+    case 'amount_with_comma_separator':
+      value = formatWithDelimiters(cents, 2, '.', ',');
+      break;
+    case 'amount_no_decimals_with_comma_separator':
+      value = formatWithDelimiters(cents, 0, '.', ',');
+      break;
+  }
+
+  return formatString.replace(placeholderRegex, value);
+};
+
+ class VariantWeightSelect extends HTMLElement {
+  constructor() {
+    super();
+
+    this.selectedOptions = {};
+  }
+
+  connectedCallback() {
+    this.box = this.querySelector(".vs-box");
+    this.items = this.querySelectorAll(".vs-item");
+    this.selected = this.querySelector(".vs-selected");
+
+    this.productCard = this.closest(".product-card-wrapper");
+    this.form = this.productCard?.querySelector(".js-product-form");
+
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    // Dropdown toggle
+    this.box?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.classList.toggle("open");
+    });
+
+    // Option select
+    this.items.forEach((item) => {
+      item.addEventListener("click", () => {
+        this.selectOption(item);
+      });
+    });
+
+    // Outside click close
+    document.addEventListener("click", (e) => {
+      if (!this.contains(e.target)) {
+        this.classList.remove("open");
+      }
+    });
+  }
+
+  selectOption(item) {
+    const value = item.dataset.value;
+    const position = item.dataset.position;
+
+    this.selected.textContent = value;
+    this.classList.remove("open");
+
+    this.selectedOptions[position] = value;
+
+ 
+
+    const variant = this.getVariant(value);
+
+   
+
+    if (!variant) return;
+  this.updatePrice(variant);
+    this.updateForm(variant);
+
+  }
+
+
+  getVariants() {
+    const variantsScript = this.productCard?.querySelector('[type="application/json"][data-variants]');
+
+    return variantsScript? JSON.parse(variantsScript.textContent) : [];
+  }
+
+  
+  getVariant(value) {
+  const variants = this.getVariants();
+
+  return variants.find((variant) =>
+    [variant.option1, variant.option2, variant.option3].includes(value)
+  );
+}
+
+
+ async updatePrice(variant) {
+  const handle = this.productCard.dataset.productHandle;
+
+  const response = await fetch(
+    `/products/${handle}?variant=${variant.id}&section_id=card-product`
+  );
+
+  const html = await response.text();
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+
+ 
+
+  const newPrice = doc.querySelector(".price");
+  const currentPrice = this.productCard.querySelector(".price");
+
+
+  if (newPrice && currentPrice) {
+    currentPrice.innerHTML = newPrice.innerHTML;
+  }
+}
+
+  updateForm(variant) {
+    const input = this.form?.querySelector('[name="id"]');
+    const button = this.form?.querySelector('[name="add"]');
+    const text = button?.querySelector("span");
+
+    if (!input || !button) return;
+
+    input.value = variant.id;
+
+    if (variant.available) {
+      button.disabled = false;
+      if (text) text.textContent = "Add to cart";
+    } else {
+      button.disabled = true;
+      if (text) text.textContent = "Sold out";
+    }
+
+    input.dispatchEvent(
+      new Event("change", {
+        bubbles: true,
+      })
+    );
+
+    this.form.dispatchEvent(
+      new Event("change", {
+        bubbles: true,
+      })
+    );
+  }
+}
+
+customElements.define(
+  "variant-weight-select",
+  VariantWeightSelect
+);
+
+// class VariantWeightSelect extends HTMLElement {
+//   constructor() {
+//     super();
+
+//      this.box = this.querySelector(".vs-box");
+//     this.items = this.querySelectorAll(".vs-item");
+//     this.selected = this.querySelector(".vs-selected");
+
+//     this.productCard = this.closest(".product-card-wrapper");
+//     this.form = this.productCard?.querySelector(".js-product-form");
+//      const variantsScript = this.productCard?.querySelector('[type="application/json"][data-variants]');
+//       if (variantsScript) {
+//       this.variants = JSON.parse(variantsScript.textContent);
+//     } else {
+//       console.error('Variants JSON not found');
+//       this.variants = [];
+//     }
+
+//     this.init();
+//   }
+
+//   init() {
+   
+//     // open/close dropdown
+//     this.box.addEventListener("click", () => {
+//       this.classList.toggle("open");
+//     });
+
+//     // select item
+//     // this.items.forEach(item => {
+//     //   item.addEventListener("click", () => {
+
+//     //     const variantId = item.dataset.variantId;
+//     //     const value = item.textContent.trim();
+
+//     //     // UI update
+//     //     this.selected.textContent = value;
+//     //     this.classList.remove("open");
+
+//     //     // 🔥 Shopify form update (NO hidden input needed)
+   
+//     //     const input = this.form.querySelector("input[name='id']");
+
+//     //     if (input && variantId) {
+//     //       input.value = variantId;
+//     //     }
+
+//     //     // trigger Shopify update system
+//     //     form.dispatchEvent(new Event("change", { bubbles: true }));
+
+//     //   });
+//     // });
+
+
+//     this.items.forEach((item) => {
+//       item.addEventListener("click", () => {
+//         const selectedValue = item.dataset.value;
+
+//         this.selected.textContent = selectedValue;
+//         this.classList.remove("open");
+
+//         const variant = this.findVariant(selectedValue);
+
+
+//         console.log("clicked", variant);
+//         if (!variant) return;
+
+
+             
+
+//         // update variant id
+//         const input = this.form.querySelector('[name="id"]');
+//         input.value = variant.id;
+
+//         // update button state
+//         const button = this.form.querySelector('[name="add"]');
+//         const buttonText = button.querySelector("span");
+
+//         if (variant.available) {
+//           button.disabled = false;
+
+//           if (buttonText) {
+//             buttonText.textContent = "Add to cart";
+//           }
+//         } else {
+//           button.disabled = true;
+
+//           if (buttonText) {
+//             buttonText.textContent = "Sold out";
+//           }
+//         }
+
+//         input.dispatchEvent(
+//           new Event("change", {
+//             bubbles: true,
+//           })
+//         );
+
+//         this.form.dispatchEvent(
+//           new Event("change", {
+//             bubbles: true,
+//           })
+//         );
+//       });
+//     });
+
+
+
+//     // outside click close
+//     document.addEventListener("click", (e) => {
+//       if (!this.contains(e.target)) {
+//         this.classList.remove("open");
+//       }
+//     });
+//   }
+
+//    findVariant(weightValue) {
+//     return this.variants.find((variant) =>
+//       variant.options.some(
+//         (option) => option.toString() === weightValue.toString()
+//       )
+//     );
+//   }
+
+
+// }
+
+// customElements.define("variant-weight-select", VariantWeightSelect);
+ 
