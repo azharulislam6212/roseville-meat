@@ -21,7 +21,7 @@
  
 
    {% liquid
-      assign desktop_column =  6.5
+      assign desktop_column =  5.3
       assign tab_column = 4.3
       assign mobile_column = 3.3
 
@@ -73,10 +73,9 @@
        </div>
     {%- endunless -%}
 
+  
 
-
-  <div class="slideshow__swiper swiper" 
-        data-centeredslides="true"
+  <div class="slideshow__swiper swiper shop-by-category__slider-wrapper" data-centeredslides="false"
         data-slidesDesktop="{{desktop_column}}"
         data-slidesTab="{{tab_column}}"
         data-slidesMobile="{{mobile_column}}"
@@ -86,10 +85,10 @@
         data-freemode="{{ freemode }}"
         data-freemomentum="false"
         data-mousewheel="false"
-        data-desktopspace="16"
-        data-tabspace="16"
-        data-mobilespace="16">
-    <div class="swiper-wrapper  shop-by-category__slider-wrapper"  >
+        data-desktopspace="60"
+        data-tabspace="40"
+        data-mobilespace="20">
+    <div class="swiper-wrapper"  >
       {% for block in section.blocks %}
         {% if block.type == 'category_item' %}
 
