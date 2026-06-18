@@ -7,6 +7,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify:\/\/shop_images\/slide-1.png",
+            "pre_text": "GET 50% OFF",
             "title": "Premium Meat <em>Delivered Fresh<\/em>",
             "heading_size": "h0",
             "text": "Save up to 15% on our curated Variety Boxes and Family Packs",
@@ -154,9 +155,173 @@
         "padding_bottom_mobile": 32
       }
     },
+    "section_shop_by_category_MYwTmm": {
+      "type": "section-shop-by-category",
+      "blocks": {
+        "category_item_hKcUXU": {
+          "type": "category_item",
+          "settings": {
+            "title": "Gifts under $100",
+            "link": ""
+          }
+        },
+        "category_item_paHfAw": {
+          "type": "category_item",
+          "settings": {
+            "title": "Beef",
+            "link": ""
+          }
+        },
+        "category_item_fiH46X": {
+          "type": "category_item",
+          "settings": {
+            "title": "Ribeye",
+            "link": ""
+          }
+        },
+        "category_item_UJDJ48": {
+          "type": "category_item",
+          "settings": {
+            "title": "Wagyu",
+            "link": ""
+          }
+        },
+        "category_item_PBxzJV": {
+          "type": "category_item",
+          "settings": {
+            "title": "Family Packs",
+            "link": ""
+          }
+        },
+        "category_item_hYXgBE": {
+          "type": "category_item",
+          "settings": {
+            "title": "Holiday Favorites",
+            "link": ""
+          }
+        },
+        "category_item_DqMxqF": {
+          "type": "category_item",
+          "settings": {
+            "title": "Holiday Favorites",
+            "link": ""
+          }
+        },
+        "category_item_tgizRG": {
+          "type": "category_item",
+          "settings": {
+            "title": "Holiday Favorites",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_item_hKcUXU",
+        "category_item_paHfAw",
+        "category_item_fiH46X",
+        "category_item_UJDJ48",
+        "category_item_PBxzJV",
+        "category_item_hYXgBE",
+        "category_item_DqMxqF",
+        "category_item_tgizRG"
+      ],
+      "name": "Shop By Category",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "SHOP BY CATEGORY",
+        "heading": "Our Categories",
+        "heading_size": "h1",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "color_scheme": "",
+        "padding_top": 76,
+        "padding_bottom": 76,
+        "padding_top_tab": 68,
+        "padding_bottom_tab": 68,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    },
+    "featured_product_X7GCr6": {
+      "type": "featured-product",
+      "blocks": {
+        "text_M3PiaG": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_DzEkTQ": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_MRcdVz": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_47B4DA": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_imzHRd": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_A7zG9a": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_6F4Ma8": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_M3PiaG",
+        "title_DzEkTQ",
+        "price_MRcdVz",
+        "variant_picker_47B4DA",
+        "quantity_selector_imzHRd",
+        "buy_buttons_A7zG9a",
+        "share_6F4Ma8"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
   },
   "order": [
     "hero_slider_E44mFM",
     "icon_with_text_scroll_dgHgxg",
+    "section_shop_by_category_MYwTmm",
+    "featured_product_X7GCr6"
   ]
 }

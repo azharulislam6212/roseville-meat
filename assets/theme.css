@@ -593,12 +593,33 @@ button.shopify-payment-button__button--unbranded {
 
 
 /* section title */
+.section--pre-text{
+ 
 
-.section--header {
-    padding-bottom: 6rem;
-    max-width: 87.2rem;
+font-family: var(--font-heading-family);
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 130%;
+/* identical to box height, or 16px */
+text-transform: uppercase;
+
+/* Text/text-5 */
+color: rgba(var(--color-foreground));
+
+opacity: 0.6;
+margin: 0 0 10px;
+
 }
-
+.section--header {
+    padding-bottom: 3.2rem;
+}
+.section--header__flex{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
 .section--title {
     font-style: normal;
     font-weight: 700;
