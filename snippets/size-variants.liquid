@@ -1,0 +1,35 @@
+{% assign target_option = "weight" %}
+
+{% for option in product.options_with_values %}
+
+  {% assign option_name = option.name | downcase %}
+
+  {% if option_name == target_option %}
+
+    <variant-weight-select>
+ 
+
+      <div class="vs-box">
+        <span class="vs-selected">{{ option.selected_value }}</span>
+        <span class="vs-arrow">▾</span>
+      </div>
+
+      <ul class="vs-dropdown">
+
+        {% for value in option.values %}
+          {% assign variant = product.variants | where: 'option' | append: option.position, value | first %}
+
+          <li class="vs-item"
+              data-value="{{ value }}"
+              data-variant="{{ variant.id }}">
+            {{ value }}
+          </li>
+        {% endfor %}
+
+      </ul>
+
+    </variant-weight-select>
+
+  {% endif %}
+
+{% endfor %}

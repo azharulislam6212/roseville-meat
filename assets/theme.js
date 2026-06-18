@@ -1444,3 +1444,65 @@ if (!customElements.get('tabbed-content')) {
 
     customElements.define('tabbed-content', Tabs);
 }
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+class VariantWeightSelect extends HTMLElement {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.box = this.querySelector(".vs-box");
+    this.items = this.querySelectorAll(".vs-item");
+    this.selected = this.querySelector(".vs-selected");
+
+    // open/close dropdown
+    this.box.addEventListener("click", () => {
+      this.classList.toggle("open");
+    });
+
+    // select item
+    this.items.forEach(item => {
+      item.addEventListener("click", () => {
+
+        const variantId = item.dataset.variant;
+        const value = item.textContent.trim();
+
+        // UI update
+        this.selected.textContent = value;
+        this.classList.remove("open");
+
+        // 🔥 Shopify form update (NO hidden input needed)
+        const form = this.closest("form");
+        const input = form.querySelector("input[name='id']");
+
+        if (input && variantId) {
+          input.value = variantId;
+        }
+
+        // trigger Shopify update system
+        form.dispatchEvent(new Event("change", { bubbles: true }));
+
+      });
+    });
+
+    // outside click close
+    document.addEventListener("click", (e) => {
+      if (!this.contains(e.target)) {
+        this.classList.remove("open");
+      }
+    });
+  }
+}
+
+customElements.define("variant-weight-select", VariantWeightSelect);
+ 
