@@ -161,6 +161,7 @@
         "category_item_hKcUXU": {
           "type": "category_item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/Img_Wrap.png",
             "title": "Gifts under $100",
             "link": ""
           }
@@ -168,6 +169,7 @@
         "category_item_paHfAw": {
           "type": "category_item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/Img_Wrap_1.png",
             "title": "Beef",
             "link": ""
           }
@@ -175,6 +177,7 @@
         "category_item_fiH46X": {
           "type": "category_item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/Img_Wrap_3.png",
             "title": "Ribeye",
             "link": ""
           }
@@ -182,6 +185,7 @@
         "category_item_UJDJ48": {
           "type": "category_item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/Img_Wrap_2.png",
             "title": "Wagyu",
             "link": ""
           }
@@ -189,6 +193,7 @@
         "category_item_PBxzJV": {
           "type": "category_item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/Img_Wrap_5.png",
             "title": "Family Packs",
             "link": ""
           }
@@ -196,21 +201,24 @@
         "category_item_hYXgBE": {
           "type": "category_item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/Img_Wrap_6.png",
             "title": "Holiday Favorites",
             "link": ""
           }
         },
-        "category_item_DqMxqF": {
+        "category_item_Gdrbmw": {
           "type": "category_item",
           "settings": {
-            "title": "Holiday Favorites",
+            "image": "shopify:\/\/shop_images\/Img_Wrap_3.png",
+            "title": "Ribeye",
             "link": ""
           }
         },
-        "category_item_tgizRG": {
+        "category_item_XRNNAR": {
           "type": "category_item",
           "settings": {
-            "title": "Holiday Favorites",
+            "image": "shopify:\/\/shop_images\/Img_Wrap_5.png",
+            "title": "Family Packs",
             "link": ""
           }
         }
@@ -222,8 +230,8 @@
         "category_item_UJDJ48",
         "category_item_PBxzJV",
         "category_item_hYXgBE",
-        "category_item_DqMxqF",
-        "category_item_tgizRG"
+        "category_item_Gdrbmw",
+        "category_item_XRNNAR"
       ],
       "name": "Shop By Category",
       "settings": {
@@ -238,83 +246,51 @@
         "enable_navigation": true,
         "color_scheme_swiper": "",
         "color_scheme": "",
-        "padding_top": 76,
-        "padding_bottom": 76,
-        "padding_top_tab": 68,
-        "padding_bottom_tab": 68,
-        "padding_top_mobile": 56,
-        "padding_bottom_mobile": 56,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
         "them_section_id": ""
       }
     },
-    "featured_product_X7GCr6": {
-      "type": "featured-product",
-      "blocks": {
-        "text_M3PiaG": {
-          "type": "text",
-          "settings": {
-            "text": "{{ section.settings.product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
-        "title_DzEkTQ": {
-          "type": "title",
-          "settings": {
-            "heading_size": "h1"
-          }
-        },
-        "price_MRcdVz": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker_47B4DA": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
-        "quantity_selector_imzHRd": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
-        "buy_buttons_A7zG9a": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
-        "share_6F4Ma8": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
-        }
-      },
-      "block_order": [
-        "text_M3PiaG",
-        "title_DzEkTQ",
-        "price_MRcdVz",
-        "variant_picker_47B4DA",
-        "quantity_selector_imzHRd",
-        "buy_buttons_A7zG9a",
-        "share_6F4Ma8"
-      ],
-      "name": "t:sections.featured-product.presets.name",
+    "featured_collection_6Hk3Kk": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "product": "",
+        "page_width": "container-fluid",
+        "pre_text": "Features PRODUTCS",
+        "heading": "Best Seller",
+        "heading_size": "h1",
+        "collection": "beef",
+        "products_to_show": 9,
+        "column": "4",
+        "column_medium": "4",
+        "column_mobile": "1",
+        "enable_desktop_slider": true,
+        "button_label": "Shop All",
+        "show_view_all": true,
+        "button_style": "primary",
         "color_scheme": "",
-        "secondary_background": false,
-        "media_size": "medium",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "media_position": "left",
-        "image_zoom": "lightbox",
-        "hide_variants": false,
-        "enable_video_looping": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     }
   },
@@ -322,6 +298,6 @@
     "hero_slider_E44mFM",
     "icon_with_text_scroll_dgHgxg",
     "section_shop_by_category_MYwTmm",
-    "featured_product_X7GCr6"
+    "featured_collection_6Hk3Kk"
   ]
 }
