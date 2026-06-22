@@ -66,65 +66,64 @@
     id="collection-{{ section.id }}"
     data-id="{{ section.id }}"
   >
+    {% if section.settings.enable_desktop_slider %}
+      <slideshow-swiper>
+    {% endif %}
 
-   {% if section.settings.enable_desktop_slider %}
-        <slideshow-swiper>
-      {% endif %}
- 
-   {%- unless section.settings.heading == blank -%}
-     <div class="{{ section.settings.page_width }}">
-      <div class="row">
-        <div class="section--header  section--header__flex text-left col-12 m-auto">
-          <div class="section--header__inner">
-            {% if section.settings.pre_text != blank %}
-          <p class="section--pre-text">{{ section.settings.pre_text }}</p>
-        {% endif %}
+    {%- unless section.settings.heading == blank -%}
+      <div class="{{ section.settings.page_width }}">
+        <div class="row">
+          <div class="section--header  section--header__flex text-left col-12 m-auto">
+            <div class="section--header__inner">
+              {% if section.settings.pre_text != blank %}
+                <p class="section--pre-text">{{ section.settings.pre_text }}</p>
+              {% endif %}
 
-          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
-            {{ section.settings.heading }}
-          </h2>
-          </div>
-
-                {% if enable_navigation %}
-          <div class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}">
-            <div class="swiper-button-prev">
-             <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"/>
-                  </svg>
-
+              <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+                {{ section.settings.heading }}
+              </h2>
             </div>
-            <div class="swiper-button-next">
-              <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"/>
-                </svg>
 
-            </div>
+            {%- if section.settings.show_view_all and more_in_collection -%}
+              <div class="button-action text-center justify-content-center">
+                <a
+                  {% if section.settings.collection.url %}
+                    href="{{ section.settings.collection.url }}"
+                  {% else %}
+                    role="link" aria-disabled="true"
+                  {% endif %}
+                  class="button  button--{{  section.settings.button_style }}"
+                >
+                  <span class="button--text">
+                    {{- section.settings.button_label | escape -}}
+                  </span>
+                </a>
+              </div>
+            {% endif %}
           </div>
-        {% endif %}
         </div>
       </div>
-       </div>
     {%- endunless -%}
 
-    <div class=" {{ section.settings.page_width }}  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    <div class="{{ section.settings.page_width }}  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       {% if section.settings.enable_desktop_slider %}
-          <div
-            class="slideshow__swiper swiper product-feed"
-            data-centeredslides="false"
-            data-slidesDesktop="{{column}}"
-            data-slidesTab="{{column_medium}}"
-            data-slidesMobile="{{column_mobile}}"
-            data-autoPlay="{{ autoplay }}"
-            data-delay="{{ delay }}"
-            data-loop="{{ loop }}"
-            data-paginationType="bullets"
-            data-freemode="{{ freemode }}"
-            data-freemomentum="false"
-            data-mousewheel="false"
-            data-desktopspace="16"
-            data-tabspace="16"
-            data-mobilespace="16"
-          >
+        <div
+          class="slideshow__swiper swiper product-feed"
+          data-centeredslides="false"
+          data-slidesDesktop="{{column}}"
+          data-slidesTab="{{column_medium}}"
+          data-slidesMobile="{{column_mobile}}"
+          data-autoPlay="{{ autoplay }}"
+          data-delay="{{ delay }}"
+          data-loop="{{ loop }}"
+          data-paginationType="bullets"
+          data-freemode="{{ freemode }}"
+          data-freemomentum="false"
+          data-mousewheel="false"
+          data-desktopspace="16"
+          data-tabspace="16"
+          data-mobilespace="16"
+        >
       {% endif %}
       <div
         id="Slider-{{ section.id }}"
@@ -134,7 +133,6 @@
         aria-label="{{ 'general.slider.name' | t }}"
       >
         {% assign skip_card_product_styles = false %}
-     
 
         {%- if section.settings.collection.products.size > 0 -%}
           {% paginate section.settings.collection.products by section.settings.products_to_show %}
@@ -147,7 +145,7 @@
                   style="--animation-order: {{ forloop.index }};"
                 {% endif %}
               >
-                {% render 'card-product',
+                {% render 'card-product-pack',
                   card_product: product,
                   media_aspect_ratio: section.settings.image_ratio,
                   image_shape: section.settings.image_shape,
@@ -159,14 +157,13 @@
                   section_id: section.id,
                   quick_add: section.settings.quick_add,
                   add_button_style: section.settings.add_button_style,
-                  badge: true,
+                  badge: true
                 %}
               </li>
               {%- assign skip_card_product_styles = true -%}
             {%- endfor -%}
           {% endpaginate %}
         {%- else -%}
- 
           {%- for i in (1..section.settings.products_to_show) -%}
             <div
               class="swiper-slide col {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -175,9 +172,9 @@
                 style="--animation-order: {{ forloop.index }};"
               {% endif %}
             >
-            {% assign ridx = forloop.index0 | modulo: 4 | plus: 1 %}
+              {% assign ridx = forloop.index0 | modulo: 4 | plus: 1 %}
               {%- assign placeholder_image = 'product-apparel-' | append: ridx -%}
-              {% render 'card-product',
+              {% render 'card-product-pack',
                 show_vendor: section.settings.show_vendor,
                 media_aspect_ratio: section.settings.image_ratio,
                 image_shape: section.settings.image_shape,
@@ -187,8 +184,23 @@
           {%- endfor -%}
         {%- endif -%}
       </div>
+      {% if enable_navigation %}
+        <div class="swiper-navigation">
+          <div class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-button-prev">
+              <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="swiper-button-next">
+              <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      {% endif %}
 
-   
       {% if enable_pagination %}
         <div class="pagination-wrap color-{{ section.settings.color_scheme_swiper }}">
           <div class="swiper-pagination"></div>
@@ -202,41 +214,41 @@
       {% endif %}
       {% if section.settings.enable_desktop_slider %}
         </div>
-     
-      {% endif %}
-
-      {%- if section.settings.show_view_all and more_in_collection -%}
-        <div class="button-action text-center justify-content-center">
-          <a
-            {% if section.settings.collection.url %}
-              href="{{ section.settings.collection.url }}"
-            {% else %}
-              role="link" aria-disabled="true"
-            {% endif %}
-            class="button  button--{{  section.settings.button_style }}"
-          >
-            <span class="button--text">
-              {{- section.settings.button_label | escape -}}
-            </span>
-          </a>
-        </div>
       {% endif %}
     </div>
-     {% if section.settings.enable_desktop_slider %}
-        </slideshow-swiper>
-      {% endif %}
+    {% if section.settings.enable_desktop_slider %}
+      </slideshow-swiper>
+    {% endif %}
   </div>
 </div>
 
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}">
+    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+
 {% schema %}
 {
-  "name": "t:sections.featured-collection.name",
+  "name": "Featured family pack",
   "tag": "section",
   "class": "section",
   "disabled_on": {
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#DDDCD5",
+      "label": "Divider color"
+    },
     {
       "type": "select",
       "id": "page_width",
@@ -602,7 +614,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.featured-collection.presets.name"
+      "name": "Featured family pack"
     }
   ]
 }

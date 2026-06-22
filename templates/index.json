@@ -269,11 +269,284 @@
         "column_medium": "4",
         "column_mobile": "1",
         "enable_desktop_slider": true,
-        "button_label": "Shop All",
+        "button_label": "SHOP ALL",
         "show_view_all": true,
         "button_style": "primary",
         "color_scheme": "",
-        "image_ratio": "adapt",
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": false,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "collage_grid_banner_n79rMh": {
+      "type": "collage-grid-banner",
+      "blocks": {
+        "banner_block_product_J8kX87": {
+          "type": "banner_block_product",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Card.png",
+            "select_product": "filet-mignon-steak-1",
+            "color_accent": "#ffcd2e",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
+          }
+        },
+        "banner_block_gqRcNc": {
+          "type": "banner_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Card_1.png",
+            "heading": "ENJOY $1 OFF <em>PER POUND<\/em>",
+            "sub_heading": "USDA Choice & Prime Filets",
+            "text": "The perfect centerpiece for a memorable Mother’s Day mea",
+            "button_text": "Shop Now",
+            "button_url": "",
+            "button_style": "primary",
+            "color_accent": "#ffcd2e",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
+          }
+        },
+        "banner_block_product_2_TGrGYk": {
+          "type": "banner_block_product_2",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Card_2.png",
+            "select_product": "filet-mignon-steak-1",
+            "color_accent": "#ffcd2e",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8"
+          }
+        }
+      },
+      "block_order": [
+        "banner_block_product_J8kX87",
+        "banner_block_gqRcNc",
+        "banner_block_product_2_TGrGYk"
+      ],
+      "name": "Collage grid",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#dddcd5",
+        "page_width": "container-fluid",
+        "pre_text": "Hot Deals",
+        "heading": "Weekly Deals",
+        "heading_size": "h1",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_pagination": false,
+        "enable_pagination_mobile": false,
+        "enable_navigation": true,
+        "enable_navigation_desktop": true,
+        "color_scheme_swiper": "",
+        "color_scheme": "scheme-1",
+        "color_scheme_card": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    },
+    "featured_collections_pillis_wmMEYQ": {
+      "type": "featured-collections-pillis",
+      "blocks": {
+        "collection_m4Jw6b": {
+          "type": "collection",
+          "settings": {
+            "collection": "family-packs-variety-boxes",
+            "title": "Family Packs"
+          }
+        },
+        "collection_tNzNbd": {
+          "type": "collection",
+          "settings": {
+            "collection": "beef",
+            "title": "Beef"
+          }
+        },
+        "collection_8znnAt": {
+          "type": "collection",
+          "settings": {
+            "collection": "lamb",
+            "title": "Lamb"
+          }
+        },
+        "collection_9NiEy4": {
+          "type": "collection",
+          "settings": {
+            "collection": "poultry",
+            "title": "Poultry"
+          }
+        },
+        "collection_NxUq9z": {
+          "type": "collection",
+          "settings": {
+            "collection": "seafood",
+            "title": "Sea Food"
+          }
+        },
+        "collection_nRL37B": {
+          "type": "collection",
+          "settings": {
+            "collection": "raw-diet-pet-food",
+            "title": "Pet Food"
+          }
+        }
+      },
+      "block_order": [
+        "collection_m4Jw6b",
+        "collection_tNzNbd",
+        "collection_8znnAt",
+        "collection_9NiEy4",
+        "collection_NxUq9z",
+        "collection_nRL37B"
+      ],
+      "name": "Featured collection pills",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "Our Products",
+        "heading": "Premium Collections",
+        "heading_size": "h1",
+        "collection": "",
+        "products_to_show": 4,
+        "column": "4",
+        "column_medium": "3",
+        "column_mobile": "2",
+        "enable_desktop_slider": false,
+        "button_label": "Shop ALl Collections",
+        "show_view_all": true,
+        "button_style": "primary",
+        "color_accent": "#ff0000",
+        "color_scheme": "",
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": false,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "section_collection_list_card_LDnqx9": {
+      "type": "section-collection-list-card",
+      "blocks": {
+        "category_item_etTTfR": {
+          "type": "category_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_12_1.png",
+            "title": "Gifts under $100",
+            "sub_text": "Gifts for any occasion.",
+            "link": ""
+          }
+        },
+        "category_item_Ui6JjW": {
+          "type": "category_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_12_2.png",
+            "title": "Beef",
+            "sub_text": "Gifts for any occasion.",
+            "link": ""
+          }
+        },
+        "category_item_HWhPE7": {
+          "type": "category_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_12_3.png",
+            "title": "Ribeye",
+            "sub_text": "Gifts for any occasion.",
+            "link": ""
+          }
+        },
+        "category_item_UTXfxq": {
+          "type": "category_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_12_2.png",
+            "title": "Beef",
+            "sub_text": "Gifts for any occasion.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_item_etTTfR",
+        "category_item_Ui6JjW",
+        "category_item_HWhPE7",
+        "category_item_UTXfxq"
+      ],
+      "name": "Collection list card",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#730000",
+        "page_width": "container-fluid",
+        "pre_text": "seasonal GIFT",
+        "heading": "Best Seller",
+        "heading_size": "h1",
+        "button_label": "SHOP ALL",
+        "button_link": "shopify:\/\/collections",
+        "button_style": "link",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 3,
+        "loop_enabled": true,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-1",
+        "padding_top": 76,
+        "padding_bottom": 76,
+        "padding_top_tab": 68,
+        "padding_bottom_tab": 68,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    },
+    "featured_collection_family_pack_xhTyGq": {
+      "type": "featured-collection-family-pack",
+      "name": "Featured family pack",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#730000",
+        "page_width": "container-fluid",
+        "pre_text": "SHOP BUNDLE",
+        "heading": "Family Packs",
+        "heading_size": "h1",
+        "collection": "beef",
+        "products_to_show": 9,
+        "column": "4",
+        "column_medium": "3",
+        "column_mobile": "1",
+        "enable_desktop_slider": true,
+        "button_label": "View All",
+        "show_view_all": true,
+        "button_style": "primary",
+        "color_scheme": "",
+        "image_ratio": "square",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
@@ -285,8 +558,8 @@
         "enable_pagination": false,
         "enable_navigation": true,
         "color_scheme_swiper": "",
-        "padding_top": 36,
-        "padding_bottom": 36,
+        "padding_top": 76,
+        "padding_bottom": 76,
         "padding_top_tab": 60,
         "padding_bottom_tab": 60,
         "padding_top_mobile": 40,
@@ -298,6 +571,10 @@
     "hero_slider_E44mFM",
     "icon_with_text_scroll_dgHgxg",
     "section_shop_by_category_MYwTmm",
-    "featured_collection_6Hk3Kk"
+    "featured_collection_6Hk3Kk",
+    "collage_grid_banner_n79rMh",
+    "featured_collections_pillis_wmMEYQ",
+    "section_collection_list_card_LDnqx9",
+    "featured_collection_family_pack_xhTyGq"
   ]
 }

@@ -1445,64 +1445,342 @@ if (!customElements.get('tabbed-content')) {
     customElements.define('tabbed-content', Tabs);
 }
 
+// Money format handler
+Shopify.money_format = "${{amount_no_decimals}}";
+Shopify.formatMoney = function (cents, format) {
+  if (typeof cents == 'string') cents = cents.replace('.', '');
+  var value = '';
+  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  var formatString = (format || this.money_format);
 
-
-
-
-
- 
- 
- 
- 
-class VariantWeightSelect extends HTMLElement {
-  constructor() {
-    super();
-    this.init();
+  function defaultOption(opt, def) {
+    return (typeof opt === 'undefined' ? def : opt);
   }
 
-  init() {
+  function formatWithDelimiters(number, precision, thousands, decimal) {
+    precision = defaultOption(precision, 2);
+    thousands = defaultOption(thousands, ',');
+    decimal = defaultOption(decimal, '.');
+
+    if (isNaN(number) || number == null) return 0;
+    number = (number / 100.0).toFixed(precision);
+    var parts = number.split('.'),
+      dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+      cents = parts[1] ? (decimal + parts[1]) : '';
+    return dollars + cents;
+  }
+
+  var match = formatString.match(placeholderRegex);
+  if (!match) return formatString;
+
+  switch (match[1]) {
+    case 'amount':
+      value = formatWithDelimiters(cents, 2);
+      break;
+    case 'amount_no_decimals':
+      value = formatWithDelimiters(cents, 0);
+      break;
+    case 'amount_with_comma_separator':
+      value = formatWithDelimiters(cents, 2, '.', ',');
+      break;
+    case 'amount_no_decimals_with_comma_separator':
+      value = formatWithDelimiters(cents, 0, '.', ',');
+      break;
+  }
+
+  return formatString.replace(placeholderRegex, value);
+};
+
+ class VariantWeightSelect extends HTMLElement {
+  constructor() {
+    super();
+
+    this.selectedOptions = {};
+  }
+
+  connectedCallback() {
     this.box = this.querySelector(".vs-box");
     this.items = this.querySelectorAll(".vs-item");
     this.selected = this.querySelector(".vs-selected");
 
-    // open/close dropdown
-    this.box.addEventListener("click", () => {
+    this.productCard = this.closest(".product-card-wrapper");
+    this.form = this.productCard?.querySelector(".js-product-form");
+
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    // Dropdown toggle
+    this.box?.addEventListener("click", (e) => {
+      e.stopPropagation();
       this.classList.toggle("open");
     });
 
-    // select item
-    this.items.forEach(item => {
+    // Option select
+    this.items.forEach((item) => {
       item.addEventListener("click", () => {
-
-        const variantId = item.dataset.variant;
-        const value = item.textContent.trim();
-
-        // UI update
-        this.selected.textContent = value;
-        this.classList.remove("open");
-
-        // 🔥 Shopify form update (NO hidden input needed)
-        const form = this.closest("form");
-        const input = form.querySelector("input[name='id']");
-
-        if (input && variantId) {
-          input.value = variantId;
-        }
-
-        // trigger Shopify update system
-        form.dispatchEvent(new Event("change", { bubbles: true }));
-
+        this.selectOption(item);
       });
     });
 
-    // outside click close
+    // Outside click close
     document.addEventListener("click", (e) => {
       if (!this.contains(e.target)) {
         this.classList.remove("open");
       }
     });
   }
+
+  selectOption(item) {
+    const value = item.dataset.value;
+    const position = item.dataset.position;
+
+    this.selected.textContent = value;
+    this.classList.remove("open");
+
+    this.selectedOptions[position] = value;
+
+ 
+
+    const variant = this.getVariant(value);
+
+   
+
+    if (!variant) return;
+  this.updatePrice(variant);
+    this.updateForm(variant);
+
+  }
+
+
+  getVariants() {
+    const variantsScript = this.productCard?.querySelector('[type="application/json"][data-variants]');
+
+    return variantsScript? JSON.parse(variantsScript.textContent) : [];
+  }
+
+  
+  getVariant(value) {
+  const variants = this.getVariants();
+
+  return variants.find((variant) =>
+    [variant.option1, variant.option2, variant.option3].includes(value)
+  );
 }
 
-customElements.define("variant-weight-select", VariantWeightSelect);
+
+ async updatePrice(variant) {
+  const handle = this.productCard.dataset.productHandle;
+
+  const response = await fetch(
+    `/products/${handle}?variant=${variant.id}&section_id=card-product`
+  );
+
+  const html = await response.text();
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+
  
+
+  const newPrice = doc.querySelector(".price");
+  const currentPrice = this.productCard.querySelector(".price");
+
+
+  if (newPrice && currentPrice) {
+    currentPrice.innerHTML = newPrice.innerHTML;
+  }
+}
+
+  updateForm(variant) {
+    const input = this.form?.querySelector('[name="id"]');
+    const button = this.form?.querySelector('[name="add"]');
+    const text = button?.querySelector("span");
+
+    if (!input || !button) return;
+
+    input.value = variant.id;
+
+    if (variant.available) {
+      button.disabled = false;
+      if (text) text.textContent = "Add to cart";
+    } else {
+      button.disabled = true;
+      if (text) text.textContent = "Sold out";
+    }
+
+    input.dispatchEvent(
+      new Event("change", {
+        bubbles: true,
+      })
+    );
+
+    this.form.dispatchEvent(
+      new Event("change", {
+        bubbles: true,
+      })
+    );
+  }
+}
+
+customElements.define(
+  "variant-weight-select",
+  VariantWeightSelect
+);
+
+
+
+if (!customElements.get('tabbed-content')) {
+    class Tabs extends HTMLElement {
+        constructor() {
+            super();
+            this.tabList = this.querySelector('[role="tablist"]');
+            this.activeTab = this.tabList.querySelector('[aria-selected="true"]');
+            this.isVerticalTablist = this.tabList.getAttribute('aria-orientation') === 'vertical';
+            this.tabs = this.querySelectorAll('[role="tab"]');
+            this.panels = this.querySelectorAll('[role="tabpanel"]');
+
+            // If no tab is active by default, activate the first tab.
+            if (!this.activeTab) {
+                this.activeTab = this.tabs[0];
+                this.activateTab(this.activeTab);
+            }
+
+            this.addListeners();
+        }
+
+        addListeners() {
+            this.tabList.addEventListener('click', this.handleClick.bind(this));
+            this.tabList.addEventListener('keydown', this.handleKeydown.bind(this));
+        }
+
+        handleClick(evt) {
+            if (!evt.target.matches('[role="tab"]') || evt.target === this.activeTab) return;
+            this.activateTab(evt.target);
+
+        }
+
+        handleKeydown(evt) {
+            switch (evt.key) {
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    evt.preventDefault();
+                    if (!this.isVerticalTablist) {
+                        this.switchTabOnKeyPress(evt.key);
+                    }
+                    break;
+
+                case 'ArrowUp':
+                case 'ArrowDown':
+                    evt.preventDefault();
+                    if (this.isVerticalTablist) {
+                        this.switchTabOnKeyPress(evt.key);
+                    }
+                    break;
+
+                case 'Home':
+                    evt.preventDefault();
+                    this.activateTab(this.tabs[0]);
+                    break;
+
+                case 'End':
+                    evt.preventDefault();
+                    this.activateTab(this.tabs[this.tabs.length - 1]);
+                    break;
+            }
+        }
+
+        switchTabOnKeyPress(key) {
+            if (key === 'ArrowRight' || key === 'ArrowDown') {
+                if (this.activeTab === this.tabs[this.tabs.length - 1]) {
+                    this.activateTab(this.tabs[0]);
+                } else {
+                    this.activateTab(this.activeTab.nextElementSibling);
+                }
+            } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+                if (this.activeTab === this.tabs[0]) {
+                    this.activateTab(this.tabs[this.tabs.length - 1]);
+                } else {
+                    this.activateTab(this.activeTab.previousElementSibling);
+                }
+            }
+        }
+
+        activateTab(tab) {
+            this.deactivateActiveTab();
+
+            Tabs.setTabState(tab, true);
+            tab.removeAttribute('tabindex');
+            this.activeTab = tab;
+
+            const panelId = tab.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+
+            if (panel) {
+                panel.classList.add('fade-in');  // Add animation class
+
+                setTimeout(() => {
+                    panel.classList.remove('fade-in');
+                }, 500);
+            }
+
+            if (document.activeElement.matches('.tablist__tab')) {
+                tab.focus();
+            }
+        }
+
+        deactivateActiveTab() {
+            Tabs.setTabState(this.activeTab, false);
+            this.activeTab.setAttribute('tabindex', '-1');
+            this.activeTab = null;
+        }
+
+        static setTabState(tab, active) {
+            tab.setAttribute('aria-selected', active);
+
+            const panelId = tab.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+
+            if (panel) {
+                if (active) {
+                    panel.hidden = false;
+                } else {
+                    panel.hidden = true;
+                }
+            }
+        }
+
+    }
+
+    customElements.define('tabbed-content', Tabs);
+}
+
+
+
+document.querySelectorAll('.product--spacific--block').forEach(block => {
+  const content = block.querySelector('.product--spacific__text');
+  const button = block.querySelector('.product--spacific__toggle');
+
+  if (!content || !button) return;
+
+  const collapsedHeight = 126;
+
+  if (content.scrollHeight <= collapsedHeight) {
+    button.style.display = 'none';
+    return;
+  }
+
+  button.addEventListener('click', () => {
+    const expanded = button.classList.contains('is-expanded');
+
+    if (expanded) {
+      content.style.maxHeight = collapsedHeight + 'px';
+      button.classList.remove('is-expanded');
+      button.innerHTML = 'View More <span>▼</span>';
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      button.classList.add('is-expanded');
+      button.innerHTML = 'View Less <span>▼</span>';
+    }
+  });
+});
