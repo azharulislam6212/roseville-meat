@@ -1784,3 +1784,116 @@ document.querySelectorAll('.product--spacific--block').forEach(block => {
     }
   });
 });
+
+
+
+
+ class CountdownTimer extends HTMLElement {
+  constructor() {
+    super();
+    this.interval = null;
+  }
+
+  connectedCallback() {
+    this.startTimer();
+  }
+
+  disconnectedCallback() {
+    clearInterval(this.interval);
+  }
+
+  parseEndTimeUTCMinus4(str) {
+    const date = new Date(str);
+    const localOffset = date.getTimezoneOffset();
+    const targetOffset = 4 * 60;
+    return date.getTime() + (localOffset + targetOffset) * 60 * 1000;
+  }
+
+  createDigits(value) {
+    return value
+      .split('')
+      .map(
+        digit => `
+          <span class="timer-digit">${digit}</span>
+        `
+      )
+      .join('');
+  }
+
+  renderTimer(days, hours, mins, secs) {
+    this.innerHTML = `
+      <div class="countdown-wrap">
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(days)}
+          </div>
+          <span class="timer-label">DAY</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(hours)}
+          </div>
+          <span class="timer-label">HOUR</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(mins)}
+          </div>
+          <span class="timer-label">MINS</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(secs)}
+          </div>
+          <span class="timer-label">SECS</span>
+        </div>
+
+      </div>
+    `;
+  }
+
+  startTimer() {
+    const endDate = this.dataset.endDate;
+    if (!endDate) return;
+
+    const endTime = this.parseEndTimeUTCMinus4(endDate);
+
+    const update = () => {
+      const now = Date.now();
+      let timeLeft = Math.floor((endTime - now) / 1000);
+
+      if (timeLeft <= 0) {
+        this.renderTimer('00', '00', '00', '00');
+        clearInterval(this.interval);
+        return;
+      }
+
+      const days = String(Math.floor(timeLeft / 86400)).padStart(2, '0');
+
+      timeLeft %= 86400;
+      const hours = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
+
+      timeLeft %= 3600;
+      const mins = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+
+      const secs = String(timeLeft % 60).padStart(2, '0');
+
+      this.renderTimer(days, hours, mins, secs);
+    };
+
+    update();
+    this.interval = setInterval(update, 1000);
+  }
+}
+
+customElements.define('countdown-timer', CountdownTimer);

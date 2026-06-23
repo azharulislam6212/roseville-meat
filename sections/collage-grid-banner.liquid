@@ -50,14 +50,14 @@
       </div>
     {%- endunless -%}
 
-    <div class="card-grid">
+    <div class="collage-grid">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'banner_block_product' -%}
             {% assign product = block.settings.select_product %}
 
-            <div class="banner-card banner-card__product" {{ block.shopify_attributes }}>
-              <div class="banner-card__image">
+            <div class="banner-grid banner-grid__product" {{ block.shopify_attributes }}>
+              <div class="banner-grid__image">
                 {% if block.settings.image != blank %}
                   {% render 'responsive-img' with image: block.settings.image %}
                 {% else %}
@@ -66,13 +66,13 @@
               </div>
 
               {%- if product != blank -%}
-                <div class="banner-card__content color-{{ block.settings.color_scheme }}" style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};">
-                  <div class="banner-card__inner">
-                    <h3 class="banner-card__product-title">{{ product.title }}</h3>
+                <div class="banner-grid__content color-{{ block.settings.color_scheme }}" style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};">
+                  <div class="banner-grid__inner">
+                    <h3 class="banner-grid__product-title">{{ product.title }}</h3>
 
                     {% render 'price',
                       product: product,
-                      price_class: 'banner-card__product__price',
+                      price_class: 'banner-grid__product__price',
                       show_compare_at_price: true
                     %}
 
@@ -112,8 +112,8 @@
           {%- when 'banner_block_product_2' -%}
             {% assign product = block.settings.select_product %}
 
-            <div class="banner-card banner-card__product" {{ block.shopify_attributes }}>
-              <div class="banner-card__image">
+            <div class="banner-grid banner-grid__product" {{ block.shopify_attributes }}>
+              <div class="banner-grid__image">
                 {% if block.settings.image != blank %}
                   {% render 'responsive-img' with image: block.settings.image %}
                 {% else %}
@@ -122,13 +122,13 @@
               </div>
 
               {%- if product != blank -%}
-                <div class="banner-card__content color-{{ block.settings.color_scheme }}" style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};">
-                  <div class="banner-card__inner">
-                    <h3 class="banner-card__product-title">{{ product.title }}</h3>
+                <div class="banner-grid__content color-{{ block.settings.color_scheme }}" style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};">
+                  <div class="banner-grid__inner">
+                    <h3 class="banner-grid__product-title">{{ product.title }}</h3>
 
                     {% render 'price',
                       product: product,
-                      price_class: 'banner-card__product__price',
+                      price_class: 'banner-grid__product__price',
                       show_compare_at_price: true,
                       show_save: false
                     %}
@@ -166,8 +166,8 @@
               {%- endif -%}
             </div>
           {%- when 'banner_block' -%}
-            <div class="banner-card" {{ block.shopify_attributes }}>
-              <div class="banner-card__image">
+            <div class="banner-grid" {{ block.shopify_attributes }}>
+              <div class="banner-grid__image">
                 {% if block.settings.image != blank %}
                   {% render 'responsive-img' with image: block.settings.image %}
                 {% else %}
@@ -175,9 +175,9 @@
                 {% endif %}
               </div>
 
-              <div class="banner-card__content color-{{ block.settings.color_scheme }}" style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};">
-                <div class="banner-card__inner">
-                  <h3 class="banner-card__title">{{ block.settings.heading }}</h3>
+              <div class="banner-grid__content color-{{ block.settings.color_scheme }}" style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};">
+                <div class="banner-grid__inner">
+                  <h3 class="banner-grid__title">{{ block.settings.heading }}</h3>
 
                   {%- if block.settings.sub_heading != blank -%}
                     <p class="banner-sub_heading">
@@ -185,7 +185,7 @@
                     </p>
                   {%- endif -%}
                   {%- if block.settings.text != blank -%}
-                    <p class="banner-card__text rte">
+                    <p class="banner-grid__text rte">
                       {{ block.settings.text }}
                     </p>
                   {%- endif -%}
@@ -283,62 +283,6 @@
       ],
       "default": "h1",
       "label": "t:sections.all.heading_size.label"
-    },
-    {
-      "type": "header",
-      "content": "Slider Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay_enabled",
-      "label": "Enable Auto Play",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "autoplay_timeout",
-      "label": "Chnage Time",
-      "min": 1,
-      "max": 10,
-      "step": 1,
-      "default": 5,
-      "unit": "s"
-    },
-    {
-      "type": "checkbox",
-      "id": "loop_enabled",
-      "label": "Enable Loop",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_pagination",
-      "label": "Enable Pagination",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_pagination_mobile",
-      "label": "Enable Pagination Mobile Only",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_navigation",
-      "label": "Enable Naviagtion",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_navigation_desktop",
-      "label": "Enable Naviagtion Desktop Only",
-      "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme_swiper",
-      "label": "Swiper Navigation",
-      "default": "scheme-2"
     },
     {
       "type": "color_scheme",

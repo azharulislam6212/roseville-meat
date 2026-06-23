@@ -1372,7 +1372,12 @@ body.drawer-open {
         padding: 0 1rem;
     }
 }
+@media screen and (max-width: 1200px) {
 
+    .header__inline-menu>ul>li {
+        padding: 0 0.5rem;
+    }
+}
 .header__inline-menu>ul>li>a {
     --font-heading-weight: 500;
     color: rgb(var(--color-heading));

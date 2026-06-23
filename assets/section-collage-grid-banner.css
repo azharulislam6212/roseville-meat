@@ -2,14 +2,14 @@
     position: relative;
 }
 
-.card-grid{
+.collage-grid{
     display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: minmax(350px, auto);
      gap: 24px;
     }
 
-.banner-card{
+.banner-grid{
     display: grid;
         grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -20,42 +20,42 @@ border: 1px solid #FFC2C2;
  
 }
 
-.banner-card__image{
+.banner-grid__image{
     grid-area: 1 / 1 / 2 / 2;
     line-height: 0;
 }
-.banner-card__image img, .banner-card__image svg{
+.banner-grid__image img, .banner-grid__image svg{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.banner-card__content{
+.banner-grid__content{
     grid-area: 1 / 1 / 2 / 2;
     background-color: transparent;
     padding: 6rem 4rem;
 }
 
-.banner-card__product .banner-card__content{
+.banner-grid__product .banner-grid__content{
     padding: 4rem ;
     position: relative;
 }
 
 
-.banner-card:first-child {
+.banner-grid:first-child {
   grid-column: span 1;
 }
 
-.banner-card:nth-child(2) {
+.banner-grid:nth-child(2) {
    grid-row: span 2;
 }
 
-.banner-card:nth-child(3) {
+.banner-grid:nth-child(3) {
    grid-column: span 1;
 }
 
 
 
-.banner-card__title{
+.banner-grid__title{
 font-style: normal;
 font-weight: 600;
 font-size: 40px;
@@ -71,7 +71,7 @@ margin: 0 0 24px;
 }
 
 
-.banner-card__title em{
+.banner-grid__title em{
     font-style: normal;
     display: block;
 }
@@ -87,11 +87,11 @@ letter-spacing: -0.04em;
  margin: 0 0 8px;
 }
 
-.banner-card__text{
+.banner-grid__text{
     margin: 0 0 32px;
 }
 
-.banner-card__product-title{
+.banner-grid__product-title{
     /* Tomahawk Ribeye Bundle */
  
 /* 500/H5 */
@@ -187,7 +187,7 @@ color: #FF0000;
 
 
 
-.banner-card__product__price{
+.banner-grid__product__price{
     margin-bottom: 16rem !important;
 }
 
@@ -277,15 +277,15 @@ color: #F4F3EF;
 }
 
 @media screen and (max-width: 768px) {
-.card-grid {
+.collage-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: 1fr;
 }
-.banner-card__product .banner-card__content {
+.banner-grid__product .banner-grid__content {
     padding: 2rem;
     position: relative;
 }
-.banner-card__content {
+.banner-grid__content {
     padding: 4rem 2rem;
 }
 .save-price--badge-top {
