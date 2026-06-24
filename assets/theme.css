@@ -633,14 +633,16 @@ button.shopify-payment-button__button--unbranded {
 
     /* Text/text-5 */
     color: rgba(var(--color-foreground));
-
     opacity: 0.6;
     margin: 0 0 10px;
-
 }
 
 .section--header {
     padding-bottom: 3.2rem;
+}
+
+.section--title  + .section--pre-text{
+  margin: 10px 0 0;
 }
 
 .section--header__flex {

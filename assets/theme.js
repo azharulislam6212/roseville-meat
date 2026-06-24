@@ -1897,3 +1897,37 @@ document.querySelectorAll('.product--spacific--block').forEach(block => {
 }
 
 customElements.define('countdown-timer', CountdownTimer);
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const items = document.querySelectorAll('.testimonial-grid .testimonial-card');
+  const button = document.querySelector('.view-more-btn');
+
+  const itemsPerClick = 3;
+  let visibleItems = 6;
+
+  // Initial
+  items.forEach((item, index) => {
+    item.classList.toggle('hidden', index >= visibleItems);
+  });
+
+  if (items.length <= visibleItems) {
+    button.parentElement.style.display = 'none';
+  }
+
+  button.addEventListener('click', () => {
+    visibleItems += itemsPerClick;
+
+    items.forEach((item, index) => {
+      if (index < visibleItems) {
+        item.classList.remove('hidden');
+      }
+    });
+
+    if (visibleItems >= items.length) {
+      button.parentElement.style.display = 'none';
+    }
+  });
+});
