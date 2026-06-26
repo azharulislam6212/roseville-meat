@@ -965,22 +965,12 @@ variant-weight-select {
 
 .tablist__scroller {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     gap: 1.2rem;
-       overflow: auto;
-                flex-wrap: nowrap;
-}
-  .tablist__scroller {
-    -ms-overflow-style: none; /* IE & Edge */
-    scrollbar-width: none;    /* Firefox */
+    flex-wrap: wrap;
 }
 
-.tablist__scroller::-webkit-scrollbar {
-    display: none;            /* Chrome, Safari, Opera */
-    width: 0;
-    height: 0;
-}
 .tablist__tab {
     box-sizing: border-box;
     /* Auto layout */
@@ -1020,7 +1010,30 @@ variant-weight-select {
     font-style: normal;
 }
 
- 
+ @media screen and (max-width:1300px) {
+
+    .tablist__scroller {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1.2rem;
+       overflow: auto;
+                flex-wrap: nowrap;
+}
+
+
+
+  .tablist__scroller {
+    -ms-overflow-style: none; /* IE & Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+
+.tablist__scroller::-webkit-scrollbar {
+    display: none;            /* Chrome, Safari, Opera */
+    width: 0;
+    height: 0;
+}
+ }
  
 
 

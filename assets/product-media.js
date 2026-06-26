@@ -1,9 +1,4 @@
-
-
-
-
-
-
+ 
 if (!customElements.get('product-media')) {
   class ProductMedia extends HTMLElement {
     constructor() {

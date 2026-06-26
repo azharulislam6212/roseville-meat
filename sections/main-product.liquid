@@ -16,6 +16,11 @@
 {%- endif -%}
 
 {%- style -%}
+  .section-{{ section.id }}-padding {
+         --color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+         --color-link: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+       }
+
      .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top_mobile}}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
@@ -108,20 +113,18 @@
   {%- capture thumbs_html -%}
     <div class="product__media-thumbs  {%- unless section.settings.gallery_type contains 'thumbs' %}   large-up-hide  {%- endunless -%}  {%- if section.settings.enable_mobile_thumbs == false %}  small-hide    medium-hide {%- endif -%}">
       <div class="swiper" data-thumbs>
-        <div class="swiper-wrapper row-cols-5">
-  
+        <div class="swiper-wrapper {%if  section.settings.gallery_type == 'thumbs-bottom'%} row-cols-5 {%- endif -%}">
           {%- for media in product.media -%}
           
   
             <div
-              class="swiper-slide col"
+              class="swiper-slide  {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
               data-thumbnail
             >
               {%- render 'product-thumbnail-custom', media: media, media_size: section.settings.gallery_image_size -%}
             </div>
           {%- endfor -%}
         </div>
-  
         <div class="product__media-thumbs-arrows">
           <button class="button-arrow button-arrow--small product__media-thumbs-arrow product__media-thumbs-arrow--prev" data-thumbs-prev aria-label="previous">
             {%- if section.settings.gallery_type != 'thumbs-bottom' -%}
@@ -171,7 +174,7 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="product-block__wrapper  product {{ section_class }} js-main-product" id="MainProduct-{{- section.id }}">
-    <div class="{{ section.settings.width }}">
+    <div class="{{ section.settings.page_width }}">
       <div class="row product-row {% if section.settings.layout == 'text_first' %} flex-row-reverse {% endif %}">
         <div class="col-12  {{grid_left}}  {%if section.settings.enable_sticky_gallery %} product__gallery-sticky {% endif %}">
           {%- unless placeholder -%}
@@ -224,13 +227,13 @@
                             aria-label="previous"
                           >
                             <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
+                              width="12"
+                              height="9"
+                              viewBox="0 0 12 9"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <path d="M14 6L8 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"></path>
                             </svg>
                           </button>
 
@@ -240,13 +243,13 @@
                             aria-label="next"
                           >
                             <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
+                              width="12"
+                              height="9"
+                              viewBox="0 0 12 9"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <path d="M10 6L16 12L10 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"></path>
                             </svg>
                           </button>
                         </div>
@@ -324,12 +327,31 @@
               {%- case block.type -%}
                 {%- when '@app' -%}
                   {% render block %}
-                {%- when 'quote' -%}
-                  <div
-                    class="product__quote inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
-                    {{ block.shopify_attributes }}
-                  >
-                    {{- block.settings.text -}}
+                {%- when 'tags' -%}
+                  <div class="tag-list">
+                    <li>
+                      <span class="product-tag">{{ block.settings.tag_1 }}</span>
+                    </li>
+                    <li>
+                      <span class="product-tag product-tag--shipping">
+                        {%- if block.settings.tag_2 contains 'shipping'
+                          or block.settings.tag_2 contains 'SHIPPING'
+                          or block.settings.tag_2 contains 'Shipping'
+                        -%}
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M11.9597 5.41594L11.3034 3.77531C11.2342 3.60129 11.1142 3.45214 10.959 3.3473C10.8039 3.24245 10.6207 3.18677 10.4334 3.1875H9.1875V3C9.1875 2.85082 9.12824 2.70774 9.02275 2.60225C8.91726 2.49676 8.77418 2.4375 8.625 2.4375H1.5C1.25136 2.4375 1.0129 2.53627 0.837087 2.71209C0.661272 2.8879 0.5625 3.12636 0.5625 3.375V8.625C0.5625 8.87364 0.661272 9.1121 0.837087 9.28791C1.0129 9.46373 1.25136 9.5625 1.5 9.5625H2.15906C2.27541 9.89147 2.49087 10.1763 2.77579 10.3777C3.0607 10.5792 3.40106 10.6874 3.75 10.6874C4.09894 10.6874 4.4393 10.5792 4.72421 10.3777C5.00913 10.1763 5.22459 9.89147 5.34094 9.5625H7.40906C7.52541 9.89147 7.74087 10.1763 8.02579 10.3777C8.3107 10.5792 8.65106 10.6874 9 10.6874C9.34894 10.6874 9.6893 10.5792 9.97421 10.3777C10.2591 10.1763 10.4746 9.89147 10.5909 9.5625H11.0625C11.3111 9.5625 11.5496 9.46373 11.7254 9.28791C11.9012 9.1121 12 8.87364 12 8.625V5.625C11.9939 5.55409 11.9804 5.48402 11.9597 5.41594ZM9.1875 4.3125H10.3069L10.6069 5.0625H9.1875V4.3125ZM3.75 9.5625C3.63875 9.5625 3.52999 9.52951 3.43749 9.4677C3.34499 9.40589 3.27289 9.31804 3.23032 9.21526C3.18774 9.11248 3.1766 8.99938 3.19831 8.89026C3.22001 8.78115 3.27359 8.68092 3.35225 8.60225C3.43092 8.52359 3.53115 8.47001 3.64026 8.44831C3.74938 8.4266 3.86248 8.43774 3.96526 8.48032C4.06804 8.52289 4.15589 8.59499 4.2177 8.68749C4.27951 8.77999 4.3125 8.88875 4.3125 9C4.3125 9.14918 4.25324 9.29226 4.14775 9.39775C4.04226 9.50324 3.89918 9.5625 3.75 9.5625ZM8.0625 7.5975C7.76052 7.80048 7.53152 8.09487 7.40906 8.4375H5.34094C5.22459 8.10853 5.00913 7.82371 4.72421 7.62227C4.4393 7.42082 4.09894 7.31265 3.75 7.31265C3.40106 7.31265 3.0607 7.42082 2.77579 7.62227C2.49087 7.82371 2.27541 8.10853 2.15906 8.4375H1.6875V6.5625H8.0625V7.5975ZM8.0625 5.4375H1.6875V3.5625H8.0625V5.4375ZM9 9.5625C8.88875 9.5625 8.77999 9.52951 8.68749 9.4677C8.59499 9.40589 8.52289 9.31804 8.48032 9.21526C8.43774 9.11248 8.4266 8.99938 8.44831 8.89026C8.47001 8.78115 8.52359 8.68092 8.60225 8.60225C8.68092 8.52359 8.78115 8.47001 8.89026 8.44831C8.99938 8.4266 9.11248 8.43774 9.21526 8.48032C9.31804 8.52289 9.40589 8.59499 9.4677 8.68749C9.52951 8.77999 9.5625 8.88875 9.5625 9C9.5625 9.14918 9.50324 9.29226 9.39775 9.39775C9.29226 9.50324 9.14918 9.5625 9 9.5625ZM10.875 8.4375H10.5909C10.4848 8.139 10.297 7.8763 10.0489 7.67931C9.80074 7.48232 9.50229 7.35896 9.1875 7.32328V6.1875H10.875V8.4375Z" fill="currentColor"/>
+                          </svg>
+                        {%- endif -%}
+
+                        {{ block.settings.tag_2 }}
+                      </span>
+                    </li>
                   </div>
 
                 {%- when 'vendor' -%}
@@ -403,9 +425,9 @@
 
                 {%- when 'payement_secure' -%}
                   <div class="payement_secure_wrapp">
-                    {% if shop.enabled_payment_types != blank %}
-                      <div class="footer__payment">
-                        <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+                    {% if shop.enabled_payment_types != blank and block.settings.enable_custom_payment_icon == false %}
+                      <div class="payment-list">
+                        <span class="payment-list-payment-title"> {{ block.settings.payment__title  }}</span>
                         <ul class="list list-payment" role="list">
                           {%- for type in shop.enabled_payment_types -%}
                             <li class="list-payment__item">
@@ -415,69 +437,15 @@
                         </ul>
                       </div>
                     {% else %}
-                      <div class="footer__payment">
-                        <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+                      <div class="payment-list">
+                        <span class="payment-list-payment-title"> {{ block.settings.payment__title }} </span>
                         {% render 'payment-icon' %}
                       </div>
                     {% endif %}
                   </div>
 
                 {%- when 'title' -%}
-                  {% liquid
-                    assign on_sale = false
-                    assign bestseller = false
-                    assign new = false
-                    assign soldout = false
-                    assign custom_badge = false
-
-                    if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price
-                      assign on_sale = true
-                    endif
-
-                    if product.available == false
-                      assign soldout = true
-                    endif
-
-                    for tag in product.tags
-                      if tag contains '_badge_'
-                        assign tag_starts_with = tag | slice: 0
-                        if tag_starts_with == '_'
-                          assign custom_label = tag | replace: '_badge_', ''
-                        endif
-                        if custom_label contains 'Bestseller' or custom_label contains 'bestseller'
-                          assign bestseller = true
-                          assign custom_badge = true
-                        endif
-                        if custom_label contains 'New' or custom_label contains 'new'
-                          assign new = true
-                          assign custom_badge = true
-                        endif
-                      endif
-                    endfor
-                  %}
-
-                  {% capture product__badge %}
-                <div  id="badge-{{ section.id }}" class="product--badge card__badge"> 
-                            {% if soldout == true and custom_badge == false %}
-                          <span class="p__badge badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}"> {{- 'products.product.sold_out' | t -}}</span>
-                          {% endif %}
-
-                                {% if on_sale == true and custom_badge == false  %}
-                          <span class="p__badge badge-sale color-{{ settings.sale_badge_color_scheme }}">{{- 'products.product.on_sale' | t -}}</span>
-                          {% endif %}
-
-                        {% if bestseller == true  %}
-                          <span class="p__badge badge-bestseller color-{{ settings.best_seller_badge }}">{{- 'products.product.bestseller' | t -}}</span>
-                          {% endif %}
-
-                          {% if new == true   %}
-                          <span class="p__badge badge-new color-{{ settings.custom_badge }}">{{- 'products.product.new' | t -}}</span>
-                          {% endif %}
-
-                </div>
-                
-               {% endcapture %}
-
+               
                   <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
                     <a href="{{ product.url }}" class="product__title">
@@ -486,7 +454,6 @@
                       </h2>
                     </a>
 
-                    {{ product__badge }}
                   </div>
                 {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
@@ -494,6 +461,7 @@
                       product: product,
                       use_variant: true,
                       show_badges: false,
+                      show_save: true,
                       price_class: 'price--large'
                     -%}
                   </div>
@@ -502,31 +470,17 @@
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>
                     </div>
                   {%- endif -%}
-                  {% comment %}
-                    {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                      <div class="product__tax caption rte">
-                        {%- if cart.duties_included and cart.taxes_included -%}
-                          {{ 'products.product.duties_and_taxes_included' | t }}
-                        {%- elsif cart.taxes_included -%}
-                          {{ 'products.product.taxes_included' | t }}
-                        {%- elsif cart.duties_included -%}
-                          {{ 'products.product.duties_included' | t }}
-                        {%- endif -%}
-                        {%- if shop.shipping_policy.body != blank -%}
-                          {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                        {%- endif -%}
-                      </div>
-                    {%- endif -%}
-                  {% endcomment %}
-                  <div class="installment-form" {{ block.shopify_attributes }}>
+
+                  {% comment %} <div class="installment-form" {{ block.shopify_attributes }}>
                     {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
-                    {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+                    {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-small' -%}
                       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                       {{ form | payment_terms }}
                     {%- endform -%}
-                  </div>
+                  </div> {% endcomment %}
+
                 {%- when 'inventory' -%}
-                  <p
+                  <div
                     class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
                     {{ block.shopify_attributes }}
                     id="Inventory-{{ section.id }}"
@@ -560,6 +514,22 @@
                           {%- else -%}
                             {{- 'products.product.inventory_in_stock' | t -}}
                           {%- endif -%}
+
+                          {% assign stock = product.selected_or_first_available_variant.inventory_quantity %}
+
+                                <div class="inventory-text">
+                                  <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="3" cy="3" r="3" fill="#DDDCD5"/>
+                                  </svg>
+
+                                  {% if stock > 0 %}
+                                    <span>Cut to order daily, limited to {{ stock }} portions</span>
+                                  {% else %}
+                                    <span>Sold Out Today</span>
+                                  {% endif %}
+                                </div>
+
+
                         {%- endif -%}
                       {%- else -%}
                         {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
@@ -575,11 +545,17 @@
                         {%- endif -%}
                       {%- endif -%}
                     {%- endif -%}
-                  </p>
+                  </div>
                 {%- when 'description' -%}
                   {%- if product.description != blank -%}
                     <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                       {{ product.description }}
+                    </div>
+                  {%- endif -%}
+                {%- when 'feaured_list_text' -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="feaured-list-text  quick-add-hidden" {{ block.shopify_attributes }}>
+                      {{ block.settings.text }}
                     </div>
                   {%- endif -%}
                 {%- when 'sku' -%}
@@ -611,32 +587,30 @@
                   <collapsible-content class="product__accordion quick-add-hidden" {{ block.shopify_attributes }}>
                     <details class="disclosure disclosure--row" id="Details-{{ block.id }}-{{ section.id }}">
                       <summary>
-                        <div class="summary__title disclosure-header">
-                          {% if block.settings.icon_image != blank %}
-                            <span class="accordion__icon">
-                              {% render 'icon-img' with image: block.settings.icon_image %}
-                            </span>
-                          {% else %}
-                            {% render 'icon-accordion', icon: block.settings.icon %}
-                          {% endif %}
+                        <div class="disclosure-header">
+                          <h2 class="h4 disclosure__title inline-richtext">
+                            {% if block.settings.icon_image != blank %}
+                              <span class="accordion__icon">
+                                {% render 'icon-img' with image: block.settings.icon_image %}
+                              </span>
+                            {% else %}
+                              {% render 'icon-accordion', icon: block.settings.icon %}
+                            {% endif %}
 
-                          <div class="accordion__title__wrap">
-                            <h2 class="h4 accordion__title inline-richtext">
-                              {{ block.settings.heading | default: block.settings.page.title | escape }}
-                            </h2>
-                            <span class="disclosure__toggle">
-                              <svg
-                                class="icon icon-caret"
-                                width="12"
-                                height="8"
-                                viewBox="0 0 12 8"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M1 1L6 6L11 1" stroke="#0A0A0A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
-                            </span>
-                          </div>
+                            {{ block.settings.heading | default: block.settings.page.title | escape }}
+                          </h2>
+                          <span class="disclosure__toggle">
+                            <svg
+                              class="icon icon-caret"
+                              width="12"
+                              height="8"
+                              viewBox="0 0 12 8"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M1 1L6 6L11 1" stroke="#0A0A0A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
                         </div>
                       </summary>
                       <div class="disclosure__panel has-motion">
@@ -1522,34 +1496,20 @@
       ]
     },
     {
-      "type": "quote",
-      "name": "Quote",
+      "type": "tags",
+      "name": "Tags",
       "settings": [
         {
-          "type": "richtext",
-          "id": "text",
-          "default": "t:sections.main-product.blocks.text.settings.text.default",
-          "label": "t:sections.main-product.blocks.text.settings.text.label"
+          "type": "text",
+          "id": "tag_1",
+          "default": "BEEF STEAKS",
+          "label": "Tag 1"
         },
         {
-          "type": "select",
-          "id": "text_style",
-          "options": [
-            {
-              "value": "body",
-              "label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
-            },
-            {
-              "value": "subtitle",
-              "label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
-            },
-            {
-              "value": "uppercase",
-              "label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
-            }
-          ],
-          "default": "body",
-          "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+          "type": "text",
+          "id": "tag_2",
+          "default": "BEEF STEAKS",
+          "label": "Tag 2"
         }
       ]
     },
@@ -1643,21 +1603,16 @@
       "name": "Payement Secure",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "lock_icon",
-          "label": "Lock Icon"
+          "type": "inline_richtext",
+          "id": "payment__title",
+          "default": "Payment Accepts",
+          "label": "Payment title"
         },
         {
-          "type": "inline_richtext",
-          "id": "text",
-          "default": "Pay securely with these payment options.",
-          "label": "t:sections.main-product.blocks.text.settings.text.label"
-        },
-        {
-          "type": "inline_richtext",
-          "id": "payments_text",
-          "default": "Pay securely with the following payment methods",
-          "label": "Popup Title"
+          "type": "checkbox",
+          "id": "enable_custom_payment_icon",
+          "default": true,
+          "label": "Enable custom payment"
         }
       ]
     },
@@ -1727,6 +1682,19 @@
           ],
           "default": "body",
           "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        }
+      ]
+    },
+
+      {
+      "type": "feaured_list_text",
+      "name": "Featured List Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "t:sections.main-product.blocks.text.settings.text.default",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
         }
       ]
     },
@@ -2727,6 +2695,12 @@
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
         },
         {
+          "type": "inline_richtext",
+          "id": "text_1",
+          "default": "Every cut, every time",
+          "label": "Text"
+        },
+        {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_2.label"
         },
@@ -2925,6 +2899,12 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_2.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_2.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        },
+       {
+          "type": "inline_richtext",
+          "id": "text_2",
+          "default": "Every cut, every time",
+          "label": "Text"
         },
         {
           "type": "header",
@@ -3125,6 +3105,218 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_3",
+          "default": "Every cut, every time",
+          "label": "Text"
+        },
+               {
+          "type": "header",
+          "content": "Pairing 4"
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            }
+          ],
+          "default": "truck",
+          "label": "t:sections.main-product.blocks.icon_with_text.settings.icon_3.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "t:sections.main-product.blocks.icon_with_text.settings.image_3.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading_4",
+          "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
+          "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
+          "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_4",
+          "default": "Every cut, every time",
+          "label": "Text"
         }
       ]
     }
@@ -3136,19 +3328,19 @@
     },
     {
       "type": "select",
-      "id": "width",
-      "label": "Width",
-      "default": "container",
+      "id": "page_width",
       "options": [
         {
-          "value": "container-full-with-padding",
-          "label": "Full width padded"
+          "value": "container",
+          "label": "Container"
         },
         {
-          "value": "container",
-          "label": "Page width"
+          "value": "container-fluid",
+          "label": "Full Width"
         }
-      ]
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
     },
     {
       "type": "select",
@@ -3320,6 +3512,12 @@
       "id": "enable_sticky_gallery",
       "default": true,
       "label": "Enable gallary sticky"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Accent Color",
+      "default": "#FFCD2E"
     },
     {
       "type": "color_scheme",

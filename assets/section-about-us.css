@@ -15,8 +15,7 @@
 }
 
 .about-us-content {
-  border: 1px solid rgba(var(--color-foreground), 0.2);
-  min-height: 52rem;
+  border: 1px solid rgba(var(--color-border));
   display: flex;
 }
 
@@ -45,7 +44,6 @@ margin: 0 0 3.2rem;
   color: #111;
   padding: 4rem;
   position: relative;
-  min-height: 52rem;
   display: flex;
   flex-direction: column;
 }

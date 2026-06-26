@@ -63,9 +63,15 @@
           loading="lazy"
         >
       {%- endif -%}
-      <span class="h4 inline-richtext">
-        {{- block.settings.heading_1 -}}
-      </span>
+
+      <div class="text__content">
+        <span class="icon--title inline-richtext">
+          {{- block.settings.heading_1 -}}
+        </span>
+        <p class="icon--text inline-richtext">
+          {{- block.settings.text_1 -}}
+        </p>
+      </div>
     </li>
   {%- endunless -%}
   {%- unless heading_2_empty -%}
@@ -85,9 +91,14 @@
           loading="lazy"
         >
       {%- endif -%}
-      <span class="h4 inline-richtext">
-        {{- block.settings.heading_2 -}}
-      </span>
+      <div class="text__content">
+        <span class="icon--title inline-richtext">
+          {{- block.settings.heading_2 -}}
+        </span>
+        <p class="icon--text inline-richtext">
+          {{- block.settings.text_2 -}}
+        </p>
+      </div>
     </li>
   {%- endunless -%}
   {%- unless heading_3_empty -%}
@@ -107,12 +118,18 @@
           loading="lazy"
         >
       {%- endif -%}
-      <span class="h4 inline-richtext">
-        {{- block.settings.heading_3 -}}
-      </span>
+      <div class="text__content">
+        <span class="icon--title inline-richtext">
+          {{- block.settings.heading_3 -}}
+        </span>
+
+        <p class="icon--text inline-richtext">
+          {{- block.settings.text_3 -}}
+        </p>
+      </div>
     </li>
   {%- endunless -%}
-   {%- unless heading_4_empty -%}
+  {%- unless heading_4_empty -%}
     <li class="icon-with-text__item">
       {%- if block.settings.image_4 == null -%}
         {% render 'icon-accordion', icon: block.settings.icon_4 -%}
@@ -129,9 +146,14 @@
           loading="lazy"
         >
       {%- endif -%}
-      <span class="h4 inline-richtext">
-        {{- block.settings.heading_4 -}}
-      </span>
+      <div class="text__content">
+        <span class="icon--title inline-richtext">
+          {{- block.settings.heading_4 -}}
+        </span>
+        <p class="icon--text inline-richtext">
+          {{- block.settings.text_4 -}}
+        </p>
+      </div>
     </li>
   {%- endunless -%}
 </ul>

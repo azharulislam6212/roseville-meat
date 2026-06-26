@@ -1912,6 +1912,7 @@ document.addEventListener('DOMContentLoaded', () => {
   items.forEach((item, index) => {
     item.classList.toggle('hidden', index >= visibleItems);
   });
+  if (!button) return;
 
   if (items.length <= visibleItems) {
     button.parentElement.style.display = 'none';

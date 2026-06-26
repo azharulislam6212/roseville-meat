@@ -928,13 +928,259 @@
         "divider_color": "#dddcd5",
         "page_width": "container-fluid",
         "color_scheme": "",
-        "padding_top": 76,
-        "padding_bottom": 76,
-        "padding_top_tab": 68,
-        "padding_bottom_tab": 68,
-        "padding_top_mobile": 56,
-        "padding_bottom_mobile": 56,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
         "them_section_id": ""
+      }
+    },
+    "instafeed_MLNK3e": {
+      "type": "instafeed",
+      "blocks": {
+        "media_item_G9BMB6": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "shopify:\/\/collections\/beef",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "uploaded_video": "shopify:\/\/files\/videos\/4230556-uhd_2160_3840_30fps.mp4",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_htWArN": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_hVkxpi": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_QPeUdW": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": false,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_xPpEqY": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": false,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_KjLewT": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_RGEFEU": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_PjFfR7": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        }
+      },
+      "block_order": [
+        "media_item_G9BMB6",
+        "media_item_htWArN",
+        "media_item_hVkxpi",
+        "media_item_QPeUdW",
+        "media_item_xPpEqY",
+        "media_item_KjLewT",
+        "media_item_RGEFEU",
+        "media_item_PjFfR7"
+      ],
+      "name": "Instagram Feed",
+      "settings": {
+        "enable_divider": false,
+        "divider_color": "#ff0000",
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "text": "<p> <\/p>",
+        "alignment": "center",
+        "image_ratio": "portrait",
+        "autoplay_enabled": true,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_pagination": false,
+        "enable_navigation": false,
+        "color_scheme_swiper": "",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+        "color_accent": "#ff0000",
+        "padding_top": 80,
+        "padding_bottom": 64,
+        "padding_top_tab": 70,
+        "padding_bottom_tab": 50,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    },
+    "newsletter_custom_YwhjHp": {
+      "type": "newsletter-custom",
+      "blocks": {
+        "pre_text_gY37CW": {
+          "type": "pre_text",
+          "settings": {
+            "pre_text": "Join Our Meat Club"
+          }
+        },
+        "heading_3VH67r": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sign up to Get 10% Off Your Order",
+            "heading_size": "h0"
+          }
+        },
+        "email_form_L3WrT4": {
+          "type": "email_form",
+          "settings": {
+            "text": "<p>By clicking on the “Sign Up” button, I confirm my agreement with the <a href=\"\/policies\/privacy-policy\" title=\"Privacy Policy\">Privacy Policy <\/a>and <a href=\"\/policies\/terms-of-service\" title=\"Terms of Service\">Terms of Use <\/a><\/p>",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "pre_text_gY37CW",
+        "heading_3VH67r",
+        "email_form_L3WrT4"
+      ],
+      "name": "Newsletter Custom",
+      "settings": {
+        "page_width": "container-fluid",
+        "background_image": "shopify:\/\/shop_images\/Bg.png",
+        "color_accent": "#cccccc",
+        "color_scheme": "",
+        "color_scheme_secondary": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "icon_blocks_DecULF": {
+      "type": "icon-blocks",
+      "blocks": {
+        "icon_block_A4wWxz": {
+          "type": "icon_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Cart.svg",
+            "svg_icon": "",
+            "title": "Store Pickup Available",
+            "text": "Order online and collect your items during regular business hours.",
+            "button_text": "Ready To Order",
+            "button_url": "",
+            "button_style": "secondary-outline"
+          }
+        },
+        "icon_block_k4Tkcr": {
+          "type": "icon_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Call.svg",
+            "svg_icon": "",
+            "title": "Prefer to order by phone?",
+            "text": "Call us at <strong>916.782.2705<\/strong> to place your order for quick curbside pickup!",
+            "button_text": "Call Us Now",
+            "button_url": "",
+            "button_style": "secondary-outline"
+          }
+        }
+      },
+      "block_order": [
+        "icon_block_A4wWxz",
+        "icon_block_k4Tkcr"
+      ],
+      "name": "Icon Blocks",
+      "settings": {
+        "page_width": "container",
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     }
   },
@@ -949,6 +1195,9 @@
     "featured_collection_family_pack_xhTyGq",
     "collage_card_banner_8edc3D",
     "testimonial_cards_VpL76A",
-    "about_us_DAqeE4"
+    "about_us_DAqeE4",
+    "instafeed_MLNK3e",
+    "newsletter_custom_YwhjHp",
+    "icon_blocks_DecULF"
   ]
 }
