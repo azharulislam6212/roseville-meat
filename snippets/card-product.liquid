@@ -194,7 +194,7 @@
               <div class="caption-with-letter-spacing light">{{ card_product.vendor }}</div>
             {%- endif -%}
 
-            <span class="caption-large light product-category-name">{{ card_product.category | escape }}</span>
+            <span class="caption-small product-category-name">{{ card_product.category | escape }}</span>
 
             {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
               {% liquid
@@ -232,7 +232,7 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product,  price_class: '', show_compare_at_price: true %}
+            {% render 'price', product: card_product,  price_class: '', show_compare_at_price: true, show_save: true %}
           </div>
         </div>
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
@@ -378,7 +378,7 @@
       assign ratio = 0.8
     endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover">
+  <div class="card-wrapper product-card-wrapper">
     <div
       class="
         card card--{{ settings.card_style }}

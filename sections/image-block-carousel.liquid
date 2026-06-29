@@ -207,8 +207,11 @@
     </slideshow-swiper>
   </div>
 </div>
+
 {%- if section.settings.enable_divider -%}
-  <div class="section-divider"></div>
+  <div class="{{ section.settings.page_width }}"> 
+  <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
 {%- endif -%}
 {% schema %}
 {
@@ -224,6 +227,12 @@
       "id": "enable_divider",
       "default": true,
       "label": "Enable divider"
+    },
+        {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#DDDCD5",
+      "label": "Divider color"
     },
     {
       "type": "select",

@@ -38,9 +38,10 @@
     width: 40px;
     height: 40px;
 
-    background: rgba(71, 112, 219, 0.15);
-    color: rgba(var(--color-accent));
+    background:  transparent;
+    color: rgba(var(--color-heading));
     border-radius: 10px;
+    border: 1px solid rgba(var(--color-border));
 
 }
 

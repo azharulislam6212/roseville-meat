@@ -70,7 +70,6 @@
 }
 .card--card .card__inner + .card__content{
   border-radius: var(--border-radius);
-  margin-top: 8px !important;
 }
 
 /* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
@@ -92,8 +91,8 @@
 }
 
 .card--card .card__inner .card__media {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0.8rem;
+  border-bottom-left-radius: 0.8rem;
 }
 
 .card--standard.card--text {
@@ -130,7 +129,7 @@
 
 .card--media .card__inner .card__content {
   position: relative;
-  padding: calc(var(--image-padding) + 1rem);
+  padding: calc(var(--image-padding) + 1.4rem);
 }
 
 .card__content {
@@ -276,7 +275,7 @@
 
 @media screen and (min-width: 750px) {
   .card__information {
-    padding-bottom: 2rem;
+    padding-bottom: 2.4rem;
     padding-top: 1rem;
   }
 }
@@ -316,12 +315,17 @@
   margin-bottom: 0;
 /* Heading/H5 */
 font-family: var(--font-heading-family);
+ 
 font-style: normal;
-font-weight: 700;
-font-size: 25px;
+font-weight: 600;
+font-size: 16px;
 line-height: 150%;
+/* identical to box height, or 24px */
+letter-spacing: 0.01em;
 
+ 
 }
+
 
 .card__heading:last-child {
   margin-bottom: 0;
@@ -630,23 +634,181 @@ line-height: 150%;
 letter-spacing: 0.01em;
 
  border-radius: 100px;
- min-width: 114;
+ min-width: 114px;
+}
+
+.card-information .price__container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
 }
 
 
-
-.card-information>.price{
+.card-information .price--on-sale .price-item--regular{
+ 
 font-family: var(--font-body-family);
 font-style: normal;
-font-weight: 400;
-font-size: 18px;
+font-weight: 500;
+font-size: 12px;
 line-height: 150%;
- 
+/* identical to box height, or 18px */
+text-align: right;
+letter-spacing: 0.01em;
+
+/* Text/text-5 */
+color: rgb(var(--color-foreground));
+text-decoration: none;
+ position: relative;
+
+}
+.card-information .price--on-sale .price-item--regular::before{
+  content: '';
+
+  /* Line 1 */
+
+position: absolute;
+height: 0px;
+left: 0%;
+right: -1.49%;
+top: 7px;
+
+/* Text/text-5 */
+border: 1px solid #454442;
+transform: matrix(0.99, -0.17, 0.14, 0.99, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+}
+.card-information>.price{
+    font-family: var(--font-body-family);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 130%;
+    letter-spacing: -0.04em;
+    color: #FF0000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
 }
 
+.save-price{
+ 
+/* 500/XS */
+font-family: var(--font-body-family);
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 150%;
+/* identical to box height, or 18px */
+text-align: right;
+letter-spacing: 0.01em;
 
+/* Primary/primary-6 */
+color: #FF0000;
+
+ 
+
+}
 .product-card-buttons{
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+
+@media screen and (max-width:768px) {
+
+
+.row-cols-2 .card__heading {
+font-size: 14px;
+}
+.card__content {
+    padding: 0.6rem;
+}
+.card__information {
+    padding: 0;
+}
+.card--card .quick-add {
+    margin: 1rem 0 1rem;
+}
+.product-category-name{
+  font-size: 12px;
+}
+
+.product-card-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.button--add {
+    width: 100%;
+}
+ 
+}
+
+
+.product-card-buttons-column{
+  flex-direction: column;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.product--spacific--block{
+margin: 1rem 1.3rem 1rem;
+    grid-row-start: 5;
+    position: relative;
+        z-index: 1;
+}
+
+
+.product--spacific__text {
+  max-height: 126px;
+  overflow: hidden;
+  transition: max-height .4s ease;
+}
+
+.product--spacific__text p{
+  margin: 0;
+}
+
+.product--spacific__toggle {
+  margin-top: 12px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.product--spacific__toggle span {
+  display: inline-block;
+  transition: transform .3s ease;
+}
+
+.product--spacific__toggle.is-expanded span {
+  transform: rotate(180deg);
+}
+
+
+.product--spacific__title{
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+letter-spacing: 0.01em;
+
+ margin: 0 0 16px;
+
 }

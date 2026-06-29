@@ -1628,132 +1628,307 @@ customElements.define(
   VariantWeightSelect
 );
 
-// class VariantWeightSelect extends HTMLElement {
-//   constructor() {
-//     super();
-
-//      this.box = this.querySelector(".vs-box");
-//     this.items = this.querySelectorAll(".vs-item");
-//     this.selected = this.querySelector(".vs-selected");
-
-//     this.productCard = this.closest(".product-card-wrapper");
-//     this.form = this.productCard?.querySelector(".js-product-form");
-//      const variantsScript = this.productCard?.querySelector('[type="application/json"][data-variants]');
-//       if (variantsScript) {
-//       this.variants = JSON.parse(variantsScript.textContent);
-//     } else {
-//       console.error('Variants JSON not found');
-//       this.variants = [];
-//     }
-
-//     this.init();
-//   }
-
-//   init() {
-   
-//     // open/close dropdown
-//     this.box.addEventListener("click", () => {
-//       this.classList.toggle("open");
-//     });
-
-//     // select item
-//     // this.items.forEach(item => {
-//     //   item.addEventListener("click", () => {
-
-//     //     const variantId = item.dataset.variantId;
-//     //     const value = item.textContent.trim();
-
-//     //     // UI update
-//     //     this.selected.textContent = value;
-//     //     this.classList.remove("open");
-
-//     //     // 🔥 Shopify form update (NO hidden input needed)
-   
-//     //     const input = this.form.querySelector("input[name='id']");
-
-//     //     if (input && variantId) {
-//     //       input.value = variantId;
-//     //     }
-
-//     //     // trigger Shopify update system
-//     //     form.dispatchEvent(new Event("change", { bubbles: true }));
-
-//     //   });
-//     // });
 
 
-//     this.items.forEach((item) => {
-//       item.addEventListener("click", () => {
-//         const selectedValue = item.dataset.value;
+if (!customElements.get('tabbed-content')) {
+    class Tabs extends HTMLElement {
+        constructor() {
+            super();
+            this.tabList = this.querySelector('[role="tablist"]');
+            this.activeTab = this.tabList.querySelector('[aria-selected="true"]');
+            this.isVerticalTablist = this.tabList.getAttribute('aria-orientation') === 'vertical';
+            this.tabs = this.querySelectorAll('[role="tab"]');
+            this.panels = this.querySelectorAll('[role="tabpanel"]');
 
-//         this.selected.textContent = selectedValue;
-//         this.classList.remove("open");
+            // If no tab is active by default, activate the first tab.
+            if (!this.activeTab) {
+                this.activeTab = this.tabs[0];
+                this.activateTab(this.activeTab);
+            }
 
-//         const variant = this.findVariant(selectedValue);
+            this.addListeners();
+        }
+
+        addListeners() {
+            this.tabList.addEventListener('click', this.handleClick.bind(this));
+            this.tabList.addEventListener('keydown', this.handleKeydown.bind(this));
+        }
+
+        handleClick(evt) {
+            if (!evt.target.matches('[role="tab"]') || evt.target === this.activeTab) return;
+            this.activateTab(evt.target);
+
+        }
+
+        handleKeydown(evt) {
+            switch (evt.key) {
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    evt.preventDefault();
+                    if (!this.isVerticalTablist) {
+                        this.switchTabOnKeyPress(evt.key);
+                    }
+                    break;
+
+                case 'ArrowUp':
+                case 'ArrowDown':
+                    evt.preventDefault();
+                    if (this.isVerticalTablist) {
+                        this.switchTabOnKeyPress(evt.key);
+                    }
+                    break;
+
+                case 'Home':
+                    evt.preventDefault();
+                    this.activateTab(this.tabs[0]);
+                    break;
+
+                case 'End':
+                    evt.preventDefault();
+                    this.activateTab(this.tabs[this.tabs.length - 1]);
+                    break;
+            }
+        }
+
+        switchTabOnKeyPress(key) {
+            if (key === 'ArrowRight' || key === 'ArrowDown') {
+                if (this.activeTab === this.tabs[this.tabs.length - 1]) {
+                    this.activateTab(this.tabs[0]);
+                } else {
+                    this.activateTab(this.activeTab.nextElementSibling);
+                }
+            } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+                if (this.activeTab === this.tabs[0]) {
+                    this.activateTab(this.tabs[this.tabs.length - 1]);
+                } else {
+                    this.activateTab(this.activeTab.previousElementSibling);
+                }
+            }
+        }
+
+        activateTab(tab) {
+            this.deactivateActiveTab();
+
+            Tabs.setTabState(tab, true);
+            tab.removeAttribute('tabindex');
+            this.activeTab = tab;
+
+            const panelId = tab.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+
+            if (panel) {
+                panel.classList.add('fade-in');  // Add animation class
+
+                setTimeout(() => {
+                    panel.classList.remove('fade-in');
+                }, 500);
+            }
+
+            if (document.activeElement.matches('.tablist__tab')) {
+                tab.focus();
+            }
+        }
+
+        deactivateActiveTab() {
+            Tabs.setTabState(this.activeTab, false);
+            this.activeTab.setAttribute('tabindex', '-1');
+            this.activeTab = null;
+        }
+
+        static setTabState(tab, active) {
+            tab.setAttribute('aria-selected', active);
+
+            const panelId = tab.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+
+            if (panel) {
+                if (active) {
+                    panel.hidden = false;
+                } else {
+                    panel.hidden = true;
+                }
+            }
+        }
+
+    }
+
+    customElements.define('tabbed-content', Tabs);
+}
 
 
-//         console.log("clicked", variant);
-//         if (!variant) return;
 
+document.querySelectorAll('.product--spacific--block').forEach(block => {
+  const content = block.querySelector('.product--spacific__text');
+  const button = block.querySelector('.product--spacific__toggle');
 
-             
+  if (!content || !button) return;
 
-//         // update variant id
-//         const input = this.form.querySelector('[name="id"]');
-//         input.value = variant.id;
+  const collapsedHeight = 126;
 
-//         // update button state
-//         const button = this.form.querySelector('[name="add"]');
-//         const buttonText = button.querySelector("span");
+  if (content.scrollHeight <= collapsedHeight) {
+    button.style.display = 'none';
+    return;
+  }
 
-//         if (variant.available) {
-//           button.disabled = false;
+  button.addEventListener('click', () => {
+    const expanded = button.classList.contains('is-expanded');
 
-//           if (buttonText) {
-//             buttonText.textContent = "Add to cart";
-//           }
-//         } else {
-//           button.disabled = true;
-
-//           if (buttonText) {
-//             buttonText.textContent = "Sold out";
-//           }
-//         }
-
-//         input.dispatchEvent(
-//           new Event("change", {
-//             bubbles: true,
-//           })
-//         );
-
-//         this.form.dispatchEvent(
-//           new Event("change", {
-//             bubbles: true,
-//           })
-//         );
-//       });
-//     });
+    if (expanded) {
+      content.style.maxHeight = collapsedHeight + 'px';
+      button.classList.remove('is-expanded');
+      button.innerHTML = 'View More <span>▼</span>';
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      button.classList.add('is-expanded');
+      button.innerHTML = 'View Less <span>▼</span>';
+    }
+  });
+});
 
 
 
-//     // outside click close
-//     document.addEventListener("click", (e) => {
-//       if (!this.contains(e.target)) {
-//         this.classList.remove("open");
-//       }
-//     });
-//   }
 
-//    findVariant(weightValue) {
-//     return this.variants.find((variant) =>
-//       variant.options.some(
-//         (option) => option.toString() === weightValue.toString()
-//       )
-//     );
-//   }
+ class CountdownTimer extends HTMLElement {
+  constructor() {
+    super();
+    this.interval = null;
+  }
+
+  connectedCallback() {
+    this.startTimer();
+  }
+
+  disconnectedCallback() {
+    clearInterval(this.interval);
+  }
+
+  parseEndTimeUTCMinus4(str) {
+    const date = new Date(str);
+    const localOffset = date.getTimezoneOffset();
+    const targetOffset = 4 * 60;
+    return date.getTime() + (localOffset + targetOffset) * 60 * 1000;
+  }
+
+  createDigits(value) {
+    return value
+      .split('')
+      .map(
+        digit => `
+          <span class="timer-digit">${digit}</span>
+        `
+      )
+      .join('');
+  }
+
+  renderTimer(days, hours, mins, secs) {
+    this.innerHTML = `
+      <div class="countdown-wrap">
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(days)}
+          </div>
+          <span class="timer-label">DAY</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(hours)}
+          </div>
+          <span class="timer-label">HOUR</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(mins)}
+          </div>
+          <span class="timer-label">MINS</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            ${this.createDigits(secs)}
+          </div>
+          <span class="timer-label">SECS</span>
+        </div>
+
+      </div>
+    `;
+  }
+
+  startTimer() {
+    const endDate = this.dataset.endDate;
+    if (!endDate) return;
+
+    const endTime = this.parseEndTimeUTCMinus4(endDate);
+
+    const update = () => {
+      const now = Date.now();
+      let timeLeft = Math.floor((endTime - now) / 1000);
+
+      if (timeLeft <= 0) {
+        this.renderTimer('00', '00', '00', '00');
+        clearInterval(this.interval);
+        return;
+      }
+
+      const days = String(Math.floor(timeLeft / 86400)).padStart(2, '0');
+
+      timeLeft %= 86400;
+      const hours = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
+
+      timeLeft %= 3600;
+      const mins = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+
+      const secs = String(timeLeft % 60).padStart(2, '0');
+
+      this.renderTimer(days, hours, mins, secs);
+    };
+
+    update();
+    this.interval = setInterval(update, 1000);
+  }
+}
+
+customElements.define('countdown-timer', CountdownTimer);
 
 
-// }
 
-// customElements.define("variant-weight-select", VariantWeightSelect);
- 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const items = document.querySelectorAll('.testimonial-grid .testimonial-card');
+  const button = document.querySelector('.view-more-btn');
+
+  const itemsPerClick = 3;
+  let visibleItems = 6;
+
+  // Initial
+  items.forEach((item, index) => {
+    item.classList.toggle('hidden', index >= visibleItems);
+  });
+  if (!button) return;
+
+  if (items.length <= visibleItems) {
+    button.parentElement.style.display = 'none';
+  }
+
+  button.addEventListener('click', () => {
+    visibleItems += itemsPerClick;
+
+    items.forEach((item, index) => {
+      if (index < visibleItems) {
+        item.classList.remove('hidden');
+      }
+    });
+
+    if (visibleItems >= items.length) {
+      button.parentElement.style.display = 'none';
+    }
+  });
+});

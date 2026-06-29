@@ -2,12 +2,15 @@
 {{ 'instagram-feed-section.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+  .section-{{ section.id }}-padding {
+         --color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+         --color-link: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+       }
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top_mobile }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     }
-
-    @media screen and (min-width:768px) {
+    @media screen and (min-width: 992px) {
       .section-{{ section.id }}-padding {
         padding-top: {{ section.settings.padding_top_tab }}px;
         padding-bottom: {{ section.settings.padding_bottom_tab }}px;
@@ -21,234 +24,222 @@
       }
     }
 {%- endstyle -%}
-
-{% liquid
-  assign column = section.settings.column
-  assign column_medium = section.settings.column_medium
-  assign column_mobile = section.settings.column_mobile
-
-  assign enable_pagination = section.settings.enable_pagination
-  assign enable_navigation = section.settings.enable_navigation
-  assign enable_scroll = section.settings.enable_scroll
-  assign autoplay = section.settings.autoplay_enabled
-  assign loop = section.settings.loop_enabled
-  assign delay = section.settings.autoplay_timeout | times: 1000
-  assign freemode = false
-%}
-
 <div
-  class="instagram-feed-section  section-{{ section.id }}-padding  color-{{ section.settings.color_scheme }} gradient isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  id="{{ section.settings.them_section_id |  default:"instafeed-section" }}"
+  class="instafeed-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
   {% if settings.animations_reveal_on_scroll %}
     data-cascade
   {% endif %}
 >
-  <div class="{{ section.settings.page_width }}">
-    {%- unless section.settings.heading == blank -%}
+  {%- unless section.settings.heading == blank -%}
+    <div class="{{ section.settings.page_width }}">
       <div class="row">
-        <div class="section--header text-center col-12 m-auto">
+        <div class="section--header text-{{ section.settings.alignment }} col-12 m-auto">
           <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
             {{ section.settings.heading }}
           </h2>
+          {% if section.settings.text != blank %}
+            <div class="section--text">{{ section.settings.text }}</div>
+          {% endif %}
         </div>
       </div>
-    {%- endunless -%}
-  </div>
+    </div>
+  {%- endunless -%}
+
+  {% liquid
+    assign desktop_column = 4.2
+    assign tab_column = 4.2
+    assign mobile_column = 1.2
+
+    assign enable_pagination = section.settings.enable_pagination
+    assign enable_navigation = section.settings.enable_navigation
+    assign autoplay = section.settings.autoplay_enabled
+    assign loop = section.settings.loop_enabled
+    assign delay = section.settings.autoplay_timeout | times: 1000
+    assign freemode = false
+  %}
 
   <slideshow-swiper>
     <div
       class="slideshow__swiper swiper"
       data-centeredslides="true"
-      data-slidesDesktop="{{column}}"
-      data-slidesTab="{{column_medium}}"
-      data-slidesMobile="{{column_mobile}}"
+      data-slidesDesktop="{{desktop_column}}"
+      data-slidesTab="{{tab_column}}"
+      data-slidesMobile="{{mobile_column}}"
       data-autoPlay="{{ autoplay }}"
       data-delay="{{ delay }}"
       data-loop="{{ loop }}"
       data-freemode="{{ freemode }}"
-      data-paginationType="bullets"
       data-freemomentum="false"
       data-mousewheel="false"
-      data-desktopspace="12"
-      data-tabspace="12"
-      data-mobilespace="12"
+      data-desktopspace="8"
+      data-tabspace="8"
+      data-mobilespace="8"
     >
-      <div class="swiper-wrapper instagram-grid-row  row row-cols-{{column_mobile}} row-cols-md-{{column_medium}} row-cols-lg-{{column}}">
+      <div class="swiper-wrapper row row-cols-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-4">
         {%- for block in section.blocks -%}
-          <div class="swiper-slide col">
-            {% if block.settings.link != blank %} <a href="{{  block.settings.link }}" class="insta-link"> {% endif %}
+          {%- case block.type -%}
+            {%- when 'media_item' -%}
+              {% liquid
+                assign block_settings = block.settings
 
-            <div class="media-item">
-              <div
-                class="media media--{{ section.settings.image_ratio }} {% if section.settings.image_ratio == 'adapt' and block.settings.image == blank %} media-placeholder {% endif %}"
-                {% if section.settings.image_ratio == 'adapt' and block.settings.image != blank %}
-                  style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
-                {% endif %}
-              >
-                {% liquid
-                  assign video_source = block.settings.video_source
-                  assign video_hosted = block.settings.video_hosted
-                  assign video_type = block.settings.video.type
-                  if block.settings.video_hosted != blank and block.settings.video_source == 'video_hosted'
-                    assign video_type = 'local_video'
-                  endif
-                %}
+                assign ratio = section.settings.image_ratio
 
-                {% if block.settings.enable_video %}
-                  {% if block.settings.emabaded_video == false %}
-                    <thm-load-media
-                      data-section-id="{{ block.id }}"
-                      data-id-video="{{ block.settings.video.id }}"
-                      data-type="{{ video_type }}"
-                      class="d-block p-relative video-media js-product-media-deferred-video"
-                    >
-                      <button type="button" class="video-play-pause-button" aria-label="Play/Pause video">
-                        <span class="video-play-icon">
-                          <svg
-                            width="12"
-                            height="14"
-                            viewBox="0 0 12 14"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M11 5.26795C12.3333 6.03775 12.3333 7.96225 11 8.73205L3.5 13.0622C2.16666 13.832 0.499999 12.8697 0.499999 11.3301L0.5 2.66987C0.5 1.13027 2.16667 0.168021 3.5 0.937822L11 5.26795Z" fill="#EBEEFF"/>
-                          </svg>
-                        </span>
-                        <span class="video-pause-icon">
-                          <svg
-                            width="14"
-                            height="14"
-                            viewBox="0 0 14 14"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M13.1875 1.375V12.625C13.1875 12.9234 13.069 13.2095 12.858 13.4205C12.647 13.6315 12.3609 13.75 12.0625 13.75H9.25C8.95163 13.75 8.66548 13.6315 8.4545 13.4205C8.24353 13.2095 8.125 12.9234 8.125 12.625V1.375C8.125 1.07663 8.24353 0.790483 8.4545 0.579505C8.66548 0.368526 8.95163 0.25 9.25 0.25H12.0625C12.3609 0.25 12.647 0.368526 12.858 0.579505C13.069 0.790483 13.1875 1.07663 13.1875 1.375ZM4.75 0.25H1.9375C1.63913 0.25 1.35298 0.368526 1.142 0.579505C0.931026 0.790483 0.8125 1.07663 0.8125 1.375V12.625C0.8125 12.9234 0.931026 13.2095 1.142 13.4205C1.35298 13.6315 1.63913 13.75 1.9375 13.75H4.75C5.04837 13.75 5.33452 13.6315 5.5455 13.4205C5.75647 13.2095 5.875 12.9234 5.875 12.625V1.375C5.875 1.07663 5.75647 0.790483 5.5455 0.579505C5.33452 0.368526 5.04837 0.25 4.75 0.25Z" fill="#EBEEFF"/>
-                          </svg>
-                        </span>
-                      </button>
+                assign image = block_settings.image | default: false
 
-                      <button
-                        class="w-100 h-100 p-zero c-pointer js-load-media-trigger media--hover-effect"
-                        type="button"
-                        aria-label="Load video"
-                      >
-                        {% if block.settings.image != blank %}
-                          {% render 'responsive-img' with image: block.settings.image, alt: block.settings.video.alt | default: 'Video thumbnail' %}
-                        {% elsif block.settings.video_hosted != blank %}
-                          {% render 'responsive-img' with image: block.settings.video_hosted, alt: block.settings.video.alt | default: 'Video thumbnail' %}
-                        {% else %}
-                          {{
-                            'image'
-                            | placeholder_svg_tag: 'placeholder js-image-lazy media of-cover', alt: 'Video placeholder'
-                          }}
-                        {% endif %}
-                      </button>
+                assign image_link = block_settings.image_url
+                assign image_ratio = ratio | default: 'portrait'
+                if image_ratio == 'adapt' and image == false
+                  assign image_ratio = false
+                endif
 
-                      {% if video_source == 'video_hosted' and video_hosted != blank %}
-                        <template>
-                          {{
-                            video_hosted
-                            | video_tag:
-                              autoplay: true,
-                              muted: false,
-                              controls: true,
-                              preload: 'none',
-                              class: 'ratio-media w-100 h-100 d-block js-media-item-video',
-                              aria_label: 'Video player'
-                          }}
-                        </template>
-                      {% else %}
-                        <div
-                          class="js-media-item external-video ratio-media h-100 w-100 d-none middle-xs center-xs"
-                          data-type="{{ block.settings.video.type }}"
-                          id="shtVideo-{{ block.id }}-{{ block.settings.video.id }}"
-                        ></div>
+                assign enable_video = block_settings.enable_video
+
+                assign video_ratio = ratio | default: 'portrait'
+                assign source = block_settings.source
+                assign video_url = block_settings.video_url
+
+                assign uploaded_video = block_settings.uploaded_video
+                assign cover_image = block_settings.cover_image
+
+                if uploaded_video != blank and source == 'uploaded'
+                  assign cover_image = uploaded_video.preview_image
+                endif
+
+                assign autoplay = block_settings.enable_autoplay
+                assign loop = block_settings.enable_loop_video | default: false
+                assign muted = block_settings.enable_video_mute
+                assign play_button_display = block_settings.play_button_display
+
+                assign video_type = video_url.type | default: 'local_video'
+                if source == 'uploaded'
+                  assign video_type = 'local_video'
+                endif
+              %}
+
+              <div class="insta__item swiper-slide col" {{ block.shopify_attributes }}>
+                <div
+                  class="insta-card color-{{ section.settings.color_scheme_card }}"
+                  style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+                >
+                  {%- if enable_video -%}
+                    <div
+                      class="insta-image  video-media  {% if video_ratio != blank %} media media--{{ video_ratio }} {% endif %}"
+                      {% if video_ratio == 'adapt' and source != blank %}
+                        style="padding-bottom: {% render 'aspect-ratio' with uploaded_video.preview_image.aspect_ratio as aspect_ratio %}%;"
                       {% endif %}
-                    </thm-load-media>
-                  {% else %}
-                    <thm-load-video
-                      class="video-media"
-                      data-video-type="{{ video_type }}"
-                      data-video-id="{{ block.settings.video.id }}"
                     >
-                      {% if block.settings.video_source == 'video_hosted' %}
-                        {% capture local_video %}
-              {{- block.settings.video_hosted
-                | video_tag:
-                  autoplay: true,
-                  controls: false,
-                  loop: true,
-                  preload: 'none',
-                  class: 'video-local w-100 h-100 of-cover center-middle p-absolute mih',
-                  aria_label: 'Local video player'
-              -}}
-            {% endcapture %}
-                        {{ local_video | replace: '<source src="', '<source data-src="' }}
-                      {% else %}
-                        <iframe
-                          tabindex="0"
-                          title="Video: {{ block.settings.video.type | capitalize }}"
-                          class="video-ifram js-local-video w-100 center-middle p-absolute mih miw"
-                          allow="autoplay; encrypted-media"
-                          data-src="
-                            {% if block.settings.video.type == 'youtube' %}
-                              https://www.youtube.com/embed/{{ block.settings.video.id }}?version=3&enablejsapi=1&mute=1&loop=1&controls=0&rel=0&showinfo=0&autoplay=1&playlist={{ block.settings.video.id }}
-                            {% elsif block.settings.video.type == 'vimeo' %}
-                              https://player.vimeo.com/video/{{ block.settings.video.id }}?api=1&background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1
-                            {% endif %}
-                          "
-                          style="--miw:177.77vh;--h-xs:56.25vw;"
-                        ></iframe>
+                      {% render 'video',
+                        video_type: video_type,
+                        source: source,
+                        video_url: video_url,
+                        uploaded_video: uploaded_video,
+                        cover_image: cover_image,
+                        autoplay: autoplay,
+                        muted: muted,
+                        loop: loop,
+                        play_button_display: play_button_display,
+                        uniq_id: section.id,
+                        class: ''
+                      %}
+                    </div>
+
+                  {%- else -%}
+                    {%- if image_link != blank -%}
+                      <a href="{{ image_link }}" class="gallery-card-image-wrapper">
+                    {%- endif -%}
+
+                    <div
+                      class="insta-image {% if image_ratio != blank %} media media--{{ image_ratio }} {% endif %}"
+                      {% if image_ratio == 'adapt' %}
+                        style="padding-bottom: {% render 'aspect-ratio' with  image.aspect_ratio as aspect_ratio %}%;"
                       {% endif %}
-                    </thm-load-video>
-                  {% endif %}
-                {% else %}
-                  {% if block.settings.image != blank %}
-                    {% render 'responsive-img' with image: block.settings.image, alt: 'Media image' %}
-                  {% else %}
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg', alt: 'Media placeholder' }}
-                  {% endif %}
-                {% endif %}
+                    >
+                      {% if image != blank %}
+                        {% render 'responsive-img' with image: image %}
+                      {% else %}
+                        {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {% endif %}
+                    </div>
+
+                    {%- if image_link != blank -%}
+                      </a>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  <div class="insta-card__over-content">
+                    {%- if image_link != blank -%}<a href="{{ image_link }}"> {%- endif -%}
+                    <div class="insta-link">
+                      {{ block.settings.image_over_text }}
+
+                      <span class="insta-link-icon">
+                        <svg width="11" height="9" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747274C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
+                        </svg>
+                      </span>
+                    </div>
+
+                    {%- if image_link != blank -%}</a>{%- endif -%}
+                  </div>
+                </div>
               </div>
-            </div>
-
-            {% if block.settings.link != blank %} </a> {% endif %}
-          </div>
+          {%- endcase -%}
         {%- endfor -%}
       </div>
 
       {% if enable_navigation %}
-        <div class="swiper-navigation-wrapper color-{{ section.settings.color_scheme_swiper }}">
-          <div class="swiper-button-prev">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.3367 15.6633L5.93665 7.26562L5.93665 13.125C5.93665 13.3736 5.83788 13.6121 5.66207 13.7879C5.48625 13.9637 5.24779 14.0625 4.99915 14.0625C4.75051 14.0625 4.51206 13.9637 4.33624 13.7879C4.16043 13.6121 4.06165 13.3736 4.06165 13.125L4.06166 5C4.06166 4.75136 4.16043 4.5129 4.33624 4.33709C4.51206 4.16127 4.75051 4.0625 4.99916 4.0625L13.1242 4.0625C13.3728 4.0625 13.6113 4.16127 13.7871 4.33709C13.9629 4.5129 14.0617 4.75136 14.0617 5C14.0617 5.24864 13.9629 5.4871 13.7871 5.66291C13.6113 5.83873 13.3728 5.9375 13.1242 5.9375L7.26478 5.9375L15.6624 14.3367C15.7496 14.4239 15.8188 14.5275 15.866 14.6414C15.9132 14.7553 15.9375 14.8775 15.9375 15.0008C15.9375 15.1241 15.9132 15.2462 15.866 15.3602C15.8188 15.4741 15.7496 15.5776 15.6624 15.6648C15.5752 15.752 15.4717 15.8212 15.3578 15.8684C15.2438 15.9156 15.1217 15.9399 14.9984 15.9399C14.875 15.9399 14.7529 15.9156 14.639 15.8684C14.525 15.8212 14.4215 15.752 14.3343 15.6648L14.3367 15.6633Z" fill="currentcolor"/>
-            </svg>
-          </div>
-          <div class="swiper-button-next">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.33672 14.3376L12.7344 5.93763L6.875 5.93763C6.62636 5.93763 6.3879 5.83886 6.21209 5.66304C6.03627 5.48723 5.9375 5.24877 5.9375 5.00013C5.9375 4.75149 6.03627 4.51303 6.21209 4.33722C6.3879 4.1614 6.62636 4.06263 6.875 4.06263L15 4.06263C15.2486 4.06263 15.4871 4.1614 15.6629 4.33722C15.8387 4.51303 15.9375 4.75149 15.9375 5.00013L15.9375 13.1251C15.9375 13.3738 15.8387 13.6122 15.6629 13.788C15.4871 13.9639 15.2486 14.0626 15 14.0626C14.7514 14.0626 14.5129 13.9639 14.3371 13.788C14.1613 13.6122 14.0625 13.3738 14.0625 13.1251L14.0625 7.26576L5.66328 15.6634C5.57608 15.7506 5.47255 15.8198 5.35861 15.867C5.24467 15.9142 5.12255 15.9385 4.99922 15.9385C4.87589 15.9385 4.75377 15.9142 4.63983 15.867C4.52589 15.8198 4.42236 15.7506 4.33516 15.6634C4.24795 15.5762 4.17877 15.4727 4.13158 15.3587C4.08438 15.2448 4.06009 15.1227 4.06009 14.9993C4.06009 14.876 4.08438 14.7539 4.13158 14.64C4.17877 14.526 4.24795 14.4225 4.33516 14.3353L4.33672 14.3376Z" fill="currentColor"/>
-            </svg>
+        <div class="swiper-navigation">
+          <div
+            class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}"
+            style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+          >
+            <div class="swiper-button-prev">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.1875 11.375L4.8125 7L9.1875 2.625" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="swiper-button-next">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.8125 11.375L9.1875 7L4.8125 2.625" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
         </div>
       {% endif %}
       {% if enable_pagination %}
-        <div class="pagination-wrap color-{{ section.settings.color_scheme_swiper }}">
+        <div
+          class="pagination-wrap  color-{{ section.settings.color_scheme_swiper }}"
+          style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+        >
           <div class="swiper-pagination"></div>
-        </div>
-      {% endif %}
-
-      {% if enable_scroll %}
-        <div class="scrollbar-wrap color-{{ section.settings.color_scheme_swiper }}">
-          <div class="swiper-scrollbar"></div>
         </div>
       {% endif %}
     </div>
   </slideshow-swiper>
 </div>
 
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}">
+    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Instagram Feed",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#FF0000",
+      "label": "Divider color"
+    },
     {
       "type": "select",
       "id": "page_width",
@@ -266,74 +257,10 @@
       "label": "Layout Width"
     },
     {
-      "type": "header",
-      "content": "Column Wdith"
-    },
-    {
-      "type": "select",
-      "id": "column",
-      "options": [
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        },
-        {
-          "value": "4",
-          "label": "4"
-        },
-        {
-          "value": "5",
-          "label": "5"
-        }
-      ],
-      "default": "4",
-      "label": "Large"
-    },
-    {
-      "type": "select",
-      "id": "column_medium",
-      "options": [
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        },
-        {
-          "value": "4",
-          "label": "4"
-        }
-      ],
-      "default": "4",
-      "label": "Medium"
-    },
-    {
-      "type": "select",
-      "id": "column_mobile",
-      "options": [
-        {
-          "value": "1",
-          "label": "1"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        }
-      ],
-      "default": "1",
-      "label": "Mobile"
-    },
-    {
       "type": "inline_richtext",
       "id": "heading",
-      "default": "Section heading",
-      "label": "Heading"
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
     },
     {
       "type": "select",
@@ -360,8 +287,34 @@
           "label": "t:sections.all.heading_size.options__5.label"
         }
       ],
-      "default": "hxl",
+      "default": "h1",
       "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.image-with-text.blocks.text.settings.text.default",
+      "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
     },
     {
       "type": "select",
@@ -380,26 +333,12 @@
           "value": "landscape"
         },
         {
-          "label": "16x9",
-          "value": "16-9"
-        },
-        {
           "label": "Portrait",
           "value": "portrait"
-        },
-        {
-          "label": "Portrait 2X",
-          "value": "portrait-2x"
         }
       ],
-      "default": "landscape",
+      "default": "portrait",
       "label": "Image Ratio"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
     },
     {
       "type": "header",
@@ -425,12 +364,6 @@
       "type": "checkbox",
       "id": "loop_enabled",
       "label": "Enable Loop",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_scroll",
-      "label": "Enable Scroll",
       "default": false
     },
     {
@@ -449,7 +382,25 @@
       "type": "color_scheme",
       "id": "color_scheme_swiper",
       "label": "Swiper Navigation",
+      "default": "scheme-4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "t:sections.all.colors.label",
       "default": "scheme-2"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Accent Color",
+      "default": "#FFCD2E"
     },
     {
       "type": "header",
@@ -514,6 +465,11 @@
       "unit": "px",
       "label": "Padding Bottom Mobile",
       "default": 40
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
     }
   ],
   "blocks": [
@@ -527,49 +483,105 @@
           "label": "Image"
         },
         {
+          "type": "text",
+          "id": "image_over_text",
+          "default": "Meals for a Week",
+          "label": "Image Over Text"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "Image link"
+        },
+        {
+          "type": "header",
+          "content": "Video"
+        },
+        {
           "type": "checkbox",
           "id": "enable_video",
-          "label": "Enable Video",
+          "label": "Enable video",
           "default": false
         },
         {
           "type": "select",
-          "id": "video_source",
-          "label": "Video Source",
-          "default": "video_external",
+          "id": "source",
+          "label": "Source",
+          "default": "uploaded",
+          "visible_if": "{{ block.settings.enable_video  == true }}",
           "options": [
             {
-              "value": "video_external",
-              "label": "Video External"
+              "value": "external",
+              "label": "External url"
             },
             {
-              "value": "video_hosted",
-              "label": "Video Hosted"
+              "value": "uploaded",
+              "label": "Uploaded"
             }
           ]
         },
         {
-          "type": "checkbox",
-          "id": "emabaded_video",
-          "label": "Embedded video",
-          "default": false
-        },
-        {
           "type": "video_url",
-          "id": "video",
+          "id": "video_url",
           "accept": ["youtube", "vimeo"],
           "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-          "label": "External Video"
+          "visible_if": "{{ block.settings.source  == 'external' }}",
+          "label": "URL"
         },
         {
           "type": "video",
-          "id": "video_hosted",
-          "label": "Hoseted Video"
+          "id": "uploaded_video",
+          "visible_if": "{{ block.settings.source  == 'uploaded' and  block.settings.enable_video  == true }}",
+          "label": "Video"
         },
         {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
+          "type": "image_picker",
+          "id": "cover_image",
+          "visible_if": "{{ block.settings.source  == 'external' and  block.settings.enable_video  == true  }}",
+          "label": "Cover image"
+        },
+        {
+          "type": "header",
+          "content": "Video settings",
+          "visible_if": "{{ block.settings.enable_video  == true  }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_autoplay",
+          "label": "Autoplay",
+          "default": true,
+          "visible_if": "{{ block.settings.enable_video  == true  }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_loop_video",
+          "label": "Loop video",
+          "visible_if": "{{ block.settings.enable_autoplay  ==  false and  block.settings.enable_video  == true }}",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_mute_video",
+          "label": "Mute video",
+          "visible_if": "{{ block.settings.enable_autoplay  ==  false  and  block.settings.enable_video  == true  }}",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "play_button_display",
+          "label": "Play button display",
+          "default": "always",
+          "visible_if": "{{ block.settings.enable_video  == true  }}",
+          "options": [
+            {
+              "label": "On hover/focus",
+              "value": "on-hover"
+            },
+            {
+              "label": "Always",
+              "value": "always"
+            }
+          ]
         }
       ]
     }

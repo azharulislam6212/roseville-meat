@@ -113,8 +113,25 @@
       {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
         {% render 'unit-price', price: product.selected_or_first_available_variant.unit_price, measurement: product.selected_or_first_available_variant.unit_price_measurement %}
       {%- endif -%}
+
+       
+
     </div>
+
+     {%- liquid
+            assign variant = variant | default: product.selected_or_first_available_variant
+          -%}
+
+      {%- if product.compare_at_price > product.price and show_save -%}
+
+           {%- assign savings = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round | append: '%' -%}
+            <span class="save-price"> {{ savings |  prepend: 'SAVE ' }}</span>
+
+     {%- endif -%}
+
+
     {%- if show_badges -%}
+      
       <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
         {{ 'products.product.on_sale' | t }}
       </span>

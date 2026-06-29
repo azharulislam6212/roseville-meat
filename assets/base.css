@@ -1195,7 +1195,7 @@ summary::-webkit-details-marker {
 .media--square {
   padding-bottom: 100%;
 }
-
+ 
 .media--portrait {
   padding-bottom: 125%;
 }
@@ -1211,7 +1211,24 @@ summary::-webkit-details-marker {
 .media--cropped {
   padding-bottom: 56%;
 }
+.media--1-1 {
+  padding-bottom: 100%;
+}
+.media--3-2 {
+  padding-bottom: 150%;
+}
 
+.media--2-3 {
+  padding-bottom: 66.66%;
+}
+
+.media--5-4 {
+  padding-bottom: 125%;
+}
+
+.media--3-4 {
+  padding-bottom: 75%;
+}
 .media--16-9 {
   padding-bottom: 56.25%;
 }
@@ -1948,7 +1965,7 @@ input[type="checkbox"] {
   left: var(--inputs-border-width);
   border: 0.1rem solid transparent;
   border-radius: 6px;
-  box-shadow: 0 0 0 var(--inputs-border-width) rgba(var(--color-accent), 0.2);
+  box-shadow: 0 0 0 var(--inputs-border-width) rgba(var(--color-border));
   transition: box-shadow var(--duration-short) ease;
   z-index: 1;
 }

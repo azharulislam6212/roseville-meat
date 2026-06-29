@@ -48,7 +48,7 @@
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-
+  width: 100%;
 
   /* Auto layout */
   display: flex;
