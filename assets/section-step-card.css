@@ -203,3 +203,12 @@ border-radius: 6px;
     color: #FF0000;
 
 }
+
+
+@media screen and (max-width: 768px) {
+
+.step-card__item {
+    flex: 0 0 100%;
+}
+
+}

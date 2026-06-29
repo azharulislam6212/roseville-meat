@@ -70,10 +70,11 @@
 }
 
 .disclosure--row {
-   border: 1px solid transparent;
-  margin-bottom: 24px;
-  border-radius: 5px;
-  overflow: hidden;
+box-sizing: border-box;
+border: 1px solid rgb(var(--color-border));
+border-radius: 8px;
+margin-bottom: 1.2rem;
+overflow: hidden;
 }
 
 
@@ -126,12 +127,14 @@
 }
 
 .disclosure-header{
-  padding: 2rem;
+  padding: 2.8rem;
   width: 100%;
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: space-between;
   gap: 20px;
+  
+
 }
 .disclosure__title {
   max-width: 100%;
@@ -143,11 +146,14 @@
 
   font-family: var(--font-heading-family);
   font-style: normal;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 25px;
+    
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+    letter-spacing: 0.01em;
 
+      
   /* Primary */
   color: rgb(var(--color-heading));
 

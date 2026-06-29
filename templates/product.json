@@ -496,11 +496,94 @@
         "padding_bottom_mobile": 40
       }
     },
+    "icon_card_text_carousel_jfDAUi": {
+      "type": "icon-card-text-carousel",
+      "blocks": {
+        "icon_text_BpG4F7": {
+          "type": "icon_text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ThermometerHot.svg",
+            "svg_icon": "",
+            "text": "If freezing, keep in original vacuum packaging. Thaw overnight in fridge — never on the bench"
+          }
+        },
+        "icon_text_9hA4C4": {
+          "type": "icon_text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/SealCheck.svg",
+            "svg_icon": "",
+            "text": "Packed in vacuum-sealed food-grade packaging to extend freshness and lock in natural juices"
+          }
+        },
+        "icon_text_iQqUb7": {
+          "type": "icon_text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ShieldCheck.svg",
+            "svg_icon": "",
+            "text": "If freezing, keep in original vacuum packaging. Thaw overnight in fridge — never on the bench"
+          }
+        },
+        "icon_text_mDVRjq": {
+          "type": "icon_text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/MoonStars.svg",
+            "svg_icon": "",
+            "text": "Do not refreeze after thawing. Discard if colour turns grey or any off-odours develop"
+          }
+        },
+        "image_block_ztmeb7": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_23.png"
+          }
+        },
+        "image_block_CK6DQd": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_24.png"
+          }
+        }
+      },
+      "block_order": [
+        "icon_text_BpG4F7",
+        "icon_text_9hA4C4",
+        "icon_text_iQqUb7",
+        "icon_text_mDVRjq",
+        "image_block_ztmeb7",
+        "image_block_CK6DQd"
+      ],
+      "name": "Icon card carousel",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#DDDCD5",
+        "page_width": "container-fluid",
+        "heading": "Storage & Freshness",
+        "heading_size": "h1",
+        "text": "<p>From our blast-freezer to your table—how to keep your premium cuts perfectly preserved.<\/p>",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": false,
+        "enable_pagination": false,
+        "enable_pagination_mobile": false,
+        "enable_navigation": true,
+        "enable_navigation_desktop": true,
+        "color_scheme_swiper": "",
+        "color_accent": "#ff0000",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 48,
+        "padding_bottom_tab": 48,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
         "heading": "You may also like",
-        "heading_size": "h2",
+        "heading_size": "h1",
         "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
@@ -509,7 +592,7 @@
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
+        "show_rating": true,
         "padding_top": 36,
         "padding_bottom": 28
       }
@@ -575,9 +658,11 @@
         "enable_border": true,
         "page_width": "container-fluid",
         "heading": "Frequently Asked Questions",
-        "heading_size": "h2",
+        "heading_size": "h1",
+        "text": "<p>Follow these essential steps to ensure the ultimate flavor and texture.<\/p>",
         "disclosure_toggle": "plus",
-        "color_scheme": "",
+        "color_accent": "#ff0000",
+        "color_scheme": "scheme-1",
         "card_color_scheme": "",
         "padding_top": 64,
         "padding_bottom": 64,
@@ -778,6 +863,7 @@
     "multicard_image_block_wfciEL",
     "icon_text_blocks_6Vjxxg",
     "step_card_AzrEHY",
+    "icon_card_text_carousel_jfDAUi",
     "related-products",
     "faq_page_section_NPFNyE",
     "1754717456e979fd41",
