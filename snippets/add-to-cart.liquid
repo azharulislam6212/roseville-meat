@@ -31,6 +31,7 @@
         disabled
       {% endif %}
     >
+          {%- render 'loading-spinner' -%}
       <span class="button--text">
         {%- if product.selected_or_first_available_variant.available -%}
           {{ 'products.product.add_to_cart' | t }}
@@ -41,12 +42,8 @@
       <span class="sold-out-message hidden">
         {{ 'products.product.sold_out' | t }}
       </span>
-      {%- if horizontal_quick_add -%}
-        <span class="icon-wrap">
-          {{- 'icon-plus.svg' | inline_asset_content -}}
-        </span>
-      {%- endif -%}
-      {%- render 'loading-spinner' -%}
+      
+
     </button>
   {%- endform -%}
 </product-form>

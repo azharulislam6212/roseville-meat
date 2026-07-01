@@ -2,6 +2,10 @@
     position: relative;
 }
 
+.step-cards-seciton .section--header{
+    text-align: center;
+}
+
 .step-card__item {
     position: relative;
 
@@ -210,5 +214,7 @@ border-radius: 6px;
 .step-card__item {
     flex: 0 0 100%;
 }
-
+.step-cards-seciton .section--header{
+   text-align: left;
+}
 }

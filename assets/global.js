@@ -1244,11 +1244,11 @@ class ProductRecommendations extends HTMLElement {
           this.innerHTML = recommendations.innerHTML;
         }
 
-        if (!this.querySelector('slideshow-component') && this.classList.contains('complementary-products')) {
+        if (!this.querySelector('slideshow-swiper') && this.classList.contains('complementary-products')) {
           this.remove();
         }
 
-        if (html.querySelector('.grid__item')) {
+        if (html.querySelector('.col')) {
           this.classList.add('product-recommendations--loaded');
         }
       })

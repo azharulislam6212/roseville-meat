@@ -298,83 +298,83 @@ var Thm = {
       customElements.define("auto-swiper", AutoSwiper);
     },
     beforeAfter: function () {
- 
 
 
-                class BeforeAfterImages extends HTMLElement {
-                  constructor() {
-                    super(),
-                      (this.$ = this.querySelector.bind(this)),
-                      (this.$$ = this.querySelectorAll.bind(this)),
-                      this.init();
-                  }
 
-                  connectedCallback() {
-                    this.observeResize();
-                    this.animateToCenter(); // Run animation on load
-                  }
+      class BeforeAfterImages extends HTMLElement {
+        constructor() {
+          super(),
+            (this.$ = this.querySelector.bind(this)),
+            (this.$$ = this.querySelectorAll.bind(this)),
+            this.init();
+        }
 
-                  observeResize() {
-                    (this.resizeObserver = new ResizeObserver(() => this.init())),
-                      this.resizeObserver.observe(this.afterImage);
-                  }
+        connectedCallback() {
+          this.observeResize();
+          this.animateToCenter(); // Run animation on load
+        }
 
-                  init() {
-                    this.afterImage = this.$(".js-after-image");
-                    this.splitCusor = this.$(".js-split-cursor");
-                    this.imageWith = this.afterImage.offsetWidth;
-                    this.imageHeight = this.afterImage.offsetHeight;
-                    this.isClicked = false;
-                    this.handleEvent();
-                  }
+        observeResize() {
+          (this.resizeObserver = new ResizeObserver(() => this.init())),
+            this.resizeObserver.observe(this.afterImage);
+        }
 
-                  handleEvent() {
-                    this.splitCusor.addEventListener("mousedown", this.slideReady.bind(this), { passive: true });
-                    this.splitCusor.addEventListener("touchstart", this.slideReady.bind(this), { passive: true });
-                    this.splitCusor.addEventListener("mouseup", this.slideFinish.bind(this), { passive: true });
-                    this.splitCusor.addEventListener("touchend", this.slideFinish.bind(this), { passive: true });
-                  }
+        init() {
+          this.afterImage = this.$(".js-after-image");
+          this.splitCusor = this.$(".js-split-cursor");
+          this.imageWith = this.afterImage.offsetWidth;
+          this.imageHeight = this.afterImage.offsetHeight;
+          this.isClicked = false;
+          this.handleEvent();
+        }
 
-                  slideReady() {
-                    this.isClicked = true;
-                    document.addEventListener("mousemove", this.slideMoveBind = this.slideMove.bind(this));
-                    document.addEventListener("touchmove", this.slideMoveBind);
-                  }
+        handleEvent() {
+          this.splitCusor.addEventListener("mousedown", this.slideReady.bind(this), { passive: true });
+          this.splitCusor.addEventListener("touchstart", this.slideReady.bind(this), { passive: true });
+          this.splitCusor.addEventListener("mouseup", this.slideFinish.bind(this), { passive: true });
+          this.splitCusor.addEventListener("touchend", this.slideFinish.bind(this), { passive: true });
+        }
 
-                  slideFinish() {
-                    this.isClicked = false;
-                    document.removeEventListener("mousemove", this.slideMoveBind);
-                    document.removeEventListener("touchmove", this.slideMoveBind);
-                  }
+        slideReady() {
+          this.isClicked = true;
+          document.addEventListener("mousemove", this.slideMoveBind = this.slideMove.bind(this));
+          document.addEventListener("touchmove", this.slideMoveBind);
+        }
 
-                  slideMove(t) {
-                    if (this.isClicked) {
-                      const e = this.offsetLeft;
-                      t = (t.changedTouches ? t.changedTouches[0] : t).clientX - e;
-                      this.posSplitCusor = (t / this.imageWith) * 100;
-                      this.posSplitCusor = Math.min(100, Math.max(0, this.posSplitCusor));
-                      requestAnimationFrame(() => {
-                        this.style.setProperty("--before-after-initial-drag-position", this.posSplitCusor + "%");
-                      });
-                    }
-                  }
+        slideFinish() {
+          this.isClicked = false;
+          document.removeEventListener("mousemove", this.slideMoveBind);
+          document.removeEventListener("touchmove", this.slideMoveBind);
+        }
 
-                  animateToCenter() {
-                    // Start from 0%
-                    this.style.setProperty("--before-after-initial-drag-position", "0%");
-                    // Smoothly move to 50% after a short delay
-                    requestAnimationFrame(() => {
-                      this.style.transition = "--before-after-initial-drag-position 1.5s ease-in-out";
-                      this.style.setProperty("--before-after-initial-drag-position", "50%");
-                      // Remove transition after animation so manual dragging is instant
-                      setTimeout(() => {
-                        this.style.transition = "";
-                      }, 1600);
-                    });
-                  }
-                }
+        slideMove(t) {
+          if (this.isClicked) {
+            const e = this.offsetLeft;
+            t = (t.changedTouches ? t.changedTouches[0] : t).clientX - e;
+            this.posSplitCusor = (t / this.imageWith) * 100;
+            this.posSplitCusor = Math.min(100, Math.max(0, this.posSplitCusor));
+            requestAnimationFrame(() => {
+              this.style.setProperty("--before-after-initial-drag-position", this.posSplitCusor + "%");
+            });
+          }
+        }
 
-                customElements.define("before-after-images", BeforeAfterImages);
+        animateToCenter() {
+          // Start from 0%
+          this.style.setProperty("--before-after-initial-drag-position", "0%");
+          // Smoothly move to 50% after a short delay
+          requestAnimationFrame(() => {
+            this.style.transition = "--before-after-initial-drag-position 1.5s ease-in-out";
+            this.style.setProperty("--before-after-initial-drag-position", "50%");
+            // Remove transition after animation so manual dragging is instant
+            setTimeout(() => {
+              this.style.transition = "";
+            }, 1600);
+          });
+        }
+      }
+
+      customElements.define("before-after-images", BeforeAfterImages);
 
 
 
@@ -476,39 +476,39 @@ var Thm = {
 
 
         togglePlayPauseVideo() {
-        this.classList.add("playing");
-        this.loadContent();
+          this.classList.add("playing");
+          this.loadContent();
 
-        const video = this.$(".js-media-item-video");
+          const video = this.$(".js-media-item-video");
 
-        if (!video) return;
+          if (!video) return;
 
-        // First time play: pause others, play this
-        if (video.paused || video.ended) {
-          this.pauseAllVideo(video);
-          video.play();
-          this.updatePlayPauseIcon(true);
-        } else {
-          video.pause();
-          this.updatePlayPauseIcon(false);
-        }
-
-        // ✅ If YouTube player is present
-        if (this.player && typeof this.player.getPlayerState === "function") {
-          const state = this.player.getPlayerState();
-          if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED) {
-            this.pauseAllVideo(this.player);
-            this.player.playVideo();
+          // First time play: pause others, play this
+          if (video.paused || video.ended) {
+            this.pauseAllVideo(video);
+            video.play();
             this.updatePlayPauseIcon(true);
-          } else if (state === YT.PlayerState.PLAYING) {
-            this.player.pauseVideo();
+          } else {
+            video.pause();
             this.updatePlayPauseIcon(false);
           }
+
+          // ✅ If YouTube player is present
+          if (this.player && typeof this.player.getPlayerState === "function") {
+            const state = this.player.getPlayerState();
+            if (state === YT.PlayerState.PAUSED || state === YT.PlayerState.ENDED) {
+              this.pauseAllVideo(this.player);
+              this.player.playVideo();
+              this.updatePlayPauseIcon(true);
+            } else if (state === YT.PlayerState.PLAYING) {
+              this.player.pauseVideo();
+              this.updatePlayPauseIcon(false);
+            }
+          }
+
+
+
         }
-
-
-
-      }
 
         updatePlayPauseIcon(isPlaying) {
           const playIcon = this.playPauseButton?.querySelector(".video-play-icon");
@@ -526,7 +526,7 @@ var Thm = {
         }
 
 
-        
+
         handlePlayVideo() {
           this.classList.add("playing");
           this.loadContent();
@@ -590,19 +590,19 @@ var Thm = {
         //   1 == t.data && this.onPlayerPlay();
         // };
 
-          onPlayerStateYTChange = (t) => {
-            const state = t.data;
+        onPlayerStateYTChange = (t) => {
+          const state = t.data;
 
-            if (state === YT.PlayerState.PLAYING) {
-              this.onPlayerPlay(); // pause other videos
-              this.updatePlayPauseIcon(true); // 👈 show pause icon
-            } else if (
-              state === YT.PlayerState.PAUSED ||
-              state === YT.PlayerState.ENDED
-            ) {
-              this.updatePlayPauseIcon(false); // 👈 show play icon
-            }
-          };
+          if (state === YT.PlayerState.PLAYING) {
+            this.onPlayerPlay(); // pause other videos
+            this.updatePlayPauseIcon(true); // 👈 show pause icon
+          } else if (
+            state === YT.PlayerState.PAUSED ||
+            state === YT.PlayerState.ENDED
+          ) {
+            this.updatePlayPauseIcon(false); // 👈 show play icon
+          }
+        };
 
 
 
@@ -617,14 +617,14 @@ var Thm = {
                 this.isLoaded(!0),
                 this.trigger && this.trigger.remove();
 
-                // 🔽 ADD HERE AFTER APPENDING VIDEO
-                const video = this.$(".js-media-item-video");
-                if (video && !video.hasAttribute("data-listeners-added")) {
-                  video.addEventListener("play", () => this.updatePlayPauseIcon(true));
-                  video.addEventListener("pause", () => this.updatePlayPauseIcon(false));
-                  video.addEventListener("ended", () => this.updatePlayPauseIcon(false));
-                  video.setAttribute("data-listeners-added", "true");
-                }
+              // 🔽 ADD HERE AFTER APPENDING VIDEO
+              const video = this.$(".js-media-item-video");
+              if (video && !video.hasAttribute("data-listeners-added")) {
+                video.addEventListener("play", () => this.updatePlayPauseIcon(true));
+                video.addEventListener("pause", () => this.updatePlayPauseIcon(false));
+                video.addEventListener("ended", () => this.updatePlayPauseIcon(false));
+                video.setAttribute("data-listeners-added", "true");
+              }
 
             } else {
               if ("youtube" == this.typeVideo) this.onYouTubeIframeAPIReady();
@@ -632,17 +632,17 @@ var Thm = {
                 if ("vimeo" != this.typeVideo) return !0;
                 this.onVimeoIframeAPIReady();
               }
-                this.trigger?.classList.add("d-none"),
+              this.trigger?.classList.add("d-none"),
                 this.$(".js-media-item").classList.add("d-flex");
 
-                // 🔽 ALSO ADD HERE in case video is not loaded via <template>
-                  const video = this.$(".js-media-item-video");
-                  if (video && !video.hasAttribute("data-listeners-added")) {
-                    video.addEventListener("play", () => this.updatePlayPauseIcon(true));
-                    video.addEventListener("pause", () => this.updatePlayPauseIcon(false));
-                    video.addEventListener("ended", () => this.updatePlayPauseIcon(false));
-                    video.setAttribute("data-listeners-added", "true");
-                  }
+              // 🔽 ALSO ADD HERE in case video is not loaded via <template>
+              const video = this.$(".js-media-item-video");
+              if (video && !video.hasAttribute("data-listeners-added")) {
+                video.addEventListener("play", () => this.updatePlayPauseIcon(true));
+                video.addEventListener("pause", () => this.updatePlayPauseIcon(false));
+                video.addEventListener("ended", () => this.updatePlayPauseIcon(false));
+                video.setAttribute("data-listeners-added", "true");
+              }
 
             }
             return !0;
@@ -670,217 +670,217 @@ var Thm = {
       customElements.define("thm-load-media", THMLoadMedia);
 
       class DeferredMediaCustom extends HTMLElement {
-    constructor() {
-        super();
+        constructor() {
+          super();
 
-        this.$ = this.querySelector.bind(this);
+          this.$ = this.querySelector.bind(this);
 
-        this.sectionID = this.dataset.sectionId;
-        this.idVideo = this.dataset.idVideo;
-        this.typeVideo = this.dataset.type;
-        this.eleVideo = `DeferredVideo-${this.sectionID}-` + this.idVideo;
+          this.sectionID = this.dataset.sectionId;
+          this.idVideo = this.dataset.idVideo;
+          this.typeVideo = this.dataset.type;
+          this.eleVideo = `DeferredVideo-${this.sectionID}-` + this.idVideo;
 
-        this.trigger = this.$('.js-load-media-trigger');
-        this.playPauseButton = this.$('.video-play-pause-button');
-
-
-        this.onPlayerStateYTChange = this.onPlayerStateYTChange.bind(this);
-        this.onPlayerPlay = this.onPlayerPlay.bind(this);
-
-        this.trigger?.addEventListener('click', () => this.handleToggle());
+          this.trigger = this.$('.js-load-media-trigger');
+          this.playPauseButton = this.$('.video-play-pause-button');
 
 
+          this.onPlayerStateYTChange = this.onPlayerStateYTChange.bind(this);
+          this.onPlayerPlay = this.onPlayerPlay.bind(this);
 
-    }
+          this.trigger?.addEventListener('click', () => this.handleToggle());
 
-    connectedCallback() {
-        if (Shopify && Shopify.designMode && this.getAttribute('data-autoplay') === 'true') {
-            this.loadContent();
-        } else if (this.getAttribute('data-autoplay') === 'true') {
-            this.loadContent();
+
+
         }
-    }
 
-    /* ===============================
-       TOGGLE
-    =============================== */
-    handleToggle() {
+        connectedCallback() {
+          if (Shopify && Shopify.designMode && this.getAttribute('data-autoplay') === 'true') {
+            this.loadContent();
+          } else if (this.getAttribute('data-autoplay') === 'true') {
+            this.loadContent();
+          }
+        }
+
+        /* ===============================
+           TOGGLE
+        =============================== */
+        handleToggle() {
 
 
 
-        this.classList.add('playing');
-        this.loadContent();
+          this.classList.add('playing');
+          this.loadContent();
 
-        const video = this.$('.js-media-item-video') || this.$('.js-media-item-video-mobile');
+          const video = this.$('.js-media-item-video') || this.$('.js-media-item-video-mobile');
 
-        if (video) {
+          if (video) {
             if (video.paused || video.ended) {
-                this.pauseAllVideo(video);
-                video.play();
-                this.setButtonState(true);
+              this.pauseAllVideo(video);
+              video.play();
+              this.setButtonState(true);
             } else {
-                video.pause();
-                this.setButtonState(false);
+              video.pause();
+              this.setButtonState(false);
             }
-        }
+          }
 
-        if (this.player && typeof this.player.getPlayerState === 'function') {
+          if (this.player && typeof this.player.getPlayerState === 'function') {
             const state = this.player.getPlayerState();
 
             if (
-                state === YT.PlayerState.PAUSED ||
-                state === YT.PlayerState.ENDED
+              state === YT.PlayerState.PAUSED ||
+              state === YT.PlayerState.ENDED
             ) {
-                this.pauseAllVideo(this.player);
-                this.player.playVideo();
-                this.setButtonState(true);
+              this.pauseAllVideo(this.player);
+              this.player.playVideo();
+              this.setButtonState(true);
             } else if (state === YT.PlayerState.PLAYING) {
-                this.player.pauseVideo();
-                this.setButtonState(false);
+              this.player.pauseVideo();
+              this.setButtonState(false);
             }
+          }
         }
-    }
 
-    /* ===============================
-       BUTTON STATE
-    =============================== */
-    setButtonState(isPlaying) {
-        if (!this.playPauseButton) return;
-        this.playPauseButton.dataset.playing = isPlaying ? 'true' : 'false';
-    }
+        /* ===============================
+           BUTTON STATE
+        =============================== */
+        setButtonState(isPlaying) {
+          if (!this.playPauseButton) return;
+          this.playPauseButton.dataset.playing = isPlaying ? 'true' : 'false';
+        }
 
-    /* ===============================
-       YOUTUBE
-    =============================== */
-    onYouTubeIframeAPIReady() {
-        if (this.player) return;
+        /* ===============================
+           YOUTUBE
+        =============================== */
+        onYouTubeIframeAPIReady() {
+          if (this.player) return;
 
-        if (typeof YT !== 'undefined' && YT.Player) {
+          if (typeof YT !== 'undefined' && YT.Player) {
             this.player = new YT.Player(this.eleVideo, {
-                videoId: this.idVideo,
-                playerVars: { playsinline: 1 },
-                events: {
-                    onReady: this.onPlayerYTReady,
-                    onStateChange: this.onPlayerStateYTChange,
-                },
+              videoId: this.idVideo,
+              playerVars: { playsinline: 1 },
+              events: {
+                onReady: this.onPlayerYTReady,
+                onStateChange: this.onPlayerStateYTChange,
+              },
             });
             return;
-        }
+          }
 
-        // load script only once
-        if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+          // load script only once
+          if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
             const script = document.createElement('script');
             script.src = 'https://www.youtube.com/iframe_api';
             document.head.appendChild(script);
+          }
+
+          // IMPORTANT: global callback (YouTube requirement)
+          window.onYouTubeIframeAPIReady = () => {
+            this.onYouTubeIframeAPIReady();
+          };
         }
 
-        // IMPORTANT: global callback (YouTube requirement)
-        window.onYouTubeIframeAPIReady = () => {
-            this.onYouTubeIframeAPIReady();
+        onPlayerYTReady = () => {
+          this.pauseAllVideo(this.player);
+          this.player.playVideo();
         };
-    }
 
-    onPlayerYTReady = () => {
-        this.pauseAllVideo(this.player);
-        this.player.playVideo();
-    };
-
-    onPlayerStateYTChange(t) {
-        if (t.data === YT.PlayerState.PLAYING) {
+        onPlayerStateYTChange(t) {
+          if (t.data === YT.PlayerState.PLAYING) {
             this.onPlayerPlay();
             this.setButtonState(true);
-        } else if (
+          } else if (
             t.data === YT.PlayerState.PAUSED ||
             t.data === YT.PlayerState.ENDED
-        ) {
+          ) {
             this.setButtonState(false);
+          }
         }
-    }
 
-    onPlayerPlay() {
-        this.pauseAllVideo(this.player);
-    }
+        onPlayerPlay() {
+          this.pauseAllVideo(this.player);
+        }
 
-    /* ===============================
-       VIMEO
-    =============================== */
+        /* ===============================
+           VIMEO
+        =============================== */
 
-    createVimeoPlayer() {
-        if (this.playerVimeo) return;
+        createVimeoPlayer() {
+          if (this.playerVimeo) return;
 
-        this.playerVimeo = new Vimeo.Player(this.eleVideo, {
+          this.playerVimeo = new Vimeo.Player(this.eleVideo, {
             id: this.idVideo,
             autoplay: true,
-        });
+          });
 
-        this.playerVimeo.on('play', () => {
+          this.playerVimeo.on('play', () => {
             this.pauseAllVideo(this.playerVimeo);
-        });
-    }
-
-
-    onVimeoIframeAPIReady() {
-        if (typeof Vimeo !== 'undefined' && Vimeo.Player) {
-            this.createVimeoPlayer();
-            return;
+          });
         }
 
-        const src = 'https://player.vimeo.com/api/player.js';
 
-        // prevent duplicate script injection
-        let script = document.querySelector(`script[src="${src}"]`);
+        onVimeoIframeAPIReady() {
+          if (typeof Vimeo !== 'undefined' && Vimeo.Player) {
+            this.createVimeoPlayer();
+            return;
+          }
 
-        if (!script) {
+          const src = 'https://player.vimeo.com/api/player.js';
+
+          // prevent duplicate script injection
+          let script = document.querySelector(`script[src="${src}"]`);
+
+          if (!script) {
             script = document.createElement('script');
             script.src = src;
 
             script.onload = () => {
-                this.createVimeoPlayer();
+              this.createVimeoPlayer();
             };
 
             document.head.appendChild(script);
             return;
-        }
+          }
 
-        // script already exists → wait until Vimeo becomes available
-        const check = setInterval(() => {
+          // script already exists → wait until Vimeo becomes available
+          const check = setInterval(() => {
             if (typeof Vimeo !== 'undefined' && Vimeo.Player) {
-                clearInterval(check);
-                this.createVimeoPlayer();
+              clearInterval(check);
+              this.createVimeoPlayer();
             }
-        }, 50);
-    }
-    /* ===============================
-       LOAD CONTENT
-    =============================== */
-
-    loadContent() {
-        if (this.hasAttribute('loaded')) return;
-
-        // 🔹 YOUTUBE / VIMEO → hide trigger only
-        if (this.typeVideo === 'youtube' || this.typeVideo === 'vimeo') {
-            this.trigger?.classList.add('d-none');
+          }, 50);
         }
+        /* ===============================
+           LOAD CONTENT
+        =============================== */
 
-        // 🔹 Load template if exists
-        if (this.$('template')) {
+        loadContent() {
+          if (this.hasAttribute('loaded')) return;
+
+          // 🔹 YOUTUBE / VIMEO → hide trigger only
+          if (this.typeVideo === 'youtube' || this.typeVideo === 'vimeo') {
+            this.trigger?.classList.add('d-none');
+          }
+
+          // 🔹 Load template if exists
+          if (this.$('template')) {
             const node = this.$('template').content.firstElementChild.cloneNode(true);
             this.appendChild(node);
 
-        } else {
+          } else {
             if (this.typeVideo === 'youtube') {
-                this.onYouTubeIframeAPIReady();
-                this.buttonWrapper?.classList.add('display-none');
+              this.onYouTubeIframeAPIReady();
+              this.buttonWrapper?.classList.add('display-none');
             }
 
             if (this.typeVideo === 'vimeo') {
-                this.onVimeoIframeAPIReady();
+              this.onVimeoIframeAPIReady();
             }
-        }
+          }
 
 
-        // 🔹 Handle autoplay (lazy-load logic)
-        if (this.getAttribute('data-autoplay') === 'true') {
+          // 🔹 Handle autoplay (lazy-load logic)
+          if (this.getAttribute('data-autoplay') === 'true') {
 
 
             // HTML5 video
@@ -888,98 +888,98 @@ var Thm = {
 
 
             if (localVideo) {
-                const source = localVideo.querySelector('source');
-                const src = source?.getAttribute('data-src');
-                if (src) {
-                    source.setAttribute('src', src);
-                    localVideo.load();
-                    localVideo.muted = true
-                    localVideo.play().catch((err) => {
-                        console.warn("Autoplay failed:", err);
-                    });
-                }
-                else {
-                    console.warn("Missing data-src on local video source.");
-                }
+              const source = localVideo.querySelector('source');
+              const src = source?.getAttribute('data-src');
+              if (src) {
+                source.setAttribute('src', src);
+                localVideo.load();
+                localVideo.muted = true
+                localVideo.play().catch((err) => {
+                  console.warn("Autoplay failed:", err);
+                });
+              }
+              else {
+                console.warn("Missing data-src on local video source.");
+              }
             }
 
             // iframe video (YouTube/Vimeo)
             const iframe = this.$('iframe');
             if (iframe) {
-                const src = iframe.getAttribute('data-src');
-                if (src) {
-                    iframe.setAttribute('src', src);
+              const src = iframe.getAttribute('data-src');
+              if (src) {
+                iframe.setAttribute('src', src);
 
-                    iframe.addEventListener(
-                        'load',
-                        () => {
-                            if (this.typeVideo === 'youtube') {
-                                iframe.contentWindow.postMessage(
-                                    '{"event":"command","func":"playVideo","args":""}',
-                                    '*'
-                                );
-                            }
+                iframe.addEventListener(
+                  'load',
+                  () => {
+                    if (this.typeVideo === 'youtube') {
+                      iframe.contentWindow.postMessage(
+                        '{"event":"command","func":"playVideo","args":""}',
+                        '*'
+                      );
+                    }
 
-                            if (this.typeVideo === 'vimeo') {
-                                iframe.contentWindow.postMessage('{"method":"play"}', '*');
-                            }
-                        },
-                        { once: true }
-                    );
-                }
+                    if (this.typeVideo === 'vimeo') {
+                      iframe.contentWindow.postMessage('{"method":"play"}', '*');
+                    }
+                  },
+                  { once: true }
+                );
+              }
             }
-        }
+          }
 
-        this.isLoaded(true);
+          this.isLoaded(true);
 
-        // 🔹 Trigger listeners remain
-        const video = this.$('.js-media-item-video');
-        if (video && !video.dataset.listenersAdded) {
+          // 🔹 Trigger listeners remain
+          const video = this.$('.js-media-item-video');
+          if (video && !video.dataset.listenersAdded) {
             video.addEventListener('play', () => this.setButtonState(true));
             video.addEventListener('pause', () => this.setButtonState(false));
             video.addEventListener('ended', () => this.setButtonState(false));
             video.dataset.listenersAdded = 'true';
+          }
         }
-    }
 
-    /* ===============================
-       PAUSE ALL
-    =============================== */
-    pauseAllVideo(current) {
-        document
+        /* ===============================
+           PAUSE ALL
+        =============================== */
+        pauseAllVideo(current) {
+          document
             .querySelectorAll(
-                ".js-media-item-video:has([data-type='youtube'])"
+              ".js-media-item-video:has([data-type='youtube'])"
             )
             .forEach((el) => {
-                el.player && el.player !== current && el.player.pauseVideo();
+              el.player && el.player !== current && el.player.pauseVideo();
             });
 
-        document
+          document
             .querySelectorAll(
-                ".js-media-item-video:has([data-type='vimeo'])"
+              ".js-media-item-video:has([data-type='vimeo'])"
             )
             .forEach((el) => {
-                el.playerVimeo &&
-                    el.playerVimeo !== current &&
-                    el.playerVimeo.pause();
+              el.playerVimeo &&
+                el.playerVimeo !== current &&
+                el.playerVimeo.pause();
             });
 
-        document
+          document
             .querySelectorAll('.js-media-item-video')
             .forEach((v) => v !== current && v.pause());
-    }
+        }
 
-    isLoaded(val) {
-        val ? this.setAttribute('loaded', '') : this.removeAttribute('loaded');
-    }
-}
+        isLoaded(val) {
+          val ? this.setAttribute('loaded', '') : this.removeAttribute('loaded');
+        }
+      }
 
-customElements.define("deferred-media-custom", DeferredMediaCustom);
+      customElements.define("deferred-media-custom", DeferredMediaCustom);
 
     },
-   collapsibleContent: function () {
+    collapsibleContent: function () {
 
-  if (!customElements.get("collapsible-content")) {
+      if (!customElements.get("collapsible-content")) {
         class collapsibleContent extends HTMLElement {
           constructor() {
             super();
@@ -1010,7 +1010,7 @@ customElements.define("deferred-media-custom", DeferredMediaCustom);
               this.parentdiv?.classList.add('open');
             } else {
               this.close();
-                this.parentdiv?.classList.remove('open');
+              this.parentdiv?.classList.remove('open');
             }
           }
 
@@ -1070,167 +1070,167 @@ customElements.define("deferred-media-custom", DeferredMediaCustom);
         }
         customElements.define('collapsible-content', collapsibleContent);
       }
-    
+
     },
 
-     collapsibleContentMobile: function () {
+    collapsibleContentMobile: function () {
 
 
-            if (!customElements.get("collapsible-mobilecontent")) {
-                class CollapsibleMobileContent extends HTMLElement {
-                    constructor() {
-                        super();
-                        this.detailsList = Array.from(this.querySelectorAll('details'));
-                        this.isMobile = window.innerWidth < 768;
+      if (!customElements.get("collapsible-mobilecontent")) {
+        class CollapsibleMobileContent extends HTMLElement {
+          constructor() {
+            super();
+            this.detailsList = Array.from(this.querySelectorAll('details'));
+            this.isMobile = window.innerWidth < 768;
 
-                        this.boundHandleResize = this.handleResize.bind(this);
-                        this.boundToggleHandlers = new Map();
+            this.boundHandleResize = this.handleResize.bind(this);
+            this.boundToggleHandlers = new Map();
 
-                        this.init();
-                        window.addEventListener('resize', this.boundHandleResize);
-                    }
+            this.init();
+            window.addEventListener('resize', this.boundHandleResize);
+          }
 
-                    init() {
-                        if (this.isMobile) {
-                            this.enableAccordion();
-                        } else {
-                            this.disableAccordion();
-                        }
-                    }
-
-                    handleResize() {
-                        const nowMobile = window.innerWidth < 768;
-                        if (nowMobile !== this.isMobile) {
-                            this.isMobile = nowMobile;
-                            if (this.isMobile) {
-                                this.enableAccordion();
-                            } else {
-                                this.disableAccordion();
-                            }
-                        }
-                    }
-
-                    enableAccordion() {
-                        this.detailsList.forEach(details => {
-                            const toggle = details.querySelector('summary');
-                            const panel = toggle.nextElementSibling;
-
-                            // Reset for mobile mode
-                            panel.style.height = '0';
-                            details.open = false;
-                            details.classList.remove('is-closing');
-
-                            // Create click handler for this details
-                            const handler = (evt) => {
-                                evt.preventDefault();
-                                if (!details.open) {
-                                    // Opening animation
-                                    panel.style.height = '0';
-                                    details.open = true;
-                                    requestAnimationFrame(() => {
-                                        panel.style.height = `${panel.scrollHeight}px`;
-                                    });
-                                } else {
-                                    // Closing animation
-                                    panel.style.height = `${panel.scrollHeight}px`;
-                                    details.classList.add('is-closing');
-                                    setTimeout(() => {
-                                        panel.style.height = '0';
-                                    }, 10);
-                                }
-                            };
-
-                            if (!this.boundToggleHandlers.has(details)) {
-                                toggle.addEventListener('click', handler);
-                                this.boundToggleHandlers.set(details, handler);
-
-                                // Transition end cleanup
-                                panel.addEventListener('transitionend', (evt) => {
-                                    if (evt.target !== panel) return;
-                                    if (details.classList.contains('is-closing')) {
-                                        details.classList.remove('is-closing');
-                                        details.open = false;
-                                        panel.style.height = '';
-                                    }
-                                });
-                            }
-                        });
-                    }
-
-                    disableAccordion() {
-                        this.detailsList.forEach(details => {
-                            const toggle = details.querySelector('summary');
-                            const panel = toggle.nextElementSibling;
-
-                            // Remove click handlers if present
-                            const handler = this.boundToggleHandlers.get(details);
-                            if (handler) {
-                                toggle.removeEventListener('click', handler);
-                                this.boundToggleHandlers.delete(details);
-                            }
-
-                            // Reset styles for desktop view
-                            panel.style.height = '';
-                            details.classList.remove('is-closing');
-                            details.open = true;
-                        });
-                    }
-
-                    disconnectedCallback() {
-                        window.removeEventListener('resize', this.boundHandleResize);
-                        this.detailsList.forEach(details => {
-                            const toggle = details.querySelector('summary');
-                            const handler = this.boundToggleHandlers.get(details);
-                            if (handler) {
-                                toggle.removeEventListener('click', handler);
-                            }
-                        });
-                        this.boundToggleHandlers.clear();
-                    }
-                }
-
-                customElements.define('collapsible-mobilecontent', CollapsibleMobileContent);
+          init() {
+            if (this.isMobile) {
+              this.enableAccordion();
+            } else {
+              this.disableAccordion();
             }
+          }
+
+          handleResize() {
+            const nowMobile = window.innerWidth < 768;
+            if (nowMobile !== this.isMobile) {
+              this.isMobile = nowMobile;
+              if (this.isMobile) {
+                this.enableAccordion();
+              } else {
+                this.disableAccordion();
+              }
+            }
+          }
+
+          enableAccordion() {
+            this.detailsList.forEach(details => {
+              const toggle = details.querySelector('summary');
+              const panel = toggle.nextElementSibling;
+
+              // Reset for mobile mode
+              panel.style.height = '0';
+              details.open = false;
+              details.classList.remove('is-closing');
+
+              // Create click handler for this details
+              const handler = (evt) => {
+                evt.preventDefault();
+                if (!details.open) {
+                  // Opening animation
+                  panel.style.height = '0';
+                  details.open = true;
+                  requestAnimationFrame(() => {
+                    panel.style.height = `${panel.scrollHeight}px`;
+                  });
+                } else {
+                  // Closing animation
+                  panel.style.height = `${panel.scrollHeight}px`;
+                  details.classList.add('is-closing');
+                  setTimeout(() => {
+                    panel.style.height = '0';
+                  }, 10);
+                }
+              };
+
+              if (!this.boundToggleHandlers.has(details)) {
+                toggle.addEventListener('click', handler);
+                this.boundToggleHandlers.set(details, handler);
+
+                // Transition end cleanup
+                panel.addEventListener('transitionend', (evt) => {
+                  if (evt.target !== panel) return;
+                  if (details.classList.contains('is-closing')) {
+                    details.classList.remove('is-closing');
+                    details.open = false;
+                    panel.style.height = '';
+                  }
+                });
+              }
+            });
+          }
+
+          disableAccordion() {
+            this.detailsList.forEach(details => {
+              const toggle = details.querySelector('summary');
+              const panel = toggle.nextElementSibling;
+
+              // Remove click handlers if present
+              const handler = this.boundToggleHandlers.get(details);
+              if (handler) {
+                toggle.removeEventListener('click', handler);
+                this.boundToggleHandlers.delete(details);
+              }
+
+              // Reset styles for desktop view
+              panel.style.height = '';
+              details.classList.remove('is-closing');
+              details.open = true;
+            });
+          }
+
+          disconnectedCallback() {
+            window.removeEventListener('resize', this.boundHandleResize);
+            this.detailsList.forEach(details => {
+              const toggle = details.querySelector('summary');
+              const handler = this.boundToggleHandlers.get(details);
+              if (handler) {
+                toggle.removeEventListener('click', handler);
+              }
+            });
+            this.boundToggleHandlers.clear();
+          }
+        }
+
+        customElements.define('collapsible-mobilecontent', CollapsibleMobileContent);
+      }
 
 
 
 
-        },
+    },
 
-    stickyProduct:function(){
+    stickyProduct: function () {
       function TopOffset(el) {
-    let rect = el.getBoundingClientRect(),
-        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return { top: rect.top + scrollTop };
-}
+        let rect = el.getBoundingClientRect(),
+          scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        return { top: rect.top + scrollTop };
+      }
 
-class Stickybar extends HTMLElement {
-    constructor() {
-        super();
-        this.sticky_close = this.querySelector(".sticky-product__close");
-        this.sticky_close.addEventListener("click", this.closeSticky.bind(this));
-    }
-    connectedCallback() {
-        this.initSticky();
-    }
+      class Stickybar extends HTMLElement {
+        constructor() {
+          super();
+          this.sticky_close = this.querySelector(".sticky-product__close");
+          this.sticky_close.addEventListener("click", this.closeSticky.bind(this));
+        }
+        connectedCallback() {
+          this.initSticky();
+        }
 
-    closeSticky() {
-        this.remove();
-    }
-    initSticky() {
-        const productForm = document.querySelector(".product-form"),
+        closeSticky() {
+          this.remove();
+        }
+        initSticky() {
+          const productForm = document.querySelector(".product-form"),
             productStickyWrapper = document.querySelector(".sticky-product");
-        window.addEventListener("scroll", function () {
-            let productFormTopffset =  TopOffset(productForm).top;
+          window.addEventListener("scroll", function () {
+            let productFormTopffset = TopOffset(productForm).top;
             window.scrollY > productFormTopffset
-                ? (productStickyWrapper.classList.add("sticky_bar"),
-                    document.body.classList.add("sticky__cart"))
-                : (productStickyWrapper.classList.remove("sticky_bar"),
-                    document.body.classList.remove("sticky__cart"));
-        });
-    }
-}
-customElements.define("sticky-component", Stickybar);
+              ? (productStickyWrapper.classList.add("sticky_bar"),
+                document.body.classList.add("sticky__cart"))
+              : (productStickyWrapper.classList.remove("sticky_bar"),
+                document.body.classList.remove("sticky__cart"));
+          });
+        }
+      }
+      customElements.define("sticky-component", Stickybar);
     }
   },
 };
@@ -1243,77 +1243,77 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function buildAnimation() {
 
-    const button = gsap.utils.toArray(".button");
+  const button = gsap.utils.toArray(".button");
 
-    if (button != null) {
-        button.forEach((item) => {
-            let span = item.querySelector(".button--text");
-            let tl = gsap.timeline({ paused: true });
-            if (span != null) {
-                tl.to(span, { duration: 0.2, xPercent: 150, ease: "power2.in" });
-                tl.set(span, { xPercent: -150 });
-                tl.to(span, { duration: 0.2, xPercent: 0 });
-                item.addEventListener("mouseenter", () => tl.play(0));
-                item.addEventListener("mouseleave", () => tl.reverse());
-            }
-        });
-    }
+  if (button != null) {
+    button.forEach((item) => {
+      let span = item.querySelector(".button--text");
+      let tl = gsap.timeline({ paused: true });
+      if (span != null) {
+        tl.to(span, { duration: 0.2, xPercent: 150, ease: "power2.in" });
+        tl.set(span, { xPercent: -150 });
+        tl.to(span, { duration: 0.2, xPercent: 0 });
+        item.addEventListener("mouseenter", () => tl.play(0));
+        item.addEventListener("mouseleave", () => tl.reverse());
+      }
+    });
+  }
 
 }
 
 
 function initBlogIsotope(section) {
-    // section is optional: if provided, scope querySelector inside it
-    var scope = section || document;
-    var elem = scope.querySelector('.blog-articles');
+  // section is optional: if provided, scope querySelector inside it
+  var scope = section || document;
+  var elem = scope.querySelector('.blog-articles');
 
-    if (!elem) return;
+  if (!elem) return;
 
-    // Destroy previous Isotope instance if it exists
-    if (elem._isotopeInstance) {
-        elem._isotopeInstance.destroy();
-    }
+  // Destroy previous Isotope instance if it exists
+  if (elem._isotopeInstance) {
+    elem._isotopeInstance.destroy();
+  }
 
-    // Initialize Isotope
-    var grid = new Isotope(elem, {
-        itemSelector: '.article__item',
-        layoutMode: 'fitRows'
+  // Initialize Isotope
+  var grid = new Isotope(elem, {
+    itemSelector: '.article__item',
+    layoutMode: 'fitRows'
+  });
+
+  // Store instance for later cleanup
+  elem._isotopeInstance = grid;
+
+  // Filter select
+  var select = scope.querySelector('.blog-filter-select');
+  if (select) {
+    select.addEventListener('change', function () {
+      var filterValue = this.value;
+      filterValue = (window.filterFns && window.filterFns[filterValue]) || filterValue;
+      grid.arrange({ filter: filterValue });
     });
-
-    // Store instance for later cleanup
-    elem._isotopeInstance = grid;
-
-    // Filter select
-    var select = scope.querySelector('.blog-filter-select');
-    if (select) {
-        select.addEventListener('change', function () {
-            var filterValue = this.value;
-            filterValue = (window.filterFns && window.filterFns[filterValue]) || filterValue;
-            grid.arrange({ filter: filterValue });
-        });
-    }
+  }
 }
 
 // Initial call on page load
 document.addEventListener('DOMContentLoaded', function () {
-    initBlogIsotope();
-    buildAnimation();
+  initBlogIsotope();
+  buildAnimation();
 });
 
 // Shopify section/block events
 document.addEventListener('shopify:section:load', function (event) {
-    initBlogIsotope(event.target);
-    buildAnimation(event.target);
+  initBlogIsotope(event.target);
+  buildAnimation(event.target);
 });
 
 document.addEventListener('shopify:section:reorder', function (event) {
-    initBlogIsotope(event.target);
-    buildAnimation(event.target);
+  initBlogIsotope(event.target);
+  buildAnimation(event.target);
 });
 
 document.addEventListener('shopify:block:select', function (event) {
-    initBlogIsotope(event.target);
-    buildAnimation(event.target);
+  initBlogIsotope(event.target);
+  buildAnimation(event.target);
 });
 
 
@@ -1321,128 +1321,128 @@ document.addEventListener('shopify:block:select', function (event) {
 
 
 if (!customElements.get('tabbed-content')) {
-    class Tabs extends HTMLElement {
-        constructor() {
-            super();
-            this.tabList = this.querySelector('[role="tablist"]');
-            this.activeTab = this.tabList.querySelector('[aria-selected="true"]');
-            this.isVerticalTablist = this.tabList.getAttribute('aria-orientation') === 'vertical';
-            this.tabs = this.querySelectorAll('[role="tab"]');
-            this.panels = this.querySelectorAll('[role="tabpanel"]');
+  class Tabs extends HTMLElement {
+    constructor() {
+      super();
+      this.tabList = this.querySelector('[role="tablist"]');
+      this.activeTab = this.tabList.querySelector('[aria-selected="true"]');
+      this.isVerticalTablist = this.tabList.getAttribute('aria-orientation') === 'vertical';
+      this.tabs = this.querySelectorAll('[role="tab"]');
+      this.panels = this.querySelectorAll('[role="tabpanel"]');
 
-            // If no tab is active by default, activate the first tab.
-            if (!this.activeTab) {
-                this.activeTab = this.tabs[0];
-                this.activateTab(this.activeTab);
-            }
+      // If no tab is active by default, activate the first tab.
+      if (!this.activeTab) {
+        this.activeTab = this.tabs[0];
+        this.activateTab(this.activeTab);
+      }
 
-            this.addListeners();
-        }
+      this.addListeners();
+    }
 
-        addListeners() {
-            this.tabList.addEventListener('click', this.handleClick.bind(this));
-            this.tabList.addEventListener('keydown', this.handleKeydown.bind(this));
-        }
+    addListeners() {
+      this.tabList.addEventListener('click', this.handleClick.bind(this));
+      this.tabList.addEventListener('keydown', this.handleKeydown.bind(this));
+    }
 
-        handleClick(evt) {
-            if (!evt.target.matches('[role="tab"]') || evt.target === this.activeTab) return;
-            this.activateTab(evt.target);
-
-        }
-
-        handleKeydown(evt) {
-            switch (evt.key) {
-                case 'ArrowLeft':
-                case 'ArrowRight':
-                    evt.preventDefault();
-                    if (!this.isVerticalTablist) {
-                        this.switchTabOnKeyPress(evt.key);
-                    }
-                    break;
-
-                case 'ArrowUp':
-                case 'ArrowDown':
-                    evt.preventDefault();
-                    if (this.isVerticalTablist) {
-                        this.switchTabOnKeyPress(evt.key);
-                    }
-                    break;
-
-                case 'Home':
-                    evt.preventDefault();
-                    this.activateTab(this.tabs[0]);
-                    break;
-
-                case 'End':
-                    evt.preventDefault();
-                    this.activateTab(this.tabs[this.tabs.length - 1]);
-                    break;
-            }
-        }
-
-        switchTabOnKeyPress(key) {
-            if (key === 'ArrowRight' || key === 'ArrowDown') {
-                if (this.activeTab === this.tabs[this.tabs.length - 1]) {
-                    this.activateTab(this.tabs[0]);
-                } else {
-                    this.activateTab(this.activeTab.nextElementSibling);
-                }
-            } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
-                if (this.activeTab === this.tabs[0]) {
-                    this.activateTab(this.tabs[this.tabs.length - 1]);
-                } else {
-                    this.activateTab(this.activeTab.previousElementSibling);
-                }
-            }
-        }
-
-        activateTab(tab) {
-            this.deactivateActiveTab();
-
-            Tabs.setTabState(tab, true);
-            tab.removeAttribute('tabindex');
-            this.activeTab = tab;
-
-            const panelId = tab.getAttribute('aria-controls');
-            const panel = document.getElementById(panelId);
-
-            if (panel) {
-                panel.classList.add('fade-in');  // Add animation class
-
-                setTimeout(() => {
-                    panel.classList.remove('fade-in');
-                }, 500);
-            }
-
-            if (document.activeElement.matches('.tablist__tab')) {
-                tab.focus();
-            }
-        }
-
-        deactivateActiveTab() {
-            Tabs.setTabState(this.activeTab, false);
-            this.activeTab.setAttribute('tabindex', '-1');
-            this.activeTab = null;
-        }
-
-        static setTabState(tab, active) {
-            tab.setAttribute('aria-selected', active);
-
-            const panelId = tab.getAttribute('aria-controls');
-            const panel = document.getElementById(panelId);
-
-            if (panel) {
-                if (active) {
-                    panel.hidden = false;
-                } else {
-                    panel.hidden = true;
-                }
-            }
-        }
+    handleClick(evt) {
+      if (!evt.target.matches('[role="tab"]') || evt.target === this.activeTab) return;
+      this.activateTab(evt.target);
 
     }
 
-    customElements.define('tabbed-content', Tabs);
+    handleKeydown(evt) {
+      switch (evt.key) {
+        case 'ArrowLeft':
+        case 'ArrowRight':
+          evt.preventDefault();
+          if (!this.isVerticalTablist) {
+            this.switchTabOnKeyPress(evt.key);
+          }
+          break;
+
+        case 'ArrowUp':
+        case 'ArrowDown':
+          evt.preventDefault();
+          if (this.isVerticalTablist) {
+            this.switchTabOnKeyPress(evt.key);
+          }
+          break;
+
+        case 'Home':
+          evt.preventDefault();
+          this.activateTab(this.tabs[0]);
+          break;
+
+        case 'End':
+          evt.preventDefault();
+          this.activateTab(this.tabs[this.tabs.length - 1]);
+          break;
+      }
+    }
+
+    switchTabOnKeyPress(key) {
+      if (key === 'ArrowRight' || key === 'ArrowDown') {
+        if (this.activeTab === this.tabs[this.tabs.length - 1]) {
+          this.activateTab(this.tabs[0]);
+        } else {
+          this.activateTab(this.activeTab.nextElementSibling);
+        }
+      } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+        if (this.activeTab === this.tabs[0]) {
+          this.activateTab(this.tabs[this.tabs.length - 1]);
+        } else {
+          this.activateTab(this.activeTab.previousElementSibling);
+        }
+      }
+    }
+
+    activateTab(tab) {
+      this.deactivateActiveTab();
+
+      Tabs.setTabState(tab, true);
+      tab.removeAttribute('tabindex');
+      this.activeTab = tab;
+
+      const panelId = tab.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId);
+
+      if (panel) {
+        panel.classList.add('fade-in');  // Add animation class
+
+        setTimeout(() => {
+          panel.classList.remove('fade-in');
+        }, 500);
+      }
+
+      if (document.activeElement.matches('.tablist__tab')) {
+        tab.focus();
+      }
+    }
+
+    deactivateActiveTab() {
+      Tabs.setTabState(this.activeTab, false);
+      this.activeTab.setAttribute('tabindex', '-1');
+      this.activeTab = null;
+    }
+
+    static setTabState(tab, active) {
+      tab.setAttribute('aria-selected', active);
+
+      const panelId = tab.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId);
+
+      if (panel) {
+        if (active) {
+          panel.hidden = false;
+        } else {
+          panel.hidden = true;
+        }
+      }
+    }
+
+  }
+
+  customElements.define('tabbed-content', Tabs);
 }
 
 // Money format handler
@@ -1491,7 +1491,7 @@ Shopify.formatMoney = function (cents, format) {
   return formatString.replace(placeholderRegex, value);
 };
 
- class VariantWeightSelect extends HTMLElement {
+class VariantWeightSelect extends HTMLElement {
   constructor() {
     super();
 
@@ -1540,14 +1540,14 @@ Shopify.formatMoney = function (cents, format) {
 
     this.selectedOptions[position] = value;
 
- 
+
 
     const variant = this.getVariant(value);
 
-   
+
 
     if (!variant) return;
-  this.updatePrice(variant);
+    this.updatePrice(variant);
     this.updateForm(variant);
 
   }
@@ -1556,41 +1556,41 @@ Shopify.formatMoney = function (cents, format) {
   getVariants() {
     const variantsScript = this.productCard?.querySelector('[type="application/json"][data-variants]');
 
-    return variantsScript? JSON.parse(variantsScript.textContent) : [];
+    return variantsScript ? JSON.parse(variantsScript.textContent) : [];
   }
 
-  
+
   getVariant(value) {
-  const variants = this.getVariants();
+    const variants = this.getVariants();
 
-  return variants.find((variant) =>
-    [variant.option1, variant.option2, variant.option3].includes(value)
-  );
-}
-
-
- async updatePrice(variant) {
-  const handle = this.productCard.dataset.productHandle;
-
-  const response = await fetch(
-    `/products/${handle}?variant=${variant.id}&section_id=card-product`
-  );
-
-  const html = await response.text();
-
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-
- 
-
-  const newPrice = doc.querySelector(".price");
-  const currentPrice = this.productCard.querySelector(".price");
-
-
-  if (newPrice && currentPrice) {
-    currentPrice.innerHTML = newPrice.innerHTML;
+    return variants.find((variant) =>
+      [variant.option1, variant.option2, variant.option3].includes(value)
+    );
   }
-}
+
+
+  async updatePrice(variant) {
+    const handle = this.productCard.dataset.productHandle;
+
+    const response = await fetch(
+      `/products/${handle}?variant=${variant.id}&section_id=card-product`
+    );
+
+    const html = await response.text();
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+
+
+    const newPrice = doc.querySelector(".price");
+    const currentPrice = this.productCard.querySelector(".price");
+
+
+    if (newPrice && currentPrice) {
+      currentPrice.innerHTML = newPrice.innerHTML;
+    }
+  }
 
   updateForm(variant) {
     const input = this.form?.querySelector('[name="id"]');
@@ -1631,128 +1631,128 @@ customElements.define(
 
 
 if (!customElements.get('tabbed-content')) {
-    class Tabs extends HTMLElement {
-        constructor() {
-            super();
-            this.tabList = this.querySelector('[role="tablist"]');
-            this.activeTab = this.tabList.querySelector('[aria-selected="true"]');
-            this.isVerticalTablist = this.tabList.getAttribute('aria-orientation') === 'vertical';
-            this.tabs = this.querySelectorAll('[role="tab"]');
-            this.panels = this.querySelectorAll('[role="tabpanel"]');
+  class Tabs extends HTMLElement {
+    constructor() {
+      super();
+      this.tabList = this.querySelector('[role="tablist"]');
+      this.activeTab = this.tabList.querySelector('[aria-selected="true"]');
+      this.isVerticalTablist = this.tabList.getAttribute('aria-orientation') === 'vertical';
+      this.tabs = this.querySelectorAll('[role="tab"]');
+      this.panels = this.querySelectorAll('[role="tabpanel"]');
 
-            // If no tab is active by default, activate the first tab.
-            if (!this.activeTab) {
-                this.activeTab = this.tabs[0];
-                this.activateTab(this.activeTab);
-            }
+      // If no tab is active by default, activate the first tab.
+      if (!this.activeTab) {
+        this.activeTab = this.tabs[0];
+        this.activateTab(this.activeTab);
+      }
 
-            this.addListeners();
-        }
+      this.addListeners();
+    }
 
-        addListeners() {
-            this.tabList.addEventListener('click', this.handleClick.bind(this));
-            this.tabList.addEventListener('keydown', this.handleKeydown.bind(this));
-        }
+    addListeners() {
+      this.tabList.addEventListener('click', this.handleClick.bind(this));
+      this.tabList.addEventListener('keydown', this.handleKeydown.bind(this));
+    }
 
-        handleClick(evt) {
-            if (!evt.target.matches('[role="tab"]') || evt.target === this.activeTab) return;
-            this.activateTab(evt.target);
-
-        }
-
-        handleKeydown(evt) {
-            switch (evt.key) {
-                case 'ArrowLeft':
-                case 'ArrowRight':
-                    evt.preventDefault();
-                    if (!this.isVerticalTablist) {
-                        this.switchTabOnKeyPress(evt.key);
-                    }
-                    break;
-
-                case 'ArrowUp':
-                case 'ArrowDown':
-                    evt.preventDefault();
-                    if (this.isVerticalTablist) {
-                        this.switchTabOnKeyPress(evt.key);
-                    }
-                    break;
-
-                case 'Home':
-                    evt.preventDefault();
-                    this.activateTab(this.tabs[0]);
-                    break;
-
-                case 'End':
-                    evt.preventDefault();
-                    this.activateTab(this.tabs[this.tabs.length - 1]);
-                    break;
-            }
-        }
-
-        switchTabOnKeyPress(key) {
-            if (key === 'ArrowRight' || key === 'ArrowDown') {
-                if (this.activeTab === this.tabs[this.tabs.length - 1]) {
-                    this.activateTab(this.tabs[0]);
-                } else {
-                    this.activateTab(this.activeTab.nextElementSibling);
-                }
-            } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
-                if (this.activeTab === this.tabs[0]) {
-                    this.activateTab(this.tabs[this.tabs.length - 1]);
-                } else {
-                    this.activateTab(this.activeTab.previousElementSibling);
-                }
-            }
-        }
-
-        activateTab(tab) {
-            this.deactivateActiveTab();
-
-            Tabs.setTabState(tab, true);
-            tab.removeAttribute('tabindex');
-            this.activeTab = tab;
-
-            const panelId = tab.getAttribute('aria-controls');
-            const panel = document.getElementById(panelId);
-
-            if (panel) {
-                panel.classList.add('fade-in');  // Add animation class
-
-                setTimeout(() => {
-                    panel.classList.remove('fade-in');
-                }, 500);
-            }
-
-            if (document.activeElement.matches('.tablist__tab')) {
-                tab.focus();
-            }
-        }
-
-        deactivateActiveTab() {
-            Tabs.setTabState(this.activeTab, false);
-            this.activeTab.setAttribute('tabindex', '-1');
-            this.activeTab = null;
-        }
-
-        static setTabState(tab, active) {
-            tab.setAttribute('aria-selected', active);
-
-            const panelId = tab.getAttribute('aria-controls');
-            const panel = document.getElementById(panelId);
-
-            if (panel) {
-                if (active) {
-                    panel.hidden = false;
-                } else {
-                    panel.hidden = true;
-                }
-            }
-        }
+    handleClick(evt) {
+      if (!evt.target.matches('[role="tab"]') || evt.target === this.activeTab) return;
+      this.activateTab(evt.target);
 
     }
 
-    customElements.define('tabbed-content', Tabs);
+    handleKeydown(evt) {
+      switch (evt.key) {
+        case 'ArrowLeft':
+        case 'ArrowRight':
+          evt.preventDefault();
+          if (!this.isVerticalTablist) {
+            this.switchTabOnKeyPress(evt.key);
+          }
+          break;
+
+        case 'ArrowUp':
+        case 'ArrowDown':
+          evt.preventDefault();
+          if (this.isVerticalTablist) {
+            this.switchTabOnKeyPress(evt.key);
+          }
+          break;
+
+        case 'Home':
+          evt.preventDefault();
+          this.activateTab(this.tabs[0]);
+          break;
+
+        case 'End':
+          evt.preventDefault();
+          this.activateTab(this.tabs[this.tabs.length - 1]);
+          break;
+      }
+    }
+
+    switchTabOnKeyPress(key) {
+      if (key === 'ArrowRight' || key === 'ArrowDown') {
+        if (this.activeTab === this.tabs[this.tabs.length - 1]) {
+          this.activateTab(this.tabs[0]);
+        } else {
+          this.activateTab(this.activeTab.nextElementSibling);
+        }
+      } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+        if (this.activeTab === this.tabs[0]) {
+          this.activateTab(this.tabs[this.tabs.length - 1]);
+        } else {
+          this.activateTab(this.activeTab.previousElementSibling);
+        }
+      }
+    }
+
+    activateTab(tab) {
+      this.deactivateActiveTab();
+
+      Tabs.setTabState(tab, true);
+      tab.removeAttribute('tabindex');
+      this.activeTab = tab;
+
+      const panelId = tab.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId);
+
+      if (panel) {
+        panel.classList.add('fade-in');  // Add animation class
+
+        setTimeout(() => {
+          panel.classList.remove('fade-in');
+        }, 500);
+      }
+
+      if (document.activeElement.matches('.tablist__tab')) {
+        tab.focus();
+      }
+    }
+
+    deactivateActiveTab() {
+      Tabs.setTabState(this.activeTab, false);
+      this.activeTab.setAttribute('tabindex', '-1');
+      this.activeTab = null;
+    }
+
+    static setTabState(tab, active) {
+      tab.setAttribute('aria-selected', active);
+
+      const panelId = tab.getAttribute('aria-controls');
+      const panel = document.getElementById(panelId);
+
+      if (panel) {
+        if (active) {
+          panel.hidden = false;
+        } else {
+          panel.hidden = true;
+        }
+      }
+    }
+
+  }
+
+  customElements.define('tabbed-content', Tabs);
 }
 
 
@@ -1788,7 +1788,7 @@ document.querySelectorAll('.product--spacific--block').forEach(block => {
 
 
 
- class CountdownTimer extends HTMLElement {
+class CountdownTimer extends HTMLElement {
   constructor() {
     super();
     this.interval = null;
@@ -1930,5 +1930,283 @@ document.addEventListener('DOMContentLoaded', () => {
     if (visibleItems >= items.length) {
       button.parentElement.style.display = 'none';
     }
+  });
+});
+
+
+
+
+
+
+
+class PurchaseOptions extends HTMLElement {
+
+  constructor() {
+    super();
+  }
+
+  get radios() {
+    return this.querySelectorAll(".purchase-option");
+  }
+
+  get select() {
+    return this.querySelector("#selling-plan-select");
+  }
+
+  get cards() {
+    return this.querySelectorAll(".purchase-card");
+  }
+
+
+  connectedCallback() {
+
+    this.planData = JSON.parse(
+      document.getElementById("selling-plans-data").textContent
+    );
+
+
+
+    this.addEventListener("change", (event) => {
+
+      if (event.target.matches(".purchase-option")) {
+        this.updatePurchaseOption();
+      }
+
+      if (event.target.matches("#selling-plan-select")) {
+        this.updateSellingPlan();
+      }
+
+    });
+
+
+    // Start observer
+    this.observeSellingPlanInput();
+
+    this.variantChangeUnsubscriber = subscribe(
+      PUB_SUB_EVENTS.variantChange,
+      this.handleVariantChange.bind(this)
+    );
+
+    // Initial UI
+    // this.updateSellingPlan();
+    this.updatePurchaseOption();
+
+  }
+
+
+  handleVariantChange({ data }) {
+
+
+    const productInfo = this.closest("product-info");
+
+    if (!productInfo || productInfo.dataset.section !== data.sectionId) {
+      return;
+    }
+
+    // নতুন plan data
+    const script = this.querySelector("#selling-plans-data");
+
+    if (script) {
+      this.planData = JSON.parse(script.textContent);
+    }
+
+    // UI sync
+    this.updatePurchaseOption();
+
+  }
+
+
+  disconnectedCallback() {
+
+    this.variantChangeUnsubscriber?.();
+
+  }
+
+
+  observeSellingPlanInput() {
+
+    if (this.observer) return;
+
+    this.observer = new MutationObserver(() => {
+
+      const hiddenInput = this.getSellingPlanInput();
+
+      if (!hiddenInput) return;
+
+      this.updateHiddenInput();
+
+    });
+
+    this.observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    // Initial attempt
+    this.updateHiddenInput();
+
+  }
+
+  updateHiddenInput() {
+
+    const hiddenInput = this.getSellingPlanInput();
+
+    if (!hiddenInput) return;
+
+    const checked = this.querySelector(".purchase-option:checked");
+
+    hiddenInput.value =
+      checked && checked.value !== ""
+        ? this.select?.value || checked.value
+        : "";
+
+    hiddenInput.dispatchEvent(
+      new Event("change", {
+        bubbles: true
+      })
+    );
+
+  }
+
+  getSellingPlanInput() {
+
+    // 1. যদি component form-এর ভিতরে থাকে
+    let form = this.closest("form");
+
+    if (form) {
+      return form.querySelector('input[name="selling_plan"]');
+    }
+
+    // 2. একই product section-এর product-form খুঁজুন
+    const section = this.closest(".shopify-section");
+
+    if (section) {
+      form = section.querySelector("product-form form");
+
+      if (form) {
+        return form.querySelector('input[name="selling_plan"]');
+      }
+    }
+
+    // 3. Fallback (শেষ চেষ্টা)
+    form = document.querySelector("product-form form");
+
+    return form?.querySelector('input[name="selling_plan"]');
+  }
+
+  updateSellingPlan() {
+
+    const hiddenInput = this.getSellingPlanInput();
+
+    if (!this.select) return;
+
+
+    // Auto select subscription
+    const subscriptionRadio = this.querySelector(
+      '.purchase-card.subscribe .purchase-option'
+    );
+
+    if (subscriptionRadio) {
+      subscriptionRadio.checked = true;
+    }
+
+    this.cards.forEach(card => card.classList.remove("active"));
+    this.querySelector(".purchase-card.subscribe")?.classList.add("active");
+
+
+    const option = this.select.options[this.select.selectedIndex];
+
+
+    const planId = this.select.value;
+    const plan = this.planData[planId];
+
+    if (!plan) return;
+
+
+    const salePrice = Number(plan.price);
+    const comparePrice = Number(plan.compare_price);
+
+    const save = comparePrice - salePrice;
+    const savePercent = Math.round((save / comparePrice) * 100);
+
+    this.querySelector(".sale-price").textContent =
+      Shopify.formatMoney(salePrice, "${{amount}}");
+
+    this.querySelector(".compare-price").textContent =
+      Shopify.formatMoney(comparePrice, "${{amount}}");
+
+    this.querySelector(".save-badge").textContent =
+      `SAVE ${savePercent}%`;
+
+    this.querySelector(".subscription-save-text").textContent =
+      `Save ${Shopify.formatMoney(save, "${{amount}}")} today and on every shipment`;
+
+
+
+    // Update hidden input
+    this.updateHiddenInput();
+  }
+
+  updatePurchaseOption() {
+
+    const checked = this.querySelector(".purchase-option:checked");
+
+    // Active class
+    this.cards.forEach(card => card.classList.remove("active"));
+
+    if (checked) {
+      checked.closest(".purchase-card").classList.add("active");
+    }
+
+    // Subscription হলে price/updateHiddenInput update হবে
+    if (checked && checked.value !== "") {
+
+      if (this.select) {
+        this.updateSellingPlan();
+      } else {
+        this.updateHiddenInput();
+      }
+
+    } else {
+
+      // One Time Purchase
+      const hiddenInput = this.getSellingPlanInput();
+
+      if (hiddenInput) {
+
+        hiddenInput.value = "";
+
+        hiddenInput.dispatchEvent(
+          new Event("change", {
+            bubbles: true
+          })
+        );
+
+      }
+
+    }
+
+  }
+
+}
+
+customElements.define("purchase-options", PurchaseOptions);
+
+
+const customSelects = document.querySelectorAll('.custom-select');
+
+customSelects.forEach((wrapper) => {
+  const select = wrapper.querySelector('select');
+
+  select.addEventListener('mousedown', () => {
+    wrapper.classList.toggle('open');
+  });
+
+  select.addEventListener('blur', () => {
+    wrapper.classList.remove('open');
+  });
+
+  select.addEventListener('change', () => {
+    wrapper.classList.remove('open');
   });
 });

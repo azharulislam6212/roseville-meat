@@ -60,6 +60,17 @@
             "text_4": ""
           }
         },
+        "variant_picker_wN9KQ6": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "square"
+          }
+        },
+        "subscription_UwFPQQ": {
+          "type": "subscription",
+          "settings": {}
+        },
         "buy_buttons_cmNQyQ": {
           "type": "buy_buttons",
           "settings": {
@@ -73,6 +84,24 @@
             "payment__title": "Payment Accepts",
             "enable_custom_payment_icon": true
           }
+        },
+        "scroll_item_WEXhL3": {
+          "type": "scroll_item",
+          "settings": {
+            "icon_1": "shopify:\/\/shop_images\/Icon_5eaca3cf-a5de-42d4-965d-b89b77581f86.svg",
+            "title_1": "Free Shippping",
+            "icon_2": "shopify:\/\/shop_images\/Icon_1_39ba54a9-7b2b-4d0c-b55b-2468dc82aa6b.svg",
+            "title_2": "Premium Quality",
+            "icon_3": "shopify:\/\/shop_images\/Icon_2_f0d44847-eb27-44bc-ad79-25507a8c9616.svg",
+            "title_3": "Well cut & packed",
+            "icon_4": "shopify:\/\/shop_images\/Icon_3_057dafe1-c2b0-4137-861e-89144547621b.svg",
+            "title_4": "Secure Payment",
+            "title_5": "",
+            "color_scheme": "scheme-2",
+            "speed": "50",
+            "moving_direction": "animation-direction",
+            "pause_when_hover": false
+          }
         }
       },
       "block_order": [
@@ -84,8 +113,11 @@
         "inventory_37E8WQ",
         "feaured_list_text_Dm6GcF",
         "icon_with_text_apRKUb",
+        "variant_picker_wN9KQ6",
+        "subscription_UwFPQQ",
         "buy_buttons_cmNQyQ",
-        "payement_secure_ExAFGb"
+        "payement_secure_ExAFGb",
+        "scroll_item_WEXhL3"
       ],
       "settings": {
         "page_width": "container-fluid",
@@ -99,7 +131,7 @@
         "partial_slide": false,
         "enable_navigation": true,
         "enable_mobile_thumbs": false,
-        "enable_sticky_info": true,
+        "enable_sticky_info": false,
         "enable_sticky_gallery": true,
         "color_accent": "#ff0000",
         "color_scheme": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
@@ -555,7 +587,7 @@
       "name": "Icon card carousel",
       "settings": {
         "enable_divider": true,
-        "divider_color": "#DDDCD5",
+        "divider_color": "#dddcd5",
         "page_width": "container-fluid",
         "heading": "Storage & Freshness",
         "heading_size": "h1",
@@ -582,19 +614,34 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "page_width": "container-fluid",
+        "pre_text": "Others Products",
+        "heading": "Related Products",
         "heading_size": "h1",
         "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
+        "column": "4",
+        "column_medium": "3",
+        "column_mobile": "1",
+        "color_accent": "#ff0000",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
-        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": true,
-        "padding_top": 36,
-        "padding_bottom": 28
+        "quick_add": "standard",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "faq_page_section_NPFNyE": {

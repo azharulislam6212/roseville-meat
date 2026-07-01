@@ -106,7 +106,7 @@ if (!customElements.get('product-form')) {
             this.submitButton.classList.remove('loading');
             if (this.cart && this.cart.classList.contains('is-empty')) this.cart.classList.remove('is-empty');
             if (!this.error) this.submitButton.removeAttribute('aria-disabled');
-            this.submitButto.querySelector('.loading__spinner').classList.add('hidden');
+            this.submitButton.querySelector('.loading__spinner').classList.add('hidden');
 
             CartPerformance.measureFromEvent("add:user-action", evt);
           });

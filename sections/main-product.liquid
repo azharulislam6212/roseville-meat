@@ -5,6 +5,7 @@
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+{{ 'marquee.css' | asset_url | stylesheet_tag }}
 
 {% unless product.has_only_default_variant %}
   {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -423,6 +424,223 @@
                     </span>
                   </div>
 
+                {%- when 'subscription' -%}
+
+           
+   
+                  <purchase-options  id="purchase-options-{{ section.id }}" >
+
+                     {% assign current_variant = product.selected_or_first_available_variant %}
+
+                      <!-- Subscription -->
+                    {% if current_variant.selling_plan_allocations.size > 0 %}
+ 
+                  <div class="purchase-wrapper">
+
+                    <!-- One Time Purchase -->
+                    {% unless product.requires_selling_plan %}
+                    <label class="purchase-card one-time active">
+                      <div class="purchase-header">
+                        <div class="left radio-label">
+                          <input
+                            type="radio"
+                            name="purchase_option"
+                            value=""
+                            checked
+                            class="purchase-option"
+                          >
+                          <span>One Time Purchase</span>
+                        </div>
+
+                        <div class="right">
+                          <strong>{{ current_variant.price | money }}</strong>
+                        </div>
+                      </div>
+                    </label>
+                    {% endunless %}
+
+                   
+                      {% assign allocation = current_variant.selling_plan_allocations.first %}
+                      {% assign plan_group = product.selling_plan_groups.first %}
+
+                      {% assign save = current_variant.price | minus: allocation.price %}
+                      {% assign save_percent = save | times: 100 | divided_by: current_variant.price %}
+
+                      <div class="subscription-box">
+
+                      
+
+                        <label class="purchase-card subscribe">
+
+                          <span class="most-chosen">
+                          MOST CHOSEN
+                        </span>
+
+                          <div class="purchase-header">
+
+                            <div class="left radio-label">
+
+                              <input
+                                type="radio"
+                                name="purchase_option"
+                                value="{{ allocation.selling_plan.id }}"
+                                class="purchase-option"
+                              >
+
+                              <div>
+
+                                <div class="title-row">
+
+                                  <h4>{{ plan_group.name }}</h4>
+
+                                  <span class="save-badge">
+                                    SAVE {{ save_percent }}%
+                                  </span>
+
+                                </div>
+
+                                <p class="subscription-save-text">
+                                  Save {{ save | money }} today and on every shipment
+                                </p>
+
+                              </div>
+
+                            </div>
+
+                            <div class="price">
+
+                              <div class="sale-price">
+                                {{ allocation.price | money }}
+                              </div>
+
+                              <div class="compare-price">
+                                {{ current_variant.price | money }}
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                          <!-- Delivery -->
+
+                          <div class="delivery-row">
+ 
+
+
+                             <label for="selling-plan-select">Deliver Every</label>
+                                        
+
+                             <div class="custom-select">
+
+                            
+                            <select id="selling-plan-select">
+
+                              {% for allocation in current_variant.selling_plan_allocations %}
+
+                                {% assign save = current_variant.price | minus: allocation.price %}
+                                {% assign save_percent = save | times: 100 | divided_by: current_variant.price %}
+
+                                <option
+                                  value="{{ allocation.selling_plan.id }}"
+                                  data-price="{{ allocation.price | money }}"
+                                  data-price-raw="{{ allocation.price }}"
+                                  data-compare="{{ current_variant.price | money }}"
+                                  data-compare-raw="{{ current_variant.price }}"
+                                  data-save="{{ save | money }}"
+                                  data-save-percent="{{ save_percent }}"
+                                >
+                                  {{ allocation.selling_plan.name }}
+                                </option>
+
+                              {% endfor %}
+
+                            </select>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.354 6.35378L8.35403 11.3538C8.30759 11.4003 8.25245 11.4372 8.19175 11.4623C8.13105 11.4875 8.06599 11.5004 8.00028 11.5004C7.93457 11.5004 7.86951 11.4875 7.80881 11.4623C7.74811 11.4372 7.69296 11.4003 7.64653 11.3538L2.64653 6.35378C2.55271 6.25996 2.5 6.13272 2.5 6.00003C2.5 5.86735 2.55271 5.7401 2.64653 5.64628C2.74035 5.55246 2.8676 5.49976 3.00028 5.49976C3.13296 5.49976 3.26021 5.55246 3.35403 5.64628L8.00028 10.2932L12.6465 5.64628C12.693 5.59983 12.7481 5.56298 12.8088 5.53784C12.8695 5.5127 12.9346 5.49976 13.0003 5.49976C13.066 5.49976 13.131 5.5127 13.1917 5.53784C13.2524 5.56298 13.3076 5.59983 13.354 5.64628C13.4005 5.69274 13.4373 5.74789 13.4625 5.80859C13.4876 5.86928 13.5006 5.93434 13.5006 6.00003C13.5006 6.06573 13.4876 6.13079 13.4625 6.19148C13.4373 6.25218 13.4005 6.30733 13.354 6.35378Z" fill="#1C1B18"/>
+                              </svg>
+
+                              </div>
+
+                          </div>
+
+                          <!-- Benefits -->
+
+                          <div class="benefits">
+
+                            <ul>
+                              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="16" height="16" rx="8" fill="#928469"/>
+                            <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
+                            </svg>
+                            Skip or cancel anytime
+                            </li>
+
+                            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="16" height="16" rx="8" fill="#928469"/>
+                              <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
+                              </svg>
+                              Access to VIP support
+                              </li>
+
+                            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="16" height="16" rx="8" fill="#928469"/>
+                              <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
+                              </svg>
+                              15% off every order
+                              </li>
+
+                            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect width="16" height="16" rx="8" fill="#928469"/>
+                          <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
+                          </svg>
+                          Free U.S. shipping
+                          </li>
+
+                            </ul>
+                          </div>
+
+                          <!-- Description -->
+
+                          <p class="seling-plan-description">
+                            Easily cancel or skip your future subscription orders through your account four days prior to shipment.
+                            <a href="#">View Details</a>
+                          </p>
+
+                        </label>
+
+                      </div>
+
+                 
+
+                  </div>
+
+          <script type="application/json" id="selling-plans-data">
+          {
+          {% assign current_variant = product.selected_or_first_available_variant %}
+
+          {% for allocation in current_variant.selling_plan_allocations %}
+            "{{ allocation.selling_plan.id }}": {
+              "price": {{ allocation.price }},
+              "compare_price": {{ current_variant.price }}
+            }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+          }
+          </script>
+
+             {% endif %}
+
+          </purchase-options>
+
+
+
+      {%- style -%}
+        .sealsubs-target-element.sealsubs-full[data-seal-ac], .sealsubs-target-element.sealsubs-full[data-seal-in] {
+          display: none !important;
+      }
+      {%- endstyle -%}
+      
+
+
                 {%- when 'payement_secure' -%}
                   <div class="payement_secure_wrapp">
                     {% if shop.enabled_payment_types != blank and block.settings.enable_custom_payment_icon == false %}
@@ -503,9 +721,13 @@
                             {{- 'products.product.inventory_low_stock' | t -}}
                           {%- endif -%}
                         {%- else -%}
+
+                          
                           <span class="green-dot">
                             {{- 'icon-inventory-status.svg' | inline_asset_content -}}
                           </span>
+
+
                           {%- if block.settings.show_inventory_quantity -%}
                             {{-
                               'products.product.inventory_in_stock_show_count'
@@ -514,6 +736,8 @@
                           {%- else -%}
                             {{- 'products.product.inventory_in_stock' | t -}}
                           {%- endif -%}
+                         
+
 
                           {% assign stock = product.selected_or_first_available_variant.inventory_quantity %}
 
@@ -860,8 +1084,207 @@
                     render 'share-button', block: block, share_link: share_url
                   %}
 
-                {%- when 'siblings' -%}
-                  {% render 'product-siblings', product: product, uniq_id: product_form_id, block: block %}
+                {%- when 'review' -%}
+                   <div class="review-slider"  {{ block.shopify_attributes }}>
+                   
+                    <slideshow-swiper>
+
+                      <div
+                          class="slideshow__swiper swiper"
+                          data-centeredslides="false"
+                          data-slidesDesktop="1"
+                          data-slidesTab="1"
+                          data-slidesMobile="1"
+                          data-autoPlay="true"
+                          data-delay="6000"
+                          data-loop="false"
+                          data-freemode="false"
+                          data-freemomentum="false"
+                          data-mousewheel="false"
+                          data-desktopspace="10"
+                          data-tabspace="10"
+                          data-mobilespace="10"
+                        >
+
+
+                                    <div class="swiper-wrapper">
+
+                                          {% for i in (1..5) %}
+
+                                              {% capture name %}review_name_{{ i }}{% endcapture %}
+                                              {% capture date %}review_date_{{ i }}{% endcapture %}
+                                              {% capture rating %}review_rating_{{ i }}{% endcapture %}
+                                              {% capture text %}review_text_{{ i }}{% endcapture %}
+
+                                              {% if block.settings[name] != blank %}
+
+                                                  <div class="swiper-slide">
+
+                                                      <div class="review-card">
+
+                                                          <div class="review-header">
+
+                                                          <div class="review-header__inner">
+
+                                                        
+                                                              <div class="review-author">
+
+                                                                  <span>{{ block.settings[name] }}</span>
+
+                                                                    <span class="verified-icon">
+                                                                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M11.4767 4.74797C11.2705 4.5325 11.0573 4.31047 10.9769 4.11523C10.9025 3.93641 10.8981 3.64 10.8937 3.35289C10.8855 2.81914 10.8768 2.2143 10.4562 1.79375C10.0357 1.3732 9.43086 1.36445 8.89711 1.35625C8.61 1.35187 8.31359 1.3475 8.13477 1.27312C7.94008 1.19273 7.7175 0.979453 7.50203 0.773281C7.12469 0.410703 6.69594 0 6.125 0C5.55406 0 5.12586 0.410703 4.74797 0.773281C4.5325 0.979453 4.31047 1.19273 4.11523 1.27312C3.9375 1.3475 3.64 1.35187 3.35289 1.35625C2.81914 1.36445 2.2143 1.3732 1.79375 1.79375C1.3732 2.2143 1.36719 2.81914 1.35625 3.35289C1.35187 3.64 1.3475 3.93641 1.27312 4.11523C1.19273 4.30992 0.979453 4.5325 0.773281 4.74797C0.410703 5.12531 0 5.55406 0 6.125C0 6.69594 0.410703 7.12414 0.773281 7.50203C0.979453 7.7175 1.19273 7.93953 1.27312 8.13477C1.3475 8.31359 1.35187 8.61 1.35625 8.89711C1.36445 9.43086 1.3732 10.0357 1.79375 10.4562C2.2143 10.8768 2.81914 10.8855 3.35289 10.8937C3.64 10.8981 3.93641 10.9025 4.11523 10.9769C4.30992 11.0573 4.5325 11.2705 4.74797 11.4767C5.12531 11.8393 5.55406 12.25 6.125 12.25C6.69594 12.25 7.12414 11.8393 7.50203 11.4767C7.7175 11.2705 7.93953 11.0573 8.13477 10.9769C8.31359 10.9025 8.61 10.8981 8.89711 10.8937C9.43086 10.8855 10.0357 10.8768 10.4562 10.4562C10.8768 10.0357 10.8855 9.43086 10.8937 8.89711C10.8981 8.61 10.9025 8.31359 10.9769 8.13477C11.0573 7.94008 11.2705 7.7175 11.4767 7.50203C11.8393 7.12469 12.25 6.69594 12.25 6.125C12.25 5.55406 11.8393 5.12586 11.4767 4.74797ZM8.62203 5.12203L5.55953 8.18453C5.5189 8.22521 5.47065 8.25748 5.41754 8.2795C5.36442 8.30151 5.30749 8.31284 5.25 8.31284C5.19251 8.31284 5.13558 8.30151 5.08246 8.2795C5.02935 8.25748 4.9811 8.22521 4.94047 8.18453L3.62797 6.87203C3.54588 6.78994 3.49976 6.6786 3.49976 6.5625C3.49976 6.4464 3.54588 6.33506 3.62797 6.25297C3.71006 6.17088 3.8214 6.12476 3.9375 6.12476C4.0536 6.12476 4.16494 6.17088 4.24703 6.25297L5.25 7.25648L8.00297 4.50297C8.04362 4.46232 8.09187 4.43008 8.14498 4.40808C8.19809 4.38608 8.25501 4.37476 8.3125 4.37476C8.36999 4.37476 8.42691 4.38608 8.48002 4.40808C8.53313 4.43008 8.58138 4.46232 8.62203 4.50297C8.66268 4.54362 8.69492 4.59187 8.71692 4.64498C8.73892 4.69809 8.75024 4.75501 8.75024 4.8125C8.75024 4.86999 8.73892 4.92691 8.71692 4.98002C8.69492 5.03313 8.66268 5.08138 8.62203 5.12203Z" fill="#20B56D"/>
+                                                                        </svg>
+
+                                                                  </span>
+
+                                                              </div>
+
+                                                                <div class="review-stars">
+
+                                                              {% for star in (1..5) %}
+                                                                  {% if star <= block.settings[rating] %}
+                                                                        <span class="star">
+                                                                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M14.6431 7.17815L11.8306 9.60502L12.6875 13.2344C12.7347 13.4314 12.7226 13.638 12.6525 13.8281C12.5824 14.0182 12.4575 14.1833 12.2937 14.3025C12.1298 14.4217 11.9343 14.4896 11.7319 14.4977C11.5294 14.5059 11.3291 14.4538 11.1562 14.3481L7.99996 12.4056L4.84184 14.3481C4.66898 14.4532 4.4689 14.5048 4.2668 14.4963C4.06469 14.4879 3.8696 14.4199 3.70609 14.3008C3.54257 14.1817 3.41795 14.0169 3.3479 13.8272C3.27786 13.6374 3.26553 13.4312 3.31246 13.2344L4.17246 9.60502L1.35996 7.17815C1.20702 7.04596 1.09641 6.87166 1.04195 6.67699C0.987486 6.48232 0.99158 6.27592 1.05372 6.08356C1.11586 5.89121 1.23329 5.72142 1.39135 5.59541C1.54941 5.4694 1.7411 5.39274 1.94246 5.37502L5.62996 5.07752L7.05246 1.63502C7.12946 1.44741 7.26051 1.28693 7.42894 1.17398C7.59738 1.06104 7.7956 1.00073 7.9984 1.00073C8.2012 1.00073 8.39942 1.06104 8.56785 1.17398C8.73629 1.28693 8.86734 1.44741 8.94434 1.63502L10.3662 5.07752L14.0537 5.37502C14.2555 5.39208 14.4477 5.46831 14.6064 5.59415C14.765 5.71999 14.883 5.88984 14.9455 6.08243C15.008 6.27502 15.0123 6.48178 14.9579 6.6768C14.9034 6.87182 14.7926 7.04644 14.6393 7.17877L14.6431 7.17815Z" fill="#FFA500"/>
+                                                                  </svg>
+                                                                </span>
+                                                                  {% endif %}
+                                                              {% endfor %}
+
+                                                          </div>
+
+                                                            </div>
+
+                                                              <div class="review-date">
+                                                                  {{ block.settings[date] }}
+                                                              </div>
+
+                                                          </div>
+
+                                                        
+
+                                                          <div class="review-content">
+                                                          <p>
+                                                              {{ block.settings[text] }}
+                                                          </p>
+                                                              </div>
+
+                                                        
+
+                                                      </div>
+
+                                                  </div>
+
+                                              {% endif %}
+
+                                          {% endfor %}
+
+                                      </div>
+
+                            <div class="pagination-wrap  color-{{ block.settings.color_scheme_swiper }}">
+                              <div class="swiper-pagination"></div>
+                            </div>
+                                  
+
+                                  </div>
+                                            
+                    </slideshow-swiper>   
+                      </div>    
+                                    
+
+                {%- when 'pickup_details' -%}
+
+                  
+
+                  <div class="pickup-container"  {{ block.shopify_attributes }}>
+
+                      <label class="option active">
+                          <input type="checkbox" checked>
+                          <span class="checkmark"></span>
+
+                          <div class="content">
+                              <h4>{{ block.settings.title_1 }}</h4>
+                              <p>{{ block.settings.text_1 }}</p>
+                          </div>
+                      </label>
+
+                      <label class="option">
+                          <input type="checkbox">
+                          <span class="checkmark"></span>
+
+                          <div class="content">
+                              <h4>{{ block.settings.title_2 }}</h4>
+                              <p>{{ block.settings.text_2 }}</p>
+                          </div>
+                      </label>
+
+                  </div>
+
+
+
+                {%- when 'scroll_item' -%}
+
+                      <div class="scroll-wrapper running-content marquee color-{{ block.settings.color_scheme }} gradient" {{ block.shopify_attributes }}>
+
+                          <marquee-content
+                            data-speed="{{ block.settings.speed }}"
+                            class="running-content-wrap"
+                            style="--marquee-duration: {{ 1000 | divided_by: block.settings.speed }}s;"
+                          >
+
+                            {%- capture marquee_item -%}
+                          {% for i in (1..5) %}
+
+                            
+                                {%- capture icon_c -%}icon_{{ i }}{%- endcapture -%}
+                                  {%- capture title_c -%}title_{{ i }}{%- endcapture -%}
+                                  {%- liquid
+                                    assign icon = block.settings[icon_c] 
+                                    assign title = block.settings[title_c] 
+                                  %}
+
+          
+                                        {% if icon != blank and title != blank %}
+                              <div class="running-content-item running-content-text scroll-item"  >
+
+
+
+                                        {% if icon != blank %}
+                                          <div class="scroll__icon">
+                                            {% render 'icon-img' with image: icon %}
+                                          </div>
+                                        {% endif %}
+
+                                        <div class="scroller__text">
+                                          {% if title != blank %}
+                                            <span class="scroller__title">{{title }}</span>
+                                          {% endif %}
+                                      </div>
+                          
+                              </div>
+
+                    {% endif %}
+                          {% endfor %}
+                      {%- endcapture -%}
+
+                      <div class="marquee-container js-marquee-items {{ block.settings.pause_when_hover | default: '' | replace: 'true', 'marquee--animation-pause' }}">
+
+                      {%- for i in (1..3) -%}
+                          <div class="js-marquee-item marquee-item  marquee__items--animate  marquee--{{- block.settings.moving_direction }}">
+                            {{- marquee_item -}}
+                          </div>
+                        {%- endfor -%}
+
+                      </div>
+
+
+                          </marquee-content>
+                      </div>
+
+
+                  
+                
                 {%- when 'variant_picker' -%}
                   {% render 'product-variant-picker',
                     product: product,
@@ -914,180 +1337,45 @@
                       </p>
                     </div>
                   {%- endif -%}
-                {%- when 'complementary_bundles' -%}
-                  {% assign product_form_id = 'quick-add-' | append: section.id %}
-                  <complementary-products
-                    class="complementary-products-bundles"
-                    data-url="{{ routes.product_recommendations_url }}?limit={{ block.settings.product_list_limit }}&intent=complementary"
-                    data-section-id="{{ section.id }}"
-                    data-product-id="{{ product.id }}"
-                    data-currency="{{ shop.currency }}"
-                  >
-                    {%- if recommendations.performed and recommendations.products_count > 0 -%}
-                      <product-form data-section-id="{{ section.id }}">
-                        {%- form 'product',
-                          product,
-                          id: product_form_id,
-                          class: 'form',
-                          novalidate: 'novalidate',
-                          data-type: 'add-to-cart-form'
-                        -%}
-                          <div class="complementary-bundle__container">
-                            {% assign total_price = 0 %}
 
-                            {% if block.settings.block_heading %}
-                              <h2 class="complementary-bundle__title">{{ block.settings.block_heading }}</h2>
-                            {% endif %}
 
-                            <div class="complementary-bundle__inner">
-                              {% for product in recommendations.products %}
-                                {% assign variant = product.selected_or_first_available_variant %}
-                                <div
-                                  class="complementary-item"
-                                  data-product-id="{{ product.id }}"
-                                  data-product-price="{{ product.price }}"
-                                >
-                                  {% if product.featured_image != blank %}
-                                    <div class="comp-item-image">
-                                      {% render 'responsive-img' with image: product.featured_image %}
-                                    </div>
-                                  {% endif %}
+                {%- when 'bundles_products' -%}
 
-                                  <div class="comp-item-info">
-                                    <p class="comp-item-title">
-                                      <a href="{{ product.url }}">{{ product.title }}</a>
-                                    </p>
+             
+                  {% assign bundles_products = product.metafields.custom.bundles_products.value %}
 
-                                    <!-- Price with compare -->
-                                    <p class="comp-item-price">
-                                      {% if product.compare_at_price > product.price %}
-                                        <span class="orginal-price">{{ product.price | money }}</span>
-                                        <span class="sale-price">{{ product.compare_at_price | money }}</span>
-                                      {% else %}
-                                        <span class="orginal-price">{{ product.price | money }}</span>
-                                      {% endif %}
-                                    </p>
+                  {% if bundles_products != blank %}
+                    <div class="bundles-products">
+                      {% if block.settings.title != blank %}
+                        <h2 class="bundles-products__title">{{ block.settings.title }}</h2>
+                      {% endif %}
 
-                                    <!-- Variant dropdown (only Size option) -->
-                                    {% unless product.has_only_default_variant %}
-                                      {% assign size_index = -1 %}
-                                      {% for option in product.options %}
-                                        {% if option == 'Ring size' %}
-                                          {% assign size_index = forloop.index0 %}
-                                        {% endif %}
-                                      {% endfor %}
+                      <div class="bundles-products__wrapper">
+                        {% for bundle_product in bundles_products %}
+                      
+                            {% render "bundle-product" , bundle_product:  bundle_product, section_id:  section.id %}
 
-                                      {% if size_index != -1 %}
-                                        <div class="dropdown option-size">
-                                          <span class="sub-title">Size: </span>
-                                          <select class="comp-size-selector">
-                                            {% for variant in product.variants %}
-                                              {% assign value = variant.options[size_index] %}
-                                              {% if variant.available %}
-                                                <option
-                                                  value="{{ variant.id }}"
-                                                  data-price="{{ variant.price }}"
-                                                  data-compare="{{ variant.compare_at_price }}"
-                                                >
-                                                  {{ value }}
-                                                </option>
-                                              {% endif %}
-                                            {% endfor %}
-                                          </select>
-                                        </div>
-                                      {% endif %}
-                                    {% endunless %}
 
-                                    <!-- Hidden input for selected variant -->
-                                    <input
-                                      type="hidden"
-                                      name="id[]"
-                                      value="{{ product.variants.first.id }}"
-                                      class="product-variant-id"
-                                    >
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endif %}
 
-                                    <!-- Product JSON -->
-                                    <script type="application/json" class="complementary-product-selection">
-                                      {{ product | json }}
-                                    </script>
-                                  </div>
-
-                                  {% assign total_price = total_price | plus: product.price %}
-                                </div>
-                              {% endfor %}
-                            </div>
-
-                            <div class="complementary-total">
-                              <span>Total:</span>
-                              <span>{{ total_price | money }}</span>
-                            </div>
-                            <button
-                              id="{{ product_form_id }}-submit"
-                              type="submit"
-                              name="add"
-                              class="button button--add-cart button--full-width button--primary"
-                              aria-haspopup="dialog"
-                              aria-labelledby="{{ product_form_id }}-submit"
-                              aria-live="polite"
-                              data-sold-out-message="true"
-                              {% if product.selected_or_first_available_variant.available == false %}
-                                disabled
-                              {% endif %}
-                            >
-                              <span class="cart-text">
-                                {%- if product.selected_or_first_available_variant.available -%}
-                                  {{ 'products.product.add_to_cart' | t }}
-                                {%- else -%}
-                                  {{ 'products.product.sold_out' | t }}
-                                {%- endif -%}
-                              </span>
-
-                              <span class="sold-out-message hidden">
-                                {{ 'products.product.sold_out' | t }}
-                              </span>
-
-                              {%- render 'loading-spinner' -%}
-                            </button>
-                          </div>
-                        {%- endform -%}
-                      </product-form>
-                    {%- endif -%}
-                  </complementary-products>
+                 
 
                 {%- when 'complementary' -%}
+
+ 
                   <product-recommendations
                     class="complementary-products quick-add-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
                     data-url="{{ routes.product_recommendations_url }}?limit={{ block.settings.product_list_limit }}&intent=complementary"
                     data-section-id="{{ section.id }}"
                     data-product-id="{{ product.id }}"
                   >
+ 
                     {%- if recommendations.performed and recommendations.products_count > 0 -%}
-                      <aside
-                        aria-label="{{ 'accessibility.complementary_products' | t }}"
-                        {{ block.shopify_attributes -}}
-                        {% if block.settings.make_collapsible_row %}
-                          class="product__accordion accordion"
-                        {% endif %}
-                      >
-                        <div class="complementary-products__container">
-                          {%- if block.settings.make_collapsible_row -%}
-                            <details id="Details-{{ block.id }}-{{ section.id }}" open>
-                              <summary>
-                          {%- endif %}
-                          <div class="summary__title">
-                            {%- if block.settings.make_collapsible_row -%}
-                              {% render 'icon-accordion', icon: block.settings.icon %}
-                              <h2 class="h4 accordion__title">{{ block.settings.block_heading }}</h2>
-                            {%- else -%}
-                              <h2 class="h3 accordion__title">{{ block.settings.block_heading }}</h2>
-                            {%- endif -%}
-                          </div>
-                          {%- if block.settings.make_collapsible_row -%}
-                            {{- 'icon-caret.svg' | inline_asset_content -}}
-                            </summary>
-                          {%- endif -%}
 
-                          {% liquid
+                       {% liquid
                             assign enable_pagination = block.settings.enable_pagination
                             assign enable_navigation = block.settings.enable_navigation
                             assign enable_scroll = block.settings.enable_scroll
@@ -1097,7 +1385,49 @@
                             assign freemode = false
                           %}
 
-                          <slideshow-swiper>
+
+                      <aside
+                        aria-label="{{ 'accessibility.complementary_products' | t }}"
+                        {{ block.shopify_attributes -}}
+                        {% if block.settings.make_collapsible_row %}
+                          class="product__accordion accordion"
+                        {% endif %}
+                      >
+                         <slideshow-swiper> 
+                        <div class="complementary-products__container">
+                          {%- if block.settings.make_collapsible_row -%}
+                            <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                              <summary>
+                          {%- endif %}
+                          <div class="summary__title">
+                            
+
+                          <div class="accordion-header-inner">
+                            {%- if block.settings.make_collapsible_row -%}
+                              {% render 'icon-accordion', icon: block.settings.icon %}
+                              <h2 class="h4 accordion__title">{{ block.settings.block_heading }}</h2>
+                            {%- else -%}
+                              <h2 class="h3 accordion__title">{{ block.settings.block_heading }}</h2>
+                            {%- endif -%}
+                          </div>
+
+
+                             {% if enable_pagination %}
+                                  <div class="pagination-wrap color-{{ section.settings.color_scheme_swiper }}">
+                                    <div class="swiper-pagination"></div>
+                                  </div>
+                                {% endif %}
+
+
+                          </div>
+                          {%- if block.settings.make_collapsible_row -%}
+                            {{- 'icon-caret.svg' | inline_asset_content -}}
+                            </summary>
+                          {%- endif -%}
+
+                         
+
+                          
                             {%- assign number_of_slides = recommendations.products_count
                               | plus: 0.0
                               | divided_by: block.settings.products_per_page
@@ -1121,9 +1451,9 @@
                                 role="group"
 
                                 data-centeredslides="false"
-                                data-slidesDesktop="1.50"
-                                data-slidesTab="1.45"
-                                data-slidesMobile="1.35"
+                                data-slidesDesktop="3"
+                                data-slidesTab="2"
+                                data-slidesMobile="1.75"
                                 data-autoPlay="{{ autoplay }}"
                                 data-delay="{{ delay }}"
                                 data-loop="{{ loop }}"
@@ -1162,8 +1492,8 @@
                                         quick_add: quick_add,
                                         add_button_style: 'text',
                                         section_id: section.id,
-                                        horizontal_class: true,
-                                        horizontal_quick_add: true,
+                                        horizontal_class: false,
+                                        horizontal_quick_add: false,
                                         badge: false,
                                         siblings: false
                                       %}
@@ -1200,11 +1530,7 @@
                                     </div>
                                   </div>
                                 {% endif %}
-                                {% if enable_pagination %}
-                                  <div class="pagination-wrap color-{{ section.settings.color_scheme_swiper }}">
-                                    <div class="swiper-pagination"></div>
-                                  </div>
-                                {% endif %}
+                               
 
                                 {% if enable_scroll %}
                                   <div class="scrollbar-wrap color-{{ section.settings.color_scheme_swiper }}">
@@ -1213,12 +1539,15 @@
                                 {% endif %}
                               </div>
                             </div>
-                          </slideshow-swiper>
+                       
 
                           {%- if block.settings.make_collapsible_row -%}
                             </details>
                           {%- endif -%}
                         </div>
+                        </slideshow-swiper>
+
+
                       </aside>
                     {%- endif -%}
                     {{ 'component-card.css' | asset_url | stylesheet_tag }}
@@ -1514,6 +1843,207 @@
       ]
     },
     {
+      "type": "review",
+      "name": "Customer review",
+      "settings": [
+    {
+      "type": "header",
+      "content": "Review 1"
+    },
+    {
+      "type": "text",
+      "id": "review_name_1",
+      "label": "Name",
+      "default": "Chaise"
+    },
+    {
+      "type": "text",
+      "id": "review_date_1",
+      "label": "Date",
+      "default": "Jan 2026"
+    },
+    {
+      "type": "range",
+      "id": "review_rating_1",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_text_1",
+      "label": "Review",
+      "default": "Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing."
+    },
+
+    {
+      "type": "header",
+      "content": "Review 2"
+    },
+    {
+      "type": "text",
+      "id": "review_name_2",
+      "label": "Name",
+      "default": "Michael"
+    },
+    {
+      "type": "text",
+      "id": "review_date_2",
+      "label": "Date",
+      "default": "Dec 2025"
+    },
+    {
+      "type": "range",
+      "id": "review_rating_2",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_text_2",
+      "label": "Review",
+      "default": "Amazing quality and fast shipping. Everything arrived exactly as expected."
+    },
+
+    {
+      "type": "header",
+      "content": "Review 3"
+    },
+    {
+      "type": "text",
+      "id": "review_name_3",
+      "label": "Name",
+      "default": "Sarah"
+    },
+    {
+      "type": "text",
+      "id": "review_date_3",
+      "label": "Date",
+      "default": "Nov 2025"
+    },
+    {
+      "type": "range",
+      "id": "review_rating_3",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_text_3",
+      "label": "Review",
+      "default": "Excellent customer service. Highly recommend this company to anyone."
+    },
+
+    {
+      "type": "header",
+      "content": "Review 4"
+    },
+    {
+      "type": "text",
+      "id": "review_name_4",
+      "label": "Name",
+      "default": "James"
+    },
+    {
+      "type": "text",
+      "id": "review_date_4",
+      "label": "Date",
+      "default": "Oct 2025"
+    },
+    {
+      "type": "range",
+      "id": "review_rating_4",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_text_4",
+      "label": "Review",
+      "default": "Super fresh products and fantastic communication from start to finish."
+    },
+
+    {
+      "type": "header",
+      "content": "Review 5"
+    },
+    {
+      "type": "text",
+      "id": "review_name_5",
+      "label": "Name",
+      "default": "Emma"
+    },
+    {
+      "type": "text",
+      "id": "review_date_5",
+      "label": "Date",
+      "default": "Sep 2025"
+    },
+    {
+      "type": "range",
+      "id": "review_rating_5",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "review_text_5",
+      "label": "Review",
+      "default": "Couldn't be happier with my purchase. Will definitely order again!"
+    },
+      {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-2"
+    }
+      ]
+    },
+    {
+      "type": "pickup_details",
+      "name": "Pickup Details",
+      "settings": [
+          {
+          "type": "text",
+          "id": "title_1",
+          "default": "Store Pickup available",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_1",
+          "default": "Usually ready in 24 hours",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+             {
+          "type": "text",
+          "id": "title_2",
+          "default": "Order By Phone",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_2",
+          "default": "Usually ready in 24 hours. Call Us",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
       "type": "shipping",
       "name": "Shipping Info",
       "settings": [
@@ -1699,6 +2229,119 @@
       ]
     },
     {
+      "type": "scroll_item",
+      "name": "Scrol Icons Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_1",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "Title",
+          "default": "Free Shippping"
+        },
+          {
+          "type": "image_picker",
+          "id": "icon_2",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "Title",
+          "default": "Free Shippping"
+        },
+                 {
+          "type": "image_picker",
+          "id": "icon_3",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Title",
+          "default": "Free Shippping"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_4",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "title_4",
+          "label": "Title",
+          "default": "Free Shippping"
+        },
+                {
+          "type": "image_picker",
+          "id": "icon_5",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "title_5",
+          "label": "Title",
+          "default": "Free Shippping"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        },
+            {
+      "type": "select",
+      "id": "speed",
+      "label": "Speed",
+      "default": "50",
+      "options": [
+        {
+          "value": "50",
+          "label": "50"
+        },
+        {
+          "value": "100",
+          "label": "100"
+        },
+        {
+          "value": "150",
+          "label": "150"
+        },
+        {
+          "value": "200",
+          "label": "200"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Movine Direction",
+      "id": "moving_direction",
+      "options": [
+        {
+          "value": "animation-direction",
+          "label": "animation-direction"
+        },
+        {
+          "value": "animation-reverse",
+          "label": "animation-reverse"
+        }
+      ],
+      "default": "animation-direction"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_when_hover",
+      "label": "Pause On Hover",
+      "default": false
+    }
+      ]
+    },
+    {
       "type": "inventory",
       "name": "t:sections.main-product.blocks.inventory.name",
       "limit": 1,
@@ -1746,50 +2389,9 @@
       "limit": 1
     },
     {
-      "type": "siblings",
-      "name": "Siblings",
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "Siblings allow you to split colors into separate products. [Learn more](https://groupthought.com/link/pipeline/docs/siblings)"
-        },
-        {
-          "type": "text",
-          "id": "siblings_collection",
-          "label": "Product siblings collection handle",
-          "info": "Use a metafield containing a collection handle for color siblings.  The collection should contain all color options as unique products."
-        },
-        {
-          "type": "text",
-          "id": "cutline",
-          "label": "Product color metafield",
-          "info": "Use a single line text metafield called 'theme.cutline' for product color."
-        },
-        {
-          "type": "range",
-          "id": "option_size_sibling",
-          "min": 20,
-          "max": 120,
-          "step": 2,
-          "unit": "px",
-          "label": "Sibling size",
-          "default": 50
-        },
-        {
-          "type": "header",
-          "content": "Block spacing"
-        },
-        {
-          "type": "range",
-          "id": "padding_bottom",
-          "min": 0,
-          "max": 100,
-          "step": 2,
-          "unit": "px",
-          "label": "Padding bottom",
-          "default": 20
-        }
-      ]
+      "type": "subscription",
+      "name": "Subscription",
+      "limit": 1
     },
     {
       "type": "variant_picker",
@@ -2428,48 +3030,19 @@
       ]
     },
     {
-      "type": "complementary_bundles",
-      "name": "Complementary Bundles",
+      "type": "bundles_products",
+      "name": "Bundles Products",
       "limit": 1,
       "settings": [
-        {
+          {
           "type": "paragraph",
-          "content": "t:sections.main-product.blocks.complementary_products.settings.paragraph.content"
+          "content": "Products comers from meta field option [bundles_products]. Please add meta field to your product with namespace and key as bundles_products and value as product handles separated by comma."
         },
         {
           "type": "text",
-          "id": "block_heading",
-          "default": "t:sections.main-product.blocks.complementary_products.settings.heading.default",
-          "label": "t:sections.main-product.blocks.complementary_products.settings.heading.label"
-        },
-        {
-          "type": "range",
-          "id": "product_list_limit",
-          "min": 1,
-          "max": 10,
-          "step": 1,
-          "default": 10,
-          "label": "t:sections.main-product.blocks.complementary_products.settings.product_list_limit.label"
-        },
-        {
-          "type": "header",
-          "content": "t:sections.main-product.blocks.complementary_products.settings.product_card.heading"
-        },
-        {
-          "type": "select",
-          "id": "image_ratio",
-          "options": [
-            {
-              "value": "portrait",
-              "label": "t:sections.main-product.blocks.complementary_products.settings.image_ratio.options.option_1"
-            },
-            {
-              "value": "square",
-              "label": "t:sections.main-product.blocks.complementary_products.settings.image_ratio.options.option_2"
-            }
-          ],
-          "label": "t:sections.main-product.blocks.complementary_products.settings.image_ratio.label",
-          "default": "square"
+          "id": "title",
+          "default": "Complete Your Meal",
+          "label": "Title"
         }
       ]
     },

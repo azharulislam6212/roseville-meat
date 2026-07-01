@@ -664,6 +664,13 @@ button.shopify-payment-button__button--unbranded {
     font-style: normal;
 }
 
+.section--text p{
+    margin: 0;
+}
+.section--title  + .section--text{
+  margin: 10px 0 0;
+}
+
 .form-group {
     margin-bottom: 24px;
 }
@@ -1118,4 +1125,15 @@ color: rgb(var(--color-foreground));
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
+}
+
+
+
+
+
+
+
+
+.sealsubs-target-element.sealsubs-full[data-seal-ac], .sealsubs-target-element.sealsubs-full[data-seal-in] {
+    display: none !important;
 }

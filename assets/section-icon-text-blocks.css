@@ -95,5 +95,7 @@ overflow: hidden;
 .icon-text-wrapper {
     grid-template-columns: 1fr;
 }
-
+.icon-text__column {
+    gap: 1.6rem;
+}
 }

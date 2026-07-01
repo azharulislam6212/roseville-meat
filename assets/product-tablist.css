@@ -200,7 +200,9 @@ letter-spacing: 0.01em;
 
 @media screen and (max-width: 768px) {
  
-
+.product-tab__info {
+    padding: 1.6rem;
+}
 .product-tab__row {
     grid-template-columns: 1fr;
  

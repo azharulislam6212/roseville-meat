@@ -142,6 +142,7 @@ letter-spacing: 0.01em;
 
     .icon-cards-wrapper {
         grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
     }
 
 
@@ -153,10 +154,9 @@ letter-spacing: 0.01em;
 
 @media (max-width: 576px) {
 
-    .icon-cards-wrapper {
-        grid-template-columns: 1fr;
+      .icon-card {
+        padding: 1.2rem;
     }
-
 
 
 }

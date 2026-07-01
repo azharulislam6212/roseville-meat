@@ -90,10 +90,10 @@
   border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
 }
 
-.card--card .card__inner .card__media {
+/* .card--card .card__inner .card__media {
   border-bottom-right-radius: 0.8rem;
   border-bottom-left-radius: 0.8rem;
-}
+} */
 
 .card--standard.card--text {
   background-color: transparent;
@@ -733,7 +733,7 @@ font-size: 14px;
     padding: 0.6rem;
 }
 .card__information {
-    padding: 0;
+    padding: 1rem 1.3rem;
 }
 .card--card .quick-add {
     margin: 1rem 0 1rem;

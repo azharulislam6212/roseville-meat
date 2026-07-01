@@ -93,12 +93,22 @@ letter-spacing: 0.01em;
 
 @media screen and (max-width: 768px) {
 
+
+.icon-card-seciton .section--header {
+    padding-bottom: 2.4rem;
+}
+
+
 .icon-card__flex-wrapper {
     grid-template-columns: 1fr;
 }
 
+.icon-card--columns{
+        order: 2;
+}
+
     .icon-imagags--columns {
- 
+         order: 1;
     padding-left: 0;
 }
 

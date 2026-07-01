@@ -21,8 +21,8 @@
     "buttons_shadow_vertical_offset": 4,
     "buttons_shadow_blur": 5,
     "variant_pills_border_thickness": 1,
-    "variant_pills_border_opacity": 55,
-    "variant_pills_radius": 40,
+    "variant_pills_border_opacity": 100,
+    "variant_pills_radius": 8,
     "variant_pills_shadow_opacity": 0,
     "variant_pills_shadow_horizontal_offset": 0,
     "variant_pills_shadow_vertical_offset": 4,
@@ -136,6 +136,13 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "341186785192672687": {
+        "type": "shopify:\/\/apps\/seal-subscriptions\/blocks\/subscription-script-append\/13b25004-a140-4ab7-b5fe-29918f759699",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -292,7 +299,7 @@
           "heading": "#ffffff",
           "text": "#ffffff",
           "primary_button": "#ffffff",
-          "primary_button_label": "#1C1B18",
+          "primary_button_label": "#1c1b18",
           "primary_button_hover": "#eae9e5",
           "primary_button_label_hover": "#910000",
           "secondary_button": "#eae9e5",
